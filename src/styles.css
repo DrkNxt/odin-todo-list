@@ -32,3 +32,10 @@ Make grid auto-fit content:
     --secondary-color: #555555;
     --text-color: black;
 }
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
