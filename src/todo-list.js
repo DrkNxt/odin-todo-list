@@ -5,6 +5,9 @@ class TodoList {
         this.todoItems = []
         this.id = crypto.randomUUID();
     }
+    get(todoItem) {
+        return this.todoItems.findIndex((todo) => todo === todoItem);
+    }
 
     addTodoItem(todoItem) {
         this.todoItems.push(todoItem);

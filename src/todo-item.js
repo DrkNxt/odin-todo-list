@@ -1,12 +1,10 @@
 class TodoItem {
-    constructor(title, priority, completed, dueDate, description, notes, checklist) {
+    constructor(title, priority, dueDate, notes) {
         this.title = title;
         this.priority = priority;
         this.finished = false;
         this.dueDate = dueDate;
-        this.description = description;
         this.notes = notes;
-        this.checklist = checklist;
         this.id = crypto.randomUUID();
     }
 
