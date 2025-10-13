@@ -1,6 +1,12 @@
+import * as todoManager from "./todo-manager.js";
+import * as globals from "./globals.js";
+
 const projectListElement = document.querySelector("#project-list");
 const currentProjectElement = document.querySelector("#current-project");
 const todoListsElement = document.querySelector("#todo-lists");
+const addProjectElement = document.querySelector("#add-project-form");
+
+let activeProject = globals.projectList.projects[0];
 
 // Update project list elements
 function displayProjectList(projectList) {
@@ -32,12 +38,27 @@ function displayProject(project) {
     console.log("displayProject() called. Displaying:")
     console.log(project);
 
+    activeProject = project;
+
     // remove all current elements
     currentProjectElement.innerHTML = "";
 
     createCurrentProjectElement(project);
 
     displayTodoLists(project.todoLists);
+
+    // create addTodoListButton and add to the end of TodoLists
+    const addTodoListButton = document.createElement("button");
+    addTodoListButton.classList.add("add-todo-list-btn");
+    addTodoListButton.textContent = "+";
+    todoListsElement.appendChild(addTodoListButton);
+
+    addTodoListButton.addEventListener("click", () => {
+
+        // TODO: functionality to add new TodoList
+
+        displayProject(project);
+    });
 }
 
 function createCurrentProjectElement(project) {
@@ -62,11 +83,11 @@ function displayTodoLists(todoLists) {
     todoListsElement.innerHTML = "";
 
     for (let todoList of todoLists) {
-        createTodoListElement(todoList);
+        createTodoListElement(todoList, todoLists);
     }
 }
 
-function createTodoListElement(todoList) {
+function createTodoListElement(todoList, todoLists) {
     const todoListElement = document.createElement("div");
     todoListElement.classList.add("todo-list");
 
@@ -85,6 +106,20 @@ function createTodoListElement(todoList) {
     todoListElement.appendChild(todoItemsElement);
 
     displayTodoItems(todoList.todoItems, todoItemsElement);
+
+    // create addTodoItemButton and add to the end of TodoList
+    const addTodoItemButton = document.createElement("button");
+    addTodoItemButton.classList.add("add-todo-item-btn");
+    addTodoItemButton.textContent = "+";
+    todoItemsElement.appendChild(addTodoItemButton);
+
+    addTodoItemButton.addEventListener("click", () => {
+
+        displayProject(activeProject);
+
+        // TODO: functionality to add new TodoItem
+        
+    });
 
     todoListsElement.appendChild(todoListElement);
 }
@@ -132,4 +167,67 @@ function createTodoItemElement(todoItem, todoItemsElement) {
     todoItemsElement.appendChild(todoItemElement);
 }
 
-export { displayProjectList, displayProject, displayTodoLists };
+
+function addProject() {
+
+    addProjectElement.innerHTML = "";
+
+    const addProjectTitleLabel = document.createElement("label");
+    addProjectTitleLabel.for = "project-title";
+    addProjectTitleLabel.textContent = "Project Title";
+
+    const addProjectTitle = document.createElement("input");
+    addProjectTitle.type = "text";
+    addProjectTitle.id = "project-title";
+    addProjectTitle.name = "project-title";
+    addProjectTitle.autocomplete = "off";
+    addProjectTitle.placeholder = "New Project";
+
+    const addProjectDescriptionLabel = document.createElement("label");
+    addProjectDescriptionLabel.for = "project-description";
+    addProjectDescriptionLabel.textContent = "Description";
+
+    const addProjectDescription = document.createElement("textarea");
+    addProjectDescription.id = "project-description";
+    addProjectDescription.name = "project-description";
+    addProjectDescription.rows = 5;
+    addProjectDescription.autocomplete = "off";
+    addProjectDescription.placeholder = "Project Description";
+
+    const addProjectDiv = document.createElement("div");
+    addProjectDiv.classList.add("form-buttons");
+
+    const addProjectSubmitButton = document.createElement("button");
+    addProjectSubmitButton.id = "add-new-project-btn";
+    addProjectSubmitButton.textContent = "Add";
+    addProjectSubmitButton.type = "submit";
+
+    const addProjectCancelButton = document.createElement("button");
+    addProjectCancelButton.textContent = "Cancel";
+    addProjectCancelButton.id = "cancel-new-project-btn";
+
+    addProjectElement.appendChild(addProjectTitleLabel);
+    addProjectElement.appendChild(addProjectTitle);
+    addProjectElement.appendChild(addProjectDescriptionLabel);
+    addProjectElement.appendChild(addProjectDescription);
+    addProjectDiv.appendChild(addProjectSubmitButton);
+    addProjectDiv.appendChild(addProjectCancelButton);
+    addProjectElement.appendChild(addProjectDiv);
+
+    addProjectSubmitButton.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        let title = addProjectTitle.value == "" ? "New Project" : addProjectTitle.value;
+        let description = addProjectDescription.value == "" ? "Project description" : addProjectDescription.value;
+        todoManager.createProject(title, description);
+
+        addProjectElement.innerHTML = "";
+        displayProjectList(globals.projectList);
+    })
+
+    addProjectCancelButton.addEventListener("click", () => {
+        addProjectElement.innerHTML = "";
+    })
+}
+
+export { displayProjectList, displayProject, displayTodoLists, addProject };
