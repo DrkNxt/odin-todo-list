@@ -113,23 +113,29 @@ function createTodoListElement(todoList, todoLists) {
 
     displayTodoItems(todoList.todoItems, todoItemsElement);
 
-    // create addTodoItemButton and add to the end of TodoList
-    const addTodoItemButton = document.createElement("button");
-    addTodoItemButton.classList.add("add-todo-item-btn");
-    addTodoItemButton.textContent = "+";
-    todoItemsElement.appendChild(addTodoItemButton);
+    const addTodoItemDiv = document.createElement("div");
+    addTodoItemDiv.classList.add("add-todo-item-div");
+    addTodoItemDiv.id = todoList.id;
 
-    addTodoItemButton.addEventListener("click", () => {
+    const addTodoItemButton = createAddTodoItemButton(todoList);
 
-        displayProject(activeProject);
-
-        // TODO: functionality to add new TodoItem
-        
-    });
-
+    addTodoItemDiv.appendChild(addTodoItemButton);
+    todoItemsElement.appendChild(addTodoItemDiv);
     todoListsElement.appendChild(todoListElement);
 }
 
+// create addTodoItemButton and add to the end of TodoList
+function createAddTodoItemButton(todoList) {
+    const addTodoItemButton = document.createElement("button");
+    addTodoItemButton.classList.add("add-todo-item-btn");
+    addTodoItemButton.textContent = "+";
+
+    addTodoItemButton.addEventListener("click", () => {
+        addTodoItem(todoList);
+    });
+
+    return addTodoItemButton;
+}
 
 // Update todo item elements
 function displayTodoItems(todoItems, todoItemsElement) {
@@ -175,7 +181,6 @@ function createTodoItemElement(todoItem, todoItemsElement) {
 
 
 function addProject() {
-
     addProjectElement.innerHTML = "";
 
     const addProjectTitleLabel = document.createElement("label");
@@ -237,9 +242,6 @@ function addProject() {
 }
 
 function addTodoList() {
-
-    // TODO: button in div machen (oben), alle Namen usw. ändern (hier)
-
     const addTodoListElement = document.querySelector("#add-todo-list-div");
 
     addTodoListElement.innerHTML = "";
@@ -302,6 +304,109 @@ function addTodoList() {
 
         addTodoListElement.appendChild(createAddTodoListButton());
     })
+}
+
+function addTodoItem(todoList) {
+    const addTodoItemElement = document.querySelector("#"+ CSS.escape(todoList.id));
+
+    addTodoItemElement.innerHTML = "";
+
+    const addTodoItemTitleLabel = document.createElement("label");
+    addTodoItemTitleLabel.htmlFor = "todo-item-title";
+    addTodoItemTitleLabel.textContent = "Todo Item Title";
+
+    const addTodoItemTitle = document.createElement("input");
+    addTodoItemTitle.type = "text";
+    addTodoItemTitle.id = "todo-item-title";
+    addTodoItemTitle.name = "todo-item-title";
+    addTodoItemTitle.autocomplete = "off";
+    addTodoItemTitle.placeholder = "New Todo Item";
+
+    const addTodoItemPriorityLabel = document.createElement("label");
+    addTodoItemPriorityLabel.htmlFor = "todo-item-priority";
+    addTodoItemPriorityLabel.textContent = "Priority";
+
+    const addTodoItemPriority = document.createElement("select");
+    addTodoItemPriority.id = "todo-item-priority";
+    addTodoItemPriority.name = "todo-item-priority";
+
+    addTodoItemPriority.appendChild(createOptionElement("very-low", "Very Low"));
+    addTodoItemPriority.appendChild(createOptionElement("low", "Low"));
+    let selectedOption = createOptionElement("normal", "Normal")
+    selectedOption.selected = true
+    addTodoItemPriority.appendChild(selectedOption);
+    addTodoItemPriority.appendChild(createOptionElement("high", "High"));
+    addTodoItemPriority.appendChild(createOptionElement("very-high", "Very High"));
+
+    const addTodoItemDateLabel = document.createElement("label");
+    addTodoItemDateLabel.htmlFor = "todo-item-date";
+    addTodoItemDateLabel.textContent = "Due Date";
+
+    const addTodoItemDate = document.createElement("input");
+    addTodoItemDate.type = "datetime-local";
+    addTodoItemDate.id = "todo-item-date";
+    addTodoItemDate.name = "todo-item-date";
+
+    const addTodoItemNotesLabel = document.createElement("label");
+    addTodoItemNotesLabel.htmlFor = "todo-item-notes";
+    addTodoItemNotesLabel.textContent = "Notes";
+
+    const addTodoItemNotes = document.createElement("textarea");
+    addTodoItemNotes.id = "todo-item-notes";
+    addTodoItemNotes.name = "todo-item-notes";
+    addTodoItemNotes.rows = 5;
+    addTodoItemNotes.autocomplete = "off";
+    addTodoItemNotes.placeholder = "Todo Item Notes";
+
+    const addTodoItemDiv = document.createElement("div");
+    addTodoItemDiv.classList.add("form-buttons-todo-item");
+
+    const addTodoItemSubmitButton = document.createElement("button");
+    addTodoItemSubmitButton.id = "add-new-todo-item-btn";
+    addTodoItemSubmitButton.textContent = "Add";
+    addTodoItemSubmitButton.type = "submit";
+
+    const addTodoItemCancelButton = document.createElement("button");
+    addTodoItemCancelButton.textContent = "Cancel";
+    addTodoItemCancelButton.id = "cancel-new-todo-item-btn";
+
+    addTodoItemElement.appendChild(addTodoItemTitleLabel);
+    addTodoItemElement.appendChild(addTodoItemTitle);
+    addTodoItemElement.appendChild(addTodoItemDateLabel);
+    addTodoItemElement.appendChild(addTodoItemDate);
+    addTodoItemElement.appendChild(addTodoItemPriorityLabel);
+    addTodoItemElement.appendChild(addTodoItemPriority);
+    addTodoItemElement.appendChild(addTodoItemNotesLabel);
+    addTodoItemElement.appendChild(addTodoItemNotes);
+    addTodoItemDiv.appendChild(addTodoItemSubmitButton);
+    addTodoItemDiv.appendChild(addTodoItemCancelButton);
+    addTodoItemElement.appendChild(addTodoItemDiv);
+
+    addTodoItemSubmitButton.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        let title = addTodoItemTitle.value == "" ? "New Todo Item" : addTodoItemTitle.value;
+        let priority = addTodoItemPriority.value;
+        let dueDate = addTodoItemDate.value;
+        let notes = addTodoItemNotes.value;
+        todoManager.createTodoItem(todoList, title, priority, dueDate, notes);
+
+        addTodoItemElement.innerHTML = "";
+        displayProject(activeProject);
+    })
+
+    addTodoItemCancelButton.addEventListener("click", () => {
+        addTodoItemElement.innerHTML = "";
+
+        addTodoItemElement.appendChild(createAddTodoItemButton(todoList));
+    })
+}
+
+function createOptionElement(value, text) {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = text;
+    return option;
 }
 
 export { displayProjectList, displayProject, displayTodoLists, addProject };

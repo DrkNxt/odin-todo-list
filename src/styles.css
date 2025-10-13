@@ -106,12 +106,12 @@ button:hover {
     color: white;
 }
 
-.form-buttons-project, .form-buttons-todo-list {
+.form-buttons-project, .form-buttons-todo-list, .form-buttons-todo-item {
     display: flex;
     gap: 0.5rem;
 }
 
-.form-buttons-project > button, .form-buttons-todo-list > button {
+.form-buttons-project > button, .form-buttons-todo-list > button, .form-buttons-todo-item > button {
     width: 200px;
 }
 
@@ -142,9 +142,12 @@ div.main {
     page-break-inside: avoid;
 }
 
-#add-todo-list-div {
+#add-todo-list-div, .add-todo-item-div {
     display: flex;
     flex-direction: column;
+    -webkit-column-break-inside: avoid;
+    break-inside: avoid;
+    page-break-inside: avoid;
 }
 
 .todo-list {
