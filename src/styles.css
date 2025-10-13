@@ -106,12 +106,12 @@ button:hover {
     color: white;
 }
 
-.form-buttons {
+.form-buttons-project, .form-buttons-todo-list {
     display: flex;
     gap: 0.5rem;
 }
 
-.form-buttons > button {
+.form-buttons-project > button, .form-buttons-todo-list > button {
     width: 200px;
 }
 
@@ -140,6 +140,11 @@ div.main {
     -webkit-column-break-inside: avoid;
     break-inside: avoid;
     page-break-inside: avoid;
+}
+
+#add-todo-list-div {
+    display: flex;
+    flex-direction: column;
 }
 
 .todo-list {

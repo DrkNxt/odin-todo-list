@@ -48,17 +48,23 @@ function displayProject(project) {
     displayTodoLists(project.todoLists);
 
     // create addTodoListButton and add to the end of TodoLists
+    const addTodoListDiv = document.createElement("div");
+    addTodoListDiv.id = "add-todo-list-div";
+
+    const addTodoListButton = createAddTodoListButton();
+    addTodoListDiv.appendChild(addTodoListButton);
+    todoListsElement.appendChild(addTodoListDiv);
+}
+
+function createAddTodoListButton() {
     const addTodoListButton = document.createElement("button");
     addTodoListButton.classList.add("add-todo-list-btn");
     addTodoListButton.textContent = "+";
-    todoListsElement.appendChild(addTodoListButton);
 
     addTodoListButton.addEventListener("click", () => {
-
-        // TODO: functionality to add new TodoList
-
-        displayProject(project);
+        addTodoList();
     });
+    return addTodoListButton;
 }
 
 function createCurrentProjectElement(project) {
@@ -173,7 +179,7 @@ function addProject() {
     addProjectElement.innerHTML = "";
 
     const addProjectTitleLabel = document.createElement("label");
-    addProjectTitleLabel.for = "project-title";
+    addProjectTitleLabel.htmlFor = "project-title";
     addProjectTitleLabel.textContent = "Project Title";
 
     const addProjectTitle = document.createElement("input");
@@ -184,7 +190,7 @@ function addProject() {
     addProjectTitle.placeholder = "New Project";
 
     const addProjectDescriptionLabel = document.createElement("label");
-    addProjectDescriptionLabel.for = "project-description";
+    addProjectDescriptionLabel.htmlFor = "project-description";
     addProjectDescriptionLabel.textContent = "Description";
 
     const addProjectDescription = document.createElement("textarea");
@@ -195,7 +201,7 @@ function addProject() {
     addProjectDescription.placeholder = "Project Description";
 
     const addProjectDiv = document.createElement("div");
-    addProjectDiv.classList.add("form-buttons");
+    addProjectDiv.classList.add("form-buttons-project");
 
     const addProjectSubmitButton = document.createElement("button");
     addProjectSubmitButton.id = "add-new-project-btn";
@@ -227,6 +233,74 @@ function addProject() {
 
     addProjectCancelButton.addEventListener("click", () => {
         addProjectElement.innerHTML = "";
+    })
+}
+
+function addTodoList() {
+
+    // TODO: button in div machen (oben), alle Namen usw. ändern (hier)
+
+    const addTodoListElement = document.querySelector("#add-todo-list-div");
+
+    addTodoListElement.innerHTML = "";
+
+    const addTodoListTitleLabel = document.createElement("label");
+    addTodoListTitleLabel.htmlFor = "todo-list-title";
+    addTodoListTitleLabel.textContent = "Todo List Title";
+
+    const addTodoListTitle = document.createElement("input");
+    addTodoListTitle.type = "text";
+    addTodoListTitle.id = "todo-list-title";
+    addTodoListTitle.name = "todo-list-title";
+    addTodoListTitle.autocomplete = "off";
+    addTodoListTitle.placeholder = "New Todo List";
+
+    const addTodoListDescriptionLabel = document.createElement("label");
+    addTodoListDescriptionLabel.htmlFor = "todo-list-description";
+    addTodoListDescriptionLabel.textContent = "Description";
+
+    const addTodoListDescription = document.createElement("textarea");
+    addTodoListDescription.id = "todo-list-description";
+    addTodoListDescription.name = "todo-list-description";
+    addTodoListDescription.rows = 5;
+    addTodoListDescription.autocomplete = "off";
+    addTodoListDescription.placeholder = "Todo List Description";
+
+    const addTodoListDiv = document.createElement("div");
+    addTodoListDiv.classList.add("form-buttons-todo-list");
+
+    const addTodoListSubmitButton = document.createElement("button");
+    addTodoListSubmitButton.id = "add-new-todo-list-btn";
+    addTodoListSubmitButton.textContent = "Add";
+    addTodoListSubmitButton.type = "submit";
+
+    const addTodoListCancelButton = document.createElement("button");
+    addTodoListCancelButton.textContent = "Cancel";
+    addTodoListCancelButton.id = "cancel-new-todo-list-btn";
+
+    addTodoListElement.appendChild(addTodoListTitleLabel);
+    addTodoListElement.appendChild(addTodoListTitle);
+    addTodoListElement.appendChild(addTodoListDescriptionLabel);
+    addTodoListElement.appendChild(addTodoListDescription);
+    addTodoListDiv.appendChild(addTodoListSubmitButton);
+    addTodoListDiv.appendChild(addTodoListCancelButton);
+    addTodoListElement.appendChild(addTodoListDiv);
+
+    addTodoListSubmitButton.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        let title = addTodoListTitle.value == "" ? "New Todo List" : addTodoListTitle.value;
+        let description = addTodoListDescription.value;
+        todoManager.createTodoList(activeProject, title, description);
+
+        addTodoListElement.innerHTML = "";
+        displayProject(activeProject);
+    })
+
+    addTodoListCancelButton.addEventListener("click", () => {
+        addTodoListElement.innerHTML = "";
+
+        addTodoListElement.appendChild(createAddTodoListButton());
     })
 }
 
