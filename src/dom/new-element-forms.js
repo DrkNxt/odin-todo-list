@@ -10,7 +10,7 @@ function projectForm() {
     addProjectContainer.innerHTML = "";
 
     const titleInput = elementCreator.getInput("text", "project-title", "project-title", "New Project");
-    const descriptionInput = elementCreator.getTextArea("project-description", "project-description", 3);
+    const descriptionInput = elementCreator.getTextArea("project-description", "project-description", 3, "");
     const buttonsDiv = elementCreator.getElement("div", "", "form-buttons-project");
     const submitButton = elementCreator.getButton("add-new-project-btn", "Add", "submit");
     const cancelButton = elementCreator.getButton("cancel-new-project-btn", "Cancel");
