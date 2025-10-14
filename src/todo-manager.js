@@ -1,7 +1,7 @@
 import * as globals from "./globals.js";
-import { Project } from "./project.js";
-import { TodoList } from "./todo-list.js";
-import { TodoItem } from "./todo-item.js";
+import { Project } from "./classes/project.js";
+import { TodoList } from "./classes/todo-list.js";
+import { TodoItem } from "./classes/todo-item.js";
 import { previousFridayWithOptions } from "date-fns/fp";
 
 function createProject(title, description) {
