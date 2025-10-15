@@ -3,7 +3,7 @@ import * as elementCreator from "./element-creator.js";
 import * as newForm from "./new-element-forms.js";
 import * as dataManager from "../data-manager.js";
 import * as deleteForm from "./delete-element-forms.js";
-import * as editForm from "./edit-element-form.js";
+import * as editForm from "./edit-element-forms.js";
 
 const projectListContainer = document.querySelector("#project-list");
 const currentProjectContainer = document.querySelector("#current-project");

@@ -1,6 +1,6 @@
 import * as globals from "../globals.js";
 import * as elementCreator from "./element-creator.js";
-import { updateAll, updateProject } from "../dom/dom-manager.js";
+import { updateAll, updateProject } from "./dom-manager.js";
 
 const dialog = document.querySelector("#dialog");
 const form = document.querySelector("#dialog-form");
