@@ -1,6 +1,6 @@
 import * as elementCreator from "./element-creator";
 import * as dataManager from "../data-manager";
-import { updateProjectList, updateProject } from "./dom-manager";
+import { updateProjectList, updateProject, createAddTodoItemButton, createAddTodoListButton } from "./dom-manager";
 import * as globals from "../globals";
 
 // Display form to add a new project

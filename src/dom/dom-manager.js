@@ -1,6 +1,8 @@
 import * as globals from "../globals.js";
 import * as elementCreator from "./element-creator.js";
 import * as newForm from "./new-element-forms.js";
+import * as dataManager from "../data-manager.js";
+import * as deleteForm from "./delete-element-forms.js";
 
 const projectListContainer = document.querySelector("#project-list");
 const currentProjectContainer = document.querySelector("#current-project");
@@ -28,6 +30,7 @@ function updateProjectList() {
         projectElement.addEventListener("click", () => {
             updateProject(project);
         });
+
     }
 }
 
@@ -39,6 +42,20 @@ function updateProject(project) {
     // Display title and description
     currentProjectContainer.appendChild(elementCreator.getElement("h2", project.title, "current-project-name"));
     currentProjectContainer.appendChild(elementCreator.getElement("p", project.description, "current-project-description"));
+
+    // Create delete button
+    const deleteButtonContainer = elementCreator.getElement("div", "");
+    const deleteTodoItem = elementCreator.getIcon("delete-outline", "clickable-icon");
+    deleteButtonContainer.appendChild(deleteTodoItem);
+        
+    deleteButtonContainer.addEventListener("click", (e) => {
+        deleteForm.showDeleteForm("Are you sure you want to delete this Project?<br> This can not be reverted and all Todo Lists and Todos in this Project will be deleted as well.", () => {
+            dataManager.deleteProject(project);
+            globals.setActiveProject(globals.projectList.projects[0]);
+            updateAll();
+        });
+    })
+    currentProjectContainer.appendChild(deleteButtonContainer);
 
     // Display all todo lists of this project
     updateTodoLists(project.todoLists);
@@ -68,15 +85,28 @@ function updateTodoLists(todoLists) {
 
 // Create single todo list
 function createTodoListElement(todoList, todoLists) {
+    // Create delete button
+    const deleteButtonContainer = elementCreator.getElement("div", "");
+    const deleteTodoItem = elementCreator.getIcon("delete-outline", "clickable-icon");
+    deleteButtonContainer.appendChild(deleteTodoItem);
+        
+    deleteButtonContainer.addEventListener("click", (e) => {
+        deleteForm.showDeleteForm("Are you sure you want to delete this Todo List?<br> This can not be reverted and all Todos in this List will be deleted as well.", () => {
+            dataManager.deleteTodoList(todoList, globals.getActiveProject());
+            updateProject(globals.getActiveProject());
+        });
+    })
+
     const todoListContainer = elementCreator.getElement("div", "", "todo-list");
     const todoItemsContainer = elementCreator.getElement("div", "", "todo-items");
 
+    todoListContainer.appendChild(deleteButtonContainer);
     todoListContainer.appendChild(elementCreator.getElement("h3", todoList.title, "todo-list-title"));
     todoListContainer.appendChild(elementCreator.getElement("p", todoList.description, "todo-list-description"));
     todoListContainer.appendChild(todoItemsContainer);
 
     // Display all todo items of this list
-    displayTodoItems(todoList.todoItems, todoItemsContainer);
+    displayTodoItems(todoList, todoItemsContainer);
 
     const addTodoItemDiv = elementCreator.getElement("div", "", "add-todo-item-div", todoList.id);
 
@@ -96,9 +126,22 @@ function createAddTodoItemButton(todoList) {
 }
 
 // Update todo item elements
-function displayTodoItems(todoItems, todoItemsContainer) {
-    for (let todoItem of todoItems) {
+function displayTodoItems(todoList, todoItemsContainer) {
+    for (let todoItem of todoList.todoItems) {
+        // Create delete button
+        const deleteButtonContainer = elementCreator.getElement("div", "");
+        const deleteTodoItem = elementCreator.getIcon("delete-outline", "clickable-icon");
+        deleteButtonContainer.appendChild(deleteTodoItem);
+        
+        deleteButtonContainer.addEventListener("click", (e) => {
+            deleteForm.showDeleteForm("Are you sure you want to delete this Todo?<br> This can not be reverted.", () => {
+                dataManager.deleteTodoItem(todoItem, todoList);
+                updateProject(globals.getActiveProject());
+            });
+        })
+
         const todoItemContainer = elementCreator.getElement("div", "", "todo-item");
+        todoItemContainer.appendChild(deleteButtonContainer);
         todoItemContainer.appendChild(elementCreator.getElement("h4", todoItem.title, "todo-item-title"));
         todoItemContainer.appendChild(elementCreator.getElement("span", todoItem.priority, "todo-item-priority"));
         todoItemContainer.appendChild(elementCreator.getElement("div", todoItem.isCompleted, "todo-item-status"));
@@ -108,4 +151,4 @@ function displayTodoItems(todoItems, todoItemsContainer) {
     }
 }
 
-export { updateProjectList, updateProject };
+export { updateProjectList, updateProject, createAddTodoItemButton, createAddTodoListButton };

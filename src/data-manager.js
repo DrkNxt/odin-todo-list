@@ -15,4 +15,16 @@ function createTodoItem(todoList, title, priority, dueDate, notes) {
     todoList.addTodoItem( new TodoItem(title, priority, dueDate, notes));
 }
 
-export { createProject, createTodoList, createTodoItem };
+function deleteProject(project) {
+    globals.projectList.removeProject(project);
+}
+
+function deleteTodoList(todoList, project) {
+    project.removeTodoList(todoList);
+}
+
+function deleteTodoItem(todoItem, todoList) {
+    todoList.removeTodoItem(todoItem);
+}
+
+export { createProject, createTodoList, createTodoItem, deleteProject, deleteTodoList, deleteTodoItem };

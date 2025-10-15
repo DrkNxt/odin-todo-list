@@ -73,8 +73,18 @@ function getElement(elementName, textContent, classes = null, id = null) {
     if (classes !== null){
         element.classList.add(classes);
     }
-    element.textContent = textContent;
+    element.innerHTML = textContent;
     return element;
 }
 
-export { getLabel, getInput, getOption, getTextArea, getButton, getSelect, getPrioritySelect, getElement };
+function getIcon(iconName, classes = null) {
+    const icon = document.createElement("span");
+    icon.classList.add("iconify");
+    if (classes !== null){
+        icon.classList.add(classes);
+    }
+    icon.dataset.icon = "mdi-" + iconName;
+    return icon;
+}
+
+export { getLabel, getInput, getOption, getTextArea, getButton, getSelect, getPrioritySelect, getElement, getIcon };
