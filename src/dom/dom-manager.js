@@ -56,7 +56,18 @@ function updateProject(project) {
             updateAll();
         });
     })
+
+    // Create edit button
+    const editButtonContainer = elementCreator.getElement("div", "");
+    const editProject = elementCreator.getIcon("pencil-outline", "clickable-icon");
+    editButtonContainer.appendChild(editProject);
+        
+    editButtonContainer.addEventListener("click", (e) => {
+        editForm.showProjectEditForm(project);
+    })
+
     currentProjectContainer.appendChild(deleteButtonContainer);
+    currentProjectContainer.appendChild(editButtonContainer);
 
     // Display all todo lists of this project
     updateTodoLists(project.todoLists);
@@ -98,10 +109,20 @@ function createTodoListElement(todoList, todoLists) {
         });
     })
 
+    // Create edit button
+    const editButtonContainer = elementCreator.getElement("div", "");
+    const editTodoList = elementCreator.getIcon("pencil-outline", "clickable-icon");
+    editButtonContainer.appendChild(editTodoList);
+        
+    editButtonContainer.addEventListener("click", (e) => {
+        editForm.showTodoListEditForm(todoList);
+    })
+
     const todoListContainer = elementCreator.getElement("div", "", "todo-list");
     const todoItemsContainer = elementCreator.getElement("div", "", "todo-items");
 
     todoListContainer.appendChild(deleteButtonContainer);
+    todoListContainer.appendChild(editButtonContainer);
     todoListContainer.appendChild(elementCreator.getElement("h3", todoList.title, "todo-list-title"));
     todoListContainer.appendChild(elementCreator.getElement("p", todoList.description, "todo-list-description"));
     todoListContainer.appendChild(todoItemsContainer);

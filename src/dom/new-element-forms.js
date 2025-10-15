@@ -16,7 +16,7 @@ function projectForm() {
     const cancelButton = elementCreator.getButton("cancel-new-project-btn", "Cancel");
 
     // Append all elements required for the project form
-    addProjectContainer.appendChild(elementCreator.getLabel("project-title", "Project Title"));
+    addProjectContainer.appendChild(elementCreator.getLabel("project-title", "Title"));
     addProjectContainer.appendChild(titleInput);
     addProjectContainer.appendChild(elementCreator.getLabel("project-description", "Description"));
     addProjectContainer.appendChild(descriptionInput);
@@ -55,7 +55,7 @@ function todoListForm() {
     const cancelButton = elementCreator.getButton("cancel-new-todo-list-btn", "Cancel");
 
     // Append all elements required for the todo list form
-    container.appendChild(elementCreator.getLabel("todo-list-title", "Todo List Title"));
+    container.appendChild(elementCreator.getLabel("todo-list-title", "Title"));
     container.appendChild(titleInput);
     container.appendChild(elementCreator.getLabel("todo-list-description", "Description"));
     container.appendChild(descriptionInput);
