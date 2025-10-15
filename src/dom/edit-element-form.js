@@ -82,7 +82,7 @@ function showTodoItemEditForm(todoItem) {
     const menu = elementCreator.getElement("menu", "");
     const titleInput = elementCreator.getInput("text", "todo-item-title", "todo-item-title", "New Todo", "off", todoItem.title);
     const priorityInput = elementCreator.getPrioritySelect("todo-item-priority", "todo-item-priority");
-    const dueDateInput = elementCreator.getInput("datetime-local", "todo-item-date", "todo-item-date", "");
+    const dueDateInput = elementCreator.getInput("date", "todo-item-date", "todo-item-date", "");
     dueDateInput.valueAsDate = todoItem.dueDate;
     const notesInput = elementCreator.getTextArea("todo-item-notes", "todo-item-notes", 3, "", todoItem.notes);
     const confirmButton = elementCreator.getButton("confirm-edit-btn", "Confirm", "submit");
@@ -117,7 +117,7 @@ function showTodoItemEditForm(todoItem) {
         e.preventDefault();
         todoItem.title = titleInput.value;
         todoItem.priority = priorityInput.value;
-        todoItem.dueDate = new Date(dueDateInput.value);
+        todoItem.dueDate = new Date(dueDateInput.valueAsNumber);
         todoItem.notes = notesInput.value;
         dialog.close();
         updateProject(globals.getActiveProject());
