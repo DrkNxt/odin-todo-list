@@ -5,30 +5,39 @@ function getLabel(htmlFor, textContent) {
     return label;
 }
 
-function getInput(type, id, name, placeholder, autocomplete = "off") {
+function getInput(type, id, name, placeholder, autocomplete = "off", value = null) {
     const input = document.createElement("input");
     input.type = type;
     input.id = id;
     input.name = name;
     input.autocomplete = autocomplete;
+    if (value !== null){
+        input.value = value;
+    }
     input.placeholder = placeholder;
     return input;
 }
 
-function getOption(value, text, selected = false) {
+function getOption(value, text, classes = null, selected = false) {
     const option = document.createElement("option");
     option.value = value;
     option.textContent = text;
+    if (classes !== null){
+        option.classList.add(classes);
+    }
     option.selected = selected;
     return option;
 }
 
-function getTextArea(id, name, rows, placeholder) {
+function getTextArea(id, name, rows, placeholder, value = null) {
     const textArea = document.createElement("textarea");
     textArea.id = id;
     textArea.name = name;
     textArea.rows = rows;
     textArea.placeholder = placeholder;
+    if (value !== null){
+        textArea.value = value;
+    }
     textArea.autocomplete = "off";
     return textArea;
 }
@@ -57,11 +66,11 @@ function getPrioritySelect(id, name) {
     const select = document.createElement("select");
     select.id = id;
     select.name = name;
-    select.appendChild(getOption("very-low", "Very Low"));
-    select.appendChild(getOption("low", "Low"));
-    select.appendChild(getOption("normal", "Normal", true));
-    select.appendChild(getOption("high", "High"));
-    select.appendChild(getOption("very-high", "Very High"));
+    select.appendChild(getOption("very-low", "Very Low", "very-low"));
+    select.appendChild(getOption("low", "Low", "low"));
+    select.appendChild(getOption("normal", "Normal", "normal", true));
+    select.appendChild(getOption("high", "High", "high"));
+    select.appendChild(getOption("very-high", "Very High", "very-high"));
     return select;
 }
 

@@ -3,6 +3,7 @@ import * as elementCreator from "./element-creator.js";
 import * as newForm from "./new-element-forms.js";
 import * as dataManager from "../data-manager.js";
 import * as deleteForm from "./delete-element-forms.js";
+import * as editForm from "./edit-element-form.js";
 
 const projectListContainer = document.querySelector("#project-list");
 const currentProjectContainer = document.querySelector("#current-project");
@@ -140,15 +141,25 @@ function displayTodoItems(todoList, todoItemsContainer) {
             });
         })
 
+        // Create edit button
+        const editButtonContainer = elementCreator.getElement("div", "");
+        const editTodoItem = elementCreator.getIcon("pencil-outline", "clickable-icon");
+        editButtonContainer.appendChild(editTodoItem);
+        
+        editButtonContainer.addEventListener("click", (e) => {
+            editForm.showTodoItemEditForm(todoItem);
+        })
+
         const todoItemContainer = elementCreator.getElement("div", "", "todo-item");
         todoItemContainer.appendChild(deleteButtonContainer);
+        todoItemContainer.appendChild(editButtonContainer);
         todoItemContainer.appendChild(elementCreator.getElement("h4", todoItem.title, "todo-item-title"));
         todoItemContainer.appendChild(elementCreator.getElement("span", todoItem.priority, "todo-item-priority"));
         todoItemContainer.appendChild(elementCreator.getElement("div", todoItem.isCompleted, "todo-item-status"));
-        todoItemContainer.appendChild(elementCreator.getElement("span", todoItem.dueDate, "todo-item-due-date"));
+        todoItemContainer.appendChild(elementCreator.getElement("span", todoItem.dueDate.toLocaleString(), "todo-item-due-date"));
         todoItemContainer.appendChild(elementCreator.getElement("p", todoItem.notes, "todo-item-notes"));
         todoItemsContainer.appendChild(todoItemContainer);
     }
 }
 
-export { updateProjectList, updateProject, createAddTodoItemButton, createAddTodoListButton };
+export { updateAll, updateProjectList, updateProject, createAddTodoItemButton, createAddTodoListButton };

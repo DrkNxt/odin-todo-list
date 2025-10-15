@@ -17,6 +17,9 @@ function createTodoItem(todoList, title, priority, dueDate, notes) {
 
 function deleteProject(project) {
     globals.projectList.removeProject(project);
+    if (globals.projectList.projects.length < 1) {
+        createProject("New Project", "Description");
+    }
 }
 
 function deleteTodoList(todoList, project) {

@@ -51,6 +51,11 @@ button {
     cursor: pointer;
 }
 
+#dialog-form {
+    display: flex;
+    flex-direction: column;
+}
+
 textarea {
   resize: vertical;
 }
