@@ -36,9 +36,27 @@ Make grid auto-fit content:
     --text-color: black;
 }
 
+.iconify {
+    width: 1em;
+    height: 1em;
+    font-size: 1.2rem;
+    vertical-align: -0.125em; 
+    transform: rotate(360deg);
+}
+
 h1, h2, h3, h4, p, body {
     margin: 0;
     padding: 0;
+}
+
+h1 {
+    font-size: 2rem;
+    align-self: center;
+    margin-bottom: 1rem;
+}
+
+h1 > .iconify {
+    font-size: 2rem;
 }
 
 body {
@@ -64,21 +82,42 @@ div.sidebar {
     color: white;
     padding: 1rem;;
     box-shadow: 4px 0px 5px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
 }
 
-#project-list {
-    padding: 0.5rem;
+.projects-container {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    margin-bottom: 1rem;
+    margin: 0 0.5rem;
 }
 
-.project {
-    padding: 0.5rem;
-    border-radius: 5px;
-    box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
-    cursor: pointer;
+#project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.project-btn {
+    text-align: left;
+    padding: 0.7rem 1rem;
+}
+
+#add-project-btn {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: color-mix(in srgb, var(--button-color) 70%, white);
+}
+
+#add-project-btn > .iconify {
+    font-size: 1.5rem;
+}
+
+#add-project-btn:hover {
+    background-color: color-mix(in srgb, var(--button-color) 60%, white);
 }
 
 #add-project-form {
@@ -140,7 +179,6 @@ div.main {
 
 .add-todo-list-btn {   
     width: 100%;
-    height: 6rem;
     font-size: 4rem;
     box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
     -webkit-column-break-inside: avoid;
@@ -177,6 +215,11 @@ div.main {
     align-items: center;
     border-bottom: 1px solid black;
     padding-bottom: 0.5rem;
+}
+
+.add-todo-item-btn {
+    font-size: 1.5rem;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
 }
 
 .project-top-content {
@@ -242,16 +285,25 @@ div.very-low {
     border-left: 6px solid blue;
 }
 
-.iconify {
-    width: 1em;
-    height: 1em;
-    font-size: 1.2rem;
-    vertical-align: -0.125em; 
-    transform: rotate(360deg);
+.icon-error {
+    color: red;
+    background-color: color-mix(in srgb, red 20%, white);
+}
+
+.todo-item-plus-icon {
+    font-size: 1.8rem;
+}
+
+.todo-list-plus-icon {
+    font-size: 4rem;
 }
 
 .clickable-icon, input[type="checkbox"], .todo-item-bottom-content {
     cursor: pointer;
+}
+
+.clickable-icon:hover {
+    color: color-mix(in srgb, var(--text-color) 50%, white);
 }
 
 dialog {

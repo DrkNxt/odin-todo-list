@@ -20,3 +20,5 @@ domManager.updateProject(globals.projectList.projects[0]);
 // TODO: implement local storage
 
 // TODO: change priority picker to have the correct colors
+
+// TODO: change element creation to use dialog (?)

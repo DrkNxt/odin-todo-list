@@ -25,7 +25,7 @@ function updateProjectList() {
     projectListContainer.innerHTML = "";
 
     for (let project of globals.projectList.projects) {
-        const projectElement = elementCreator.getElement("div", project.title, "project");
+        const projectElement = elementCreator.getElement("button", project.title, "project-btn");
         projectListContainer.appendChild(projectElement);
 
         projectElement.addEventListener("click", () => {
@@ -42,7 +42,7 @@ function updateProject(project) {
 
     // Create delete button
     const deleteButtonContainer = elementCreator.getElement("div", "");
-    const deleteTodoItem = elementCreator.getIconTrash("clickable-icon");
+    const deleteTodoItem = elementCreator.getIcon("delete", "clickable-icon");
     deleteButtonContainer.appendChild(deleteTodoItem);
         
     deleteButtonContainer.addEventListener("click", (e) => {
@@ -55,7 +55,7 @@ function updateProject(project) {
 
     // Create edit button
     const editButtonContainer = elementCreator.getElement("div", "");
-    const editProject = elementCreator.getIconPencil("clickable-icon");
+    const editProject = elementCreator.getIcon("edit", "clickable-icon");
     editButtonContainer.appendChild(editProject);
         
     editButtonContainer.addEventListener("click", (e) => {
@@ -80,7 +80,8 @@ function updateProject(project) {
 }
 
 function createAddTodoListButton() {
-    const addTodoListButton = elementCreator.getButton(null, "+", "button", "add-todo-list-btn");
+    const addTodoListButton = elementCreator.getButton(null, "", "button", "add-todo-list-btn");
+    addTodoListButton.appendChild(elementCreator.getIcon("new", "todo-list-plus-icon"))
     addTodoListButton.addEventListener("click", () => {
         newForm.todoListForm();
     });
@@ -100,7 +101,7 @@ function updateTodoLists(todoLists) {
 function createTodoListElement(todoList, todoLists) {
     // Create delete button
     const deleteButtonContainer = elementCreator.getElement("div", "");
-    const deleteTodoItem = elementCreator.getIconTrash("clickable-icon");
+    const deleteTodoItem = elementCreator.getIcon("delete", "clickable-icon");
     deleteButtonContainer.appendChild(deleteTodoItem);
         
     deleteButtonContainer.addEventListener("click", (e) => {
@@ -112,7 +113,7 @@ function createTodoListElement(todoList, todoLists) {
 
     // Create edit button
     const editButtonContainer = elementCreator.getElement("div", "");
-    const editTodoList = elementCreator.getIconPencil("clickable-icon");
+    const editTodoList = elementCreator.getIcon("edit", "clickable-icon");
     editButtonContainer.appendChild(editTodoList);
         
     editButtonContainer.addEventListener("click", (e) => {
@@ -141,8 +142,8 @@ function createTodoListElement(todoList, todoLists) {
 }
 
 function createAddTodoItemButton(todoList) {
-    const addTodoItemButton = elementCreator.getButton(null, "+", "button", "add-todo-item-btn");
-
+    const addTodoItemButton = elementCreator.getButton(null, "", "button", "add-todo-item-btn");
+    addTodoItemButton.appendChild(elementCreator.getIcon("new", "todo-item-plus-icon"))
     addTodoItemButton.addEventListener("click", () => {
         newForm.todoItemForm(todoList);
     });
@@ -155,7 +156,7 @@ function displayTodoItems(todoList, todoItemsContainer) {
     for (let todoItem of todoList.todoItems) {
         // Create delete button
         const deleteButtonContainer = elementCreator.getElement("div", "");
-        const deleteTodoItem = elementCreator.getIconTrash("clickable-icon");
+        const deleteTodoItem = elementCreator.getIcon("delete", "clickable-icon");
         deleteButtonContainer.appendChild(deleteTodoItem);
         
         deleteButtonContainer.addEventListener("click", (e) => {
@@ -172,7 +173,7 @@ function displayTodoItems(todoList, todoItemsContainer) {
 
         // Create edit button
         const editButtonContainer = elementCreator.getElement("div", "");
-        const editTodoItem = elementCreator.getIconPencil("clickable-icon");
+        const editTodoItem = elementCreator.getIcon("edit", "clickable-icon");
         editButtonContainer.appendChild(editTodoItem);
         
         editButtonContainer.addEventListener("click", (e) => {
