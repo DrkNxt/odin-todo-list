@@ -30,4 +30,9 @@ function deleteTodoItem(todoItem, todoList) {
     todoList.removeTodoItem(todoItem);
 }
 
-export { createProject, createTodoList, createTodoItem, deleteProject, deleteTodoList, deleteTodoItem };
+function toggleCompleted(todoItem) {
+    todoItem.toggleCompleted();
+    return todoItem.isCompleted;
+}
+
+export { createProject, createTodoList, createTodoItem, deleteProject, deleteTodoList, deleteTodoItem, toggleCompleted };

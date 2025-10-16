@@ -171,7 +171,19 @@ function displayTodoItems(todoList, todoItemsContainer) {
             editForm.showTodoItemEditForm(todoItem);
         })
 
+        // Create mark completed button
+        const markCompletedButtonContainer = elementCreator.getElement("div", "");
+        const markCompletedCheckbox = elementCreator.getInput("checkbox", null, "markChecked", "");
+        markCompletedCheckbox.checked = todoItem.isCompleted;
+        markCompletedButtonContainer.appendChild(markCompletedCheckbox);
+        markCompletedCheckbox.addEventListener("click", (e) => {
+            dataManager.toggleCompleted(todoItem);
+            updateProject(globals.getActiveProject());
+        })
+
         const todoItemContainer = elementCreator.getElement("div", "", "todo-item");
+        todoItemContainer.dataset.isCompleted = todoItem.isCompleted;
+        todoItemContainer.appendChild(markCompletedButtonContainer);
         todoItemContainer.appendChild(deleteButtonContainer);
         todoItemContainer.appendChild(editButtonContainer);
         todoItemContainer.appendChild(elementCreator.getElement("h4", todoItem.title, "todo-item-title"));

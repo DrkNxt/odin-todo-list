@@ -8,7 +8,9 @@ function getLabel(htmlFor, textContent) {
 function getInput(type, id, name, placeholder, autocomplete = "off", value = null) {
     const input = document.createElement("input");
     input.type = type;
-    input.id = id;
+    if (id !== null){
+        input.id = id;
+    }
     input.name = name;
     input.autocomplete = autocomplete;
     if (value !== null){
