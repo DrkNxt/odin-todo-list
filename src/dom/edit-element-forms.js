@@ -15,6 +15,7 @@ function showProjectEditForm(project) {
     const cancelButton = elementCreator.getButton("cancel-edit-btn", "Cancel")
 
     // Append all elements required for the project form
+    form.appendChild(elementCreator.getElement("h2", "Edit Project"));
     form.appendChild(elementCreator.getLabel("project-title", "Title"));
     form.appendChild(titleInput);
     form.appendChild(elementCreator.getLabel("project-description", "Description"));
@@ -51,6 +52,7 @@ function showTodoListEditForm(todoList) {
     const cancelButton = elementCreator.getButton("cancel-edit-btn", "Cancel")
 
     // Append all elements required for the todo list form
+    form.appendChild(elementCreator.getElement("h2", "Edit Todo List"));
     form.appendChild(elementCreator.getLabel("todo-list-title", "Todo List Title"));
     form.appendChild(titleInput);
     form.appendChild(elementCreator.getLabel("todo-list-description", "Description"));

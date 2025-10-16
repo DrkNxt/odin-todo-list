@@ -40,10 +40,6 @@ function updateProject(project) {
     globals.setActiveProject(project);
     currentProjectContainer.innerHTML = "";
 
-    // Display title and description
-    currentProjectContainer.appendChild(elementCreator.getElement("h2", project.title, "current-project-name"));
-    currentProjectContainer.appendChild(elementCreator.getElement("p", project.description, "current-project-description"));
-
     // Create delete button
     const deleteButtonContainer = elementCreator.getElement("div", "");
     const deleteTodoItem = elementCreator.getIcon("delete-outline", "clickable-icon");
@@ -66,8 +62,13 @@ function updateProject(project) {
         editForm.showProjectEditForm(project);
     })
 
-    currentProjectContainer.appendChild(deleteButtonContainer);
-    currentProjectContainer.appendChild(editButtonContainer);
+    const projectTopContent = elementCreator.getElement("div", "", "project-top-content");
+
+    projectTopContent.appendChild(elementCreator.getElement("h2", project.title, "current-project-name"));
+    projectTopContent.appendChild(editButtonContainer);
+    projectTopContent.appendChild(deleteButtonContainer);
+    currentProjectContainer.appendChild(projectTopContent);
+    currentProjectContainer.appendChild(elementCreator.getElement("p", project.description, "current-project-description"));
 
     // Display all todo lists of this project
     updateTodoLists(project.todoLists);
@@ -120,10 +121,12 @@ function createTodoListElement(todoList, todoLists) {
 
     const todoListContainer = elementCreator.getElement("div", "", "todo-list");
     const todoItemsContainer = elementCreator.getElement("div", "", "todo-items");
+    const todoListTopContent = elementCreator.getElement("div", "", "todo-list-top-content")
 
-    todoListContainer.appendChild(deleteButtonContainer);
-    todoListContainer.appendChild(editButtonContainer);
-    todoListContainer.appendChild(elementCreator.getElement("h3", todoList.title, "todo-list-title"));
+    todoListTopContent.appendChild(elementCreator.getElement("h3", todoList.title, "todo-list-title"));
+    todoListTopContent.appendChild(editButtonContainer);
+    todoListTopContent.appendChild(deleteButtonContainer);
+    todoListContainer.appendChild(todoListTopContent);
     todoListContainer.appendChild(elementCreator.getElement("p", todoList.description, "todo-list-description"));
     todoListContainer.appendChild(todoItemsContainer);
 
@@ -156,10 +159,15 @@ function displayTodoItems(todoList, todoItemsContainer) {
         deleteButtonContainer.appendChild(deleteTodoItem);
         
         deleteButtonContainer.addEventListener("click", (e) => {
-            deleteForm.showDeleteForm("Are you sure you want to delete this Todo?<br> This can not be reverted.", () => {
+            if (todoItem.isCompleted) {
+                dataManager.deleteTodoItem(todoItem, todoList);
+                updateProject(globals.getActiveProject());
+            }else {
+                deleteForm.showDeleteForm("Are you sure you want to delete this uncompleted Todo?<br> This can not be reverted.", () => {
                 dataManager.deleteTodoItem(todoItem, todoList);
                 updateProject(globals.getActiveProject());
             });
+            }
         })
 
         // Create edit button
@@ -182,15 +190,24 @@ function displayTodoItems(todoList, todoItemsContainer) {
         })
 
         const todoItemContainer = elementCreator.getElement("div", "", "todo-item");
+        const todoItemTopContent = elementCreator.getElement("div", "", "todo-item-top-content");
+        const TodoItemBottomContent = elementCreator.getElement("div", "", "todo-item-bottom-content");
+
+        TodoItemBottomContent.addEventListener("click", (e) => {
+            dataManager.toggleCompleted(todoItem);
+            updateProject(globals.getActiveProject());
+        })
+
+        todoItemContainer.classList.add(todoItem.priority);
         todoItemContainer.dataset.isCompleted = todoItem.isCompleted;
-        todoItemContainer.appendChild(markCompletedButtonContainer);
-        todoItemContainer.appendChild(deleteButtonContainer);
-        todoItemContainer.appendChild(editButtonContainer);
-        todoItemContainer.appendChild(elementCreator.getElement("h4", todoItem.title, "todo-item-title"));
-        todoItemContainer.appendChild(elementCreator.getElement("span", todoItem.priority, "todo-item-priority"));
-        todoItemContainer.appendChild(elementCreator.getElement("div", todoItem.isCompleted, "todo-item-status"));
-        todoItemContainer.appendChild(elementCreator.getElement("span", todoItem.dueDate.toLocaleString(), "todo-item-due-date"));
-        todoItemContainer.appendChild(elementCreator.getElement("p", todoItem.notes, "todo-item-notes"));
+        todoItemTopContent.appendChild(markCompletedButtonContainer);
+        todoItemTopContent.appendChild(elementCreator.getElement("span", todoItem.dueDate.toLocaleDateString(), "todo-item-due-date"));
+        todoItemTopContent.appendChild(editButtonContainer);
+        todoItemTopContent.appendChild(deleteButtonContainer);
+        TodoItemBottomContent.appendChild(elementCreator.getElement("h4", todoItem.title, "todo-item-title"));
+        TodoItemBottomContent.appendChild(elementCreator.getElement("p", todoItem.notes, "todo-item-notes"));
+        todoItemContainer.appendChild(todoItemTopContent);
+        todoItemContainer.appendChild(TodoItemBottomContent);
         todoItemsContainer.appendChild(todoItemContainer);
     }
 }

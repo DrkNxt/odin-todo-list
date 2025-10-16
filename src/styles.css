@@ -28,8 +28,11 @@ Make grid auto-fit content:
     line-height: 1.6;
     font-family: "Roboto", Arial, sans-serif;
     box-sizing: border-box;
-    --primary-color: #e1e1e1;
-    --secondary-color: #555555;
+    --primary-color: #e5e5e5;
+    --secondary-color: #2d3142;
+    --background-color: #d9e2f1;
+    --button-color: #424d64;
+    --todo-item-color: #ffffff;
     --text-color: black;
 }
 
@@ -39,16 +42,12 @@ h1, h2, h3, h4, p, body {
 }
 
 body {
-    background-color: var(--primary-color);
+    background-color: color-mix(in srgb, var(--background-color) 75%, black);
     color: var(--text-color);
     display: grid;
     grid-template-columns: clamp(200px, 25%, 300px) auto;
     grid-template-rows: masonry;
     min-height: 100vh;
-}
-
-button {
-    cursor: pointer;
 }
 
 #dialog-form {
@@ -76,15 +75,10 @@ div.sidebar {
 }
 
 .project {
-    background-color: color-mix(in srgb, var(--secondary-color) 75%, black);
     padding: 0.5rem;
     border-radius: 5px;
     box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
     cursor: pointer;
-}
-
-.project:hover {
-    background-color: color-mix(in srgb, var(--secondary-color) 85%, black);
 }
 
 #add-project-form {
@@ -106,9 +100,16 @@ input:focus, textarea:focus {
     outline: none;
 }
 
-button:hover {
-    background-color: color-mix(in srgb, var(--secondary-color) 85%, black);
+button, .project {
+    cursor: pointer;
+    background-color: var(--button-color);
+    font-weight: bold;
     color: white;
+    transition: background-color 0.3s ease;
+}
+
+button:hover, .project:hover {
+    background-color: color-mix(in srgb, var(--button-color) 85%, white);
 }
 
 .form-buttons-project, .form-buttons-todo-list, .form-buttons-todo-item {
@@ -155,7 +156,7 @@ div.main {
     page-break-inside: avoid;
 }
 
-.todo-list {
+.todo-list, .add-todo-list-form-active {
     background-color: color-mix(in srgb, var(--primary-color) 70%, white);
     padding: 1rem;
     margin-bottom: 1rem;
@@ -169,6 +170,20 @@ div.main {
     gap: 0.5rem;
 }
 
+.todo-list-top-content, .project-top-content {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 0.5rem;
+    align-items: center;
+    border-bottom: 1px solid black;
+    padding-bottom: 0.5rem;
+}
+
+.project-top-content {
+    margin-bottom: 0.5rem;
+}
+
+
 .todo-items {
     display: flex;
     flex-direction: column;
@@ -176,9 +191,103 @@ div.main {
 }
 
 .todo-item {
-    background-color: white;
+    background-color: var(--todo-item-color);
     padding: 0.5rem;
     border-radius: 5px;
     box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
     margin-bottom: 0.5rem;
+}
+
+.todo-item-notes {
+    font-size: 0.9rem;
+}
+
+.todo-item-top-content {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    gap: 0.5rem;
+    align-items: center;
+    border-bottom: 1px solid lightgray;
+    margin-bottom: 0.5rem;
+}
+
+.todo-item-due-date {
+    font-size: 0.8rem;
+    color: gray;
+}
+
+[data-is-completed="true"] {
+    background-color: color-mix(in srgb, var(--todo-item-color) 95%, black);
+    color: color-mix(in srgb, var(--text-color) 50%, white);
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+div.very-high {
+    border-left: 6px solid red;
+}
+
+div.high {
+    border-left: 6px solid orange;
+}
+
+div.normal {
+    border-left: 6px solid yellow;
+}
+
+div.low {
+    border-left: 6px solid green;
+}
+
+div.very-low {
+    border-left: 6px solid blue;
+}
+
+.iconify {
+    font-size: 1.2rem;
+}
+
+.clickable-icon, input[type="checkbox"], .todo-item-bottom-content {
+    cursor: pointer;
+}
+
+dialog {
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.4);
+    padding: 1rem 1rem 0.5rem 1rem;
+    width: 500px;
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+menu {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding-top: 1rem;
+    margin: 0;
+    border-top: 1px solid lightgray;
+    margin-top: 1rem;
+}
+
+menu > button {
+    width: 100px;
+}
+
+#confirm-delete-btn {
+    background-color: red;
+}
+
+#confirm-delete-btn:hover {
+    background-color: color-mix(in srgb, red 65%, white);
+}
+
+#confirm-edit-btn, #add-new-todo-item-btn, #add-new-todo-list-btn, #add-new-project-btn {
+    background-color: green;
+}
+
+#confirm-edit-btn:hover, #add-new-todo-item-btn:hover, #add-new-todo-list-btn:hover, #add-new-project-btn:hover {
+    background-color: color-mix(in srgb, green 65%, white);
 }

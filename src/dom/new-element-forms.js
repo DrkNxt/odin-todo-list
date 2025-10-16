@@ -46,6 +46,7 @@ function projectForm() {
 // Display form to add a new todo list to a project
 function todoListForm() {
     const container = document.querySelector("#add-todo-list-div");
+    container.classList.add("add-todo-list-form-active");
 
     container.innerHTML = "";
 
@@ -73,12 +74,14 @@ function todoListForm() {
         dataManager.createTodoList(globals.getActiveProject(), title, description);
 
         container.innerHTML = "";
+        container.classList.add("add-todo-list-form-active");
         updateProject(globals.getActiveProject());
     })
 
     // Close form when "Cancel" button is clicked
     cancelButton.addEventListener("click", () => {
         container.innerHTML = "";
+        container.classList.remove("add-todo-list-form-active");
 
         container.appendChild(createAddTodoListButton());
     })

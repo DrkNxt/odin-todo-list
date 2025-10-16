@@ -8,7 +8,7 @@ function showDeleteForm(text, action) {
     form.appendChild(elementCreator.getElement("h2", "Confirm deletion"));
     form.appendChild(elementCreator.getElement("p", text));
     const menu = elementCreator.getElement("menu", "");
-    const confirmButton = elementCreator.getButton("confirm-delete-btn", "Confirm", "submit");
+    const confirmButton = elementCreator.getButton("confirm-delete-btn", "Delete", "submit");
     const cancelButton = elementCreator.getButton("cancel-delete-btn", "Cancel")
     menu.appendChild(confirmButton);
     menu.appendChild(cancelButton);
