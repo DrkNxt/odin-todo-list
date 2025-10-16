@@ -1,8 +1,7 @@
 import * as elementCreator from "./element-creator";
 import * as dataManager from "../data-manager";
-import { updateProjectList, updateProject, createAddTodoItemButton, createAddTodoListButton } from "./dom-manager";
+import { updateProjectList, updateProject, createAddTodoItemButton, createAddTodoListButton, changeSelectedPriority, getSelectedPriority } from "./dom-manager";
 import * as globals from "../globals";
-import { formatISO } from "date-fns";
 
 // Display form to add a new project
 function projectForm() {
@@ -95,9 +94,9 @@ function todoItemForm(todoList) {
 
     const titleInput = elementCreator.getInput("text", "todo-item-title", "todo-item-title", "New Todo");
     const priorityInput = elementCreator.getPrioritySelect("todo-item-priority", "todo-item-priority");
+    changeSelectedPriority(priorityInput, "priority-1");
     const dueDateInput = elementCreator.getInput("date", "todo-item-date", "todo-item-date", "");
     dueDateInput.valueAsNumber = new Date();
-    console.log(dueDateInput.valueAsDate);
     const notesInput = elementCreator.getTextArea("todo-item-notes", "todo-item-notes", 3, "");
     const buttonsDiv = elementCreator.getElement("div", "", "form-buttons-todo-item");
     const submitButton = elementCreator.getButton("add-new-todo-item-btn", "Add", "submit");
@@ -121,9 +120,8 @@ function todoItemForm(todoList) {
         e.preventDefault();
 
         let title = titleInput.value == "" ? "New Todo" : titleInput.value;
-        let priority = priorityInput.value;
+        let priority = getSelectedPriority(priorityInput);
         let dueDate = new Date(dueDateInput.valueAsNumber);
-        console.log(dueDate);
         let notes = notesInput.value;
         dataManager.createTodoItem(todoList, title, priority, dueDate, notes);
 

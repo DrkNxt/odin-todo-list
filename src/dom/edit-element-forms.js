@@ -1,6 +1,6 @@
 import * as globals from "../globals.js";
 import * as elementCreator from "./element-creator.js";
-import { updateAll, updateProject } from "./dom-manager.js";
+import { updateAll, updateProject, changeSelectedPriority, getSelectedPriority } from "./dom-manager.js";
 
 const dialog = document.querySelector("#dialog");
 const form = document.querySelector("#dialog-form");
@@ -91,14 +91,7 @@ function showTodoItemEditForm(todoItem) {
     const cancelButton = elementCreator.getButton("cancel-edit-btn", "Cancel")
 
     // Preselect the correct priority
-    priorityInput.querySelector(".normal").selected = false;
-    switch(todoItem.priority) {
-        case "very-low": priorityInput.querySelector(".very-low").selected = true; break;
-        case "low": priorityInput.querySelector(".low").selected = true; break;
-        case "high": priorityInput.querySelector(".high").selected = true; break;
-        case "very-high": priorityInput.querySelector(".very-high").selected = true; break;
-        default: priorityInput.querySelector(".normal").selected = true; break;
-    }
+    changeSelectedPriority(priorityInput, todoItem.priority);
 
     // Append all elements required for the todo item form
     form.appendChild(elementCreator.getElement("h2", "Edit Todo"));
@@ -118,7 +111,7 @@ function showTodoItemEditForm(todoItem) {
     confirmButton.addEventListener("click", (e) => {
         e.preventDefault();
         todoItem.title = titleInput.value;
-        todoItem.priority = priorityInput.value;
+        todoItem.priority = getSelectedPriority(priorityInput);
         todoItem.dueDate = new Date(dueDateInput.valueAsNumber);
         todoItem.notes = notesInput.value;
         dialog.close();

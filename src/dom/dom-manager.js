@@ -31,7 +31,6 @@ function updateProjectList() {
         projectElement.addEventListener("click", () => {
             updateProject(project);
         });
-
     }
 }
 
@@ -213,4 +212,21 @@ function displayTodoItems(todoList, todoItemsContainer) {
     }
 }
 
-export { updateAll, updateProjectList, updateProject, createAddTodoItemButton, createAddTodoListButton };
+function changeSelectedPriority(prioritySelect, selectedPriority) {
+    for (let priority of prioritySelect.children) {
+        priority.dataset.selected = "false";
+        priority.innerHTML = "";
+        priority.appendChild(elementCreator.getIcon("circle"));
+    }
+    const priority = prioritySelect.querySelector(`.${selectedPriority}`);
+    priority.dataset.selected = "true";
+    priority.innerHTML = "";
+    priority.appendChild(elementCreator.getIcon("circle-outline"));
+}
+
+function getSelectedPriority(prioritySelect) {
+    console.log(prioritySelect.querySelector(`[data-selected="true"]`).className);
+    return prioritySelect.querySelector(`[data-selected="true"]`).className;
+}
+
+export { updateAll, updateProjectList, updateProject, createAddTodoItemButton, createAddTodoListButton, changeSelectedPriority, getSelectedPriority };

@@ -1,3 +1,5 @@
+import { changeSelectedPriority } from "./dom-manager";
+
 function getLabel(htmlFor, textContent) {
     const label = document.createElement("label");
     label.htmlFor = htmlFor;
@@ -65,14 +67,22 @@ function getSelect(id, name) {
 }
 
 function getPrioritySelect(id, name) {
-    const select = document.createElement("select");
+    const select = getElement("div", "", "priority-select");
     select.id = id;
     select.name = name;
-    select.appendChild(getOption("very-low", "Very Low", "very-low"));
-    select.appendChild(getOption("low", "Low", "low"));
-    select.appendChild(getOption("normal", "Normal", "normal", true));
-    select.appendChild(getOption("high", "High", "high"));
-    select.appendChild(getOption("very-high", "Very High", "very-high"));
+    
+    for(let i=0; i<5; i++) {
+        const priority = getElement("span", "", `priority-${i+1}`);
+        priority.appendChild(getIcon("circle-outline"));
+        select.appendChild(priority);
+        priority.dataset.selected = "false";
+
+        priority.addEventListener("click", () => {
+            priority.innerHTML = "";
+            changeSelectedPriority(select, `priority-${i+1}`);
+        });
+    }
+
     return select;
 }
 
@@ -102,6 +112,13 @@ function getIcon(iconName, classes = null) {
         case "delete": d = "M9 3v1H4v2h1v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6h1V4h-5V3zM7 6h10v13H7zm2 2v9h2V8zm4 0v9h2V8z"; break;
         case "new": d = "M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"; break;
         case "list": d= "M11 15h6v2h-6zM9 7H7v2h2zm2 6h6v-2h-6zm0-4h6V7h-6zm-2 2H7v2h2zm12-6v14c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2m-2 0H5v14h14zM9 15H7v2h2z"; break;
+        case "circle-outline": {
+            d = "M12 20a8 8 0 0 1-8-8a8 8 0 0 1 8-8a8 8 0 0 1 8 8a8 8 0 0 1-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2"; 
+            iconPath.setAttribute("stroke-width", "1");
+            iconPath.setAttribute("stroke", "currentColor");
+            break;
+        }
+        case "circle": d = "M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2"; break;
         default: d = "M11 15h2v2h-2zm0-8h2v6h-2zm1-5C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2m0 18a8 8 0 0 1-8-8a8 8 0 0 1 8-8a8 8 0 0 1 8 8a8 8 0 0 1-8 8"; iconSvg.classList.add("icon-error"); break;
     }
 

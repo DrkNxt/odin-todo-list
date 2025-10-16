@@ -28,12 +28,17 @@ Make grid auto-fit content:
     line-height: 1.6;
     font-family: "Roboto", Arial, sans-serif;
     box-sizing: border-box;
-    --primary-color: #e5e5e5;
-    --secondary-color: #2d3142;
-    --background-color: #d9e2f1;
-    --button-color: #424d64;
-    --todo-item-color: #ffffff;
-    --text-color: black;
+    --primary-color: rgb(229, 229, 229);
+    --secondary-color: rgb(45, 49, 66);
+    --background-color: rgb(217, 226, 241);
+    --button-color: rgb(66, 77, 100);
+    --todo-item-color: rgb(255, 255, 255);
+    --text-color: rgb(0, 0, 0);
+    --priority-1-color: rgb(44, 142, 44);
+    --priority-2-color: rgb(34, 158, 225);
+    --priority-3-color: rgb(255, 255, 0);
+    --priority-4-color: rgb(255, 0, 93);
+    --priority-5-color: rgb(153, 0, 255);
 }
 
 .iconify {
@@ -64,7 +69,6 @@ body {
     color: var(--text-color);
     display: grid;
     grid-template-columns: clamp(200px, 25%, 300px) auto;
-    grid-template-rows: masonry;
     min-height: 100vh;
 }
 
@@ -265,24 +269,25 @@ div.main {
     text-decoration: line-through;
     opacity: 0.7;
 }
-div.very-high {
-    border-left: 6px solid red;
+
+div.priority-1 {
+    border-left: 6px solid var(--priority-1-color);
 }
 
-div.high {
-    border-left: 6px solid orange;
+div.priority-2 {
+    border-left: 6px solid var(--priority-2-color);
 }
 
-div.normal {
-    border-left: 6px solid yellow;
+div.priority-3 {
+    border-left: 6px solid var(--priority-3-color);
 }
 
-div.low {
-    border-left: 6px solid green;
+div.priority-4 {
+    border-left: 6px solid var(--priority-4-color);
 }
 
-div.very-low {
-    border-left: 6px solid blue;
+div.priority-5 {
+    border-left: 6px solid var(--priority-5-color);
 }
 
 .icon-error {
@@ -346,4 +351,42 @@ menu > button {
 
 #confirm-edit-btn:hover, #add-new-todo-item-btn:hover, #add-new-todo-list-btn:hover, #add-new-project-btn:hover {
     background-color: color-mix(in srgb, green 65%, white);
+}
+
+.priority-select {
+    display: flex;
+    gap: 1rem;
+}
+
+.priority-select > span > .iconify {
+    font-size: 1.5rem;
+    background-color: white;
+    border-radius: 50%;
+    border: 2px solid var(--button-color);
+    transition: background-color 0.3s ease;
+}
+
+.priority-select > span:hover > .iconify {
+    background-color: color-mix(in srgb, var(--button-color) 30%, white);
+    cursor: pointer;
+}
+
+span.priority-1 {
+    color: var(--priority-1-color);
+}
+
+span.priority-2 {
+    color: var(--priority-2-color);
+}
+
+span.priority-3 {
+    color: var(--priority-3-color);
+}
+
+span.priority-4 {
+    color: var(--priority-4-color);
+}
+
+span.priority-5 {
+    color: var(--priority-5-color);
 }
