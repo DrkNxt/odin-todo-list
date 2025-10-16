@@ -15,10 +15,8 @@ domManager.updateProject(globals.projectList.projects[0]);
 
 // TODO: add "Completed" section that displays all completed tasks
 
-// TODO: only display uncompleted tasks in every section (except "Completed" (and Project?))
+// TODO: only display uncompleted tasks in every section (except "Completed" and Projects)
 
 // TODO: implement local storage
 
-// TODO: change Icon loading method to prevent flickering
-
-// TODO: background for add todo list form
+// TODO: change priority picker to have the correct colors

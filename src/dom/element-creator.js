@@ -98,4 +98,46 @@ function getIcon(iconName, classes = null) {
     return icon;
 }
 
-export { getLabel, getInput, getOption, getTextArea, getButton, getSelect, getPrioritySelect, getElement, getIcon };
+function getIconPencil(classes = null) {
+    const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    const iconPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    iconSvg.classList.add("iconify");
+    if (classes !== null){
+        iconSvg.classList.add(classes);
+    }
+
+    iconSvg.setAttribute('viewBox', '0 0 24 24');
+
+    iconPath.setAttribute('fill', 'currentColor');
+    iconPath.setAttribute(
+    'd',
+    'm14.06 9l.94.94L5.92 19H5v-.92zm3.6-6c-.25 0-.51.1-.7.29l-1.83 1.83l3.75 3.75l1.83-1.83c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29m-3.6 3.19L3 17.25V21h3.75L17.81 9.94z'
+    );
+
+    iconSvg.appendChild(iconPath);
+    return iconSvg;
+}
+
+function getIconTrash(classes = null) {
+    const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    const iconPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    iconSvg.classList.add("iconify");
+    if (classes !== null){
+        iconSvg.classList.add(classes);
+    }
+
+    iconSvg.setAttribute('viewBox', '0 0 24 24');
+
+    iconPath.setAttribute('fill', 'currentColor');
+    iconPath.setAttribute(
+    'd',
+    'M9 3v1H4v2h1v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6h1V4h-5V3zM7 6h10v13H7zm2 2v9h2V8zm4 0v9h2V8z'
+    );
+
+    iconSvg.appendChild(iconPath);
+    return iconSvg;
+}
+
+// !!!!!!!!!!!!!TRASH CAN SYMBOL!!!!!!!!!!
+
+export { getLabel, getInput, getOption, getTextArea, getButton, getSelect, getPrioritySelect, getElement, getIcon, getIconPencil, getIconTrash };
