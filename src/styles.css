@@ -103,7 +103,7 @@ div.sidebar {
     gap: 0.1rem;
 }
 
-.project-btn {
+.project-btn, .display-filter-btn {
     text-align: left;
     padding: 0.7rem 1rem;
 }
@@ -114,11 +114,20 @@ div.sidebar {
     align-items: center;
     justify-content: center;
     background-color: color-mix(in srgb, var(--button-color) 70%, white);
+    margin-bottom: 0.1rem;
 }
 
 #add-template-projects-btn {
     font-size: 1rem;
     gap: 0.5rem;
+}
+
+.display-filter-btn {
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.1rem;
 }
 
 #add-project-btn > .iconify, #add-template-projects-btn > .iconify {
@@ -250,6 +259,12 @@ div.main {
 .add-todo-item-btn {
     font-size: 1.5rem;
     box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+}
+
+.priority-due-date-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
 }
 
 .project-top-content {

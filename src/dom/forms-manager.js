@@ -1,7 +1,7 @@
 import * as globals from "../globals.js";
 import * as elementCreator from "./element-creator.js";
-import * as dataManager from "../data-manager";
-import { updateProjectList, updateAll, updateProject, changeSelectedPriority, getSelectedPriority } from "./dom-manager.js";
+import * as dataManager from "../data-manager.js";
+import { updateProjectList, updateAll, updateProject, changeSelectedPriority, getSelectedPriority } from "./dom-project-manager.js";
 
 const dialog = document.querySelector("#dialog");
 const form = document.querySelector("#dialog-form");
@@ -152,7 +152,7 @@ function showTodoItemForm(mode, element) {
     form.innerHTML = "";
     
     const menu = elementCreator.getElement("menu", "");
-    
+    const priorityDueDateContainer = elementCreator.getElement("div", "", "priority-due-date-container");
     const priorityInput = elementCreator.getPrioritySelect("todo-item-priority", "todo-item-priority");
     const dueDateContainer = elementCreator.getElement("div", "", "todo-item-date-container");
     const dueDateOption = elementCreator.getInput("checkbox", "todo-item-date-option", "todo-item-date-option", "");
@@ -240,15 +240,15 @@ function showTodoItemForm(mode, element) {
     })
 
     // Append all elements to form
-    
     form.appendChild(elementCreator.getLabel("todo-item-title", "Title"));
     form.appendChild(titleInput);
-    form.appendChild(elementCreator.getLabel("todo-item-priority", "Priority"));
-    form.appendChild(priorityInput);
-    form.appendChild(elementCreator.getLabel("todo-item-date", "Due Date"));
     dueDateContainer.appendChild(dueDateOption);
     dueDateContainer.appendChild(dueDateInput);
-    form.appendChild(dueDateContainer);
+    priorityDueDateContainer.appendChild(elementCreator.getLabel("todo-item-priority", "Priority"));
+    priorityDueDateContainer.appendChild(elementCreator.getLabel("todo-item-date", "Due Date"));
+    priorityDueDateContainer.appendChild(priorityInput);
+    priorityDueDateContainer.appendChild(dueDateContainer);
+    form.appendChild(priorityDueDateContainer);
     form.appendChild(elementCreator.getLabel("todo-item-notes", "Notes"));
     form.appendChild(notesInput);
     menu.appendChild(confirmButton);

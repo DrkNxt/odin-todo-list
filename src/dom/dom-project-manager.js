@@ -1,6 +1,6 @@
 import * as globals from "../globals.js";
 import * as elementCreator from "./element-creator.js";
-import * as elementForms from "./element-forms.js";
+import * as elementForms from "./forms-manager.js";
 import * as dataManager from "../data-manager.js";
 import { loadDefaultProject } from "../default-project.js";
 
