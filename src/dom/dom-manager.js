@@ -22,14 +22,22 @@ function updateAll() {
 // Update project list elements
 function updateProjectList() {
 
+    if (globals.projectList.projects.length < 1) {
+            dataManager.createProject("New Project", "Description");
+    }
+
     projectListContainer.innerHTML = "";
 
     for (let project of globals.projectList.projects) {
         const projectElement = elementCreator.getElement("button", project.title, "project-btn");
         projectListContainer.appendChild(projectElement);
+        if (project === globals.getActiveProject()) {
+            projectElement.id = "active-project-btn";
+        }
 
         projectElement.addEventListener("click", () => {
             updateProject(project);
+            updateProjectList();
         });
     }
 }
