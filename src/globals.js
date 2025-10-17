@@ -4,9 +4,9 @@ import * as localStorageManager from "./local-storage-manager.js";
 let projectList;
 if (localStorageManager.isProjectListStored()) {
     projectList = localStorageManager.getProjectList();
+}else {
+    projectList = new ProjectList();
 }
-projectList = new ProjectList();
-
 
 let activeProject = projectList.projects[0];
 

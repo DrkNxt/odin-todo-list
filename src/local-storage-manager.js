@@ -22,12 +22,12 @@ function storageAvailable(type) {
 function storeProjectList() {
     if (storageAvailable) {
         localStorage.setItem("projectList", JSON.stringify(globals.projectList));
+    }else {
+        throw new Error("Local storage is not available");
     }
-    
 }
 
 function getProjectList() {
-    console.log(JSON.parse(localStorage.getItem("projectList")));
     return JSON.parse(localStorage.getItem("projectList"));
 }
 
@@ -37,8 +37,5 @@ function isProjectListStored() {
     }
     return false;
 }
-
-console.log("Storage available: ");
-console.log(storageAvailable("localStorage"));
 
 export { storeProjectList, getProjectList, isProjectListStored };

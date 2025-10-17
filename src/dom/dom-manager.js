@@ -207,7 +207,16 @@ function displayTodoItems(todoList, todoItemsContainer) {
         todoItemContainer.classList.add(todoItem.priority);
         todoItemContainer.dataset.isCompleted = todoItem.isCompleted;
         todoItemTopContent.appendChild(markCompletedButtonContainer);
-        todoItemTopContent.appendChild(elementCreator.getElement("span", todoItem.dueDate === null ? "" : todoItem.dueDate.toLocaleDateString(), "todo-item-due-date"));
+        let dueDate;
+        if (todoItem.dueDate instanceof Date && !isNaN(todoItem.dueDate)) {
+            dueDate = todoItem.dueDate.toLocaleDateString();
+        }else if (todoItem.dueDate == null) {
+            dueDate = "";
+        }else {
+            todoItem.dueDate = (new Date(Date.parse(todoItem.dueDate)));
+            dueDate = todoItem.dueDate.toLocaleDateString();
+        }
+        todoItemTopContent.appendChild(elementCreator.getElement("span", dueDate, "todo-item-due-date"));
         todoItemTopContent.appendChild(editButtonContainer);
         todoItemTopContent.appendChild(deleteButtonContainer);
         TodoItemBottomContent.appendChild(elementCreator.getElement("h4", todoItem.title, "todo-item-title"));
