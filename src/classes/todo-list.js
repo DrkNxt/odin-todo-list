@@ -8,6 +8,11 @@ class TodoList {
     static get(todoList, todoItem) {
         return todoList.todoItems.findIndex((todo) => todo === todoItem);
     }
+    static setTodoItems(todoList, todoItems) {
+        for(let todoItem of todoItems) {
+            TodoList.addTodoItem(todoList, todoItem);
+        }
+    }
 
     static addTodoItem(todoList, todoItem) {
         todoList.todoItems.push(todoItem);
