@@ -14,6 +14,9 @@ function createTodoList(project, title, description) {
 }
 
 function createTodoItem(todoList, title, priority, dueDate, notes) {
+    if (!(dueDate instanceof Date && !isNaN(dueDate))) {
+        dueDate = null;
+    }
     todoList.addTodoItem( new TodoItem(title, priority, dueDate, notes));
 }
 

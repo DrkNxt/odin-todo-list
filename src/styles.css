@@ -148,6 +148,17 @@ input:focus, textarea:focus {
     outline: none;
 }
 
+input:disabled, textarea:disabled {
+    background-color: color-mix(in srgb, var(--todo-item-color) 80%, black);
+    cursor: not-allowed;
+}
+
+.todo-item-date-container{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+}
+
 button, .project {
     cursor: pointer;
     background-color: var(--button-color);

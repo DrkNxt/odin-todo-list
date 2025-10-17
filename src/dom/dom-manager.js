@@ -207,7 +207,7 @@ function displayTodoItems(todoList, todoItemsContainer) {
         todoItemContainer.classList.add(todoItem.priority);
         todoItemContainer.dataset.isCompleted = todoItem.isCompleted;
         todoItemTopContent.appendChild(markCompletedButtonContainer);
-        todoItemTopContent.appendChild(elementCreator.getElement("span", todoItem.dueDate.toLocaleDateString(), "todo-item-due-date"));
+        todoItemTopContent.appendChild(elementCreator.getElement("span", todoItem.dueDate === null ? "" : todoItem.dueDate.toLocaleDateString(), "todo-item-due-date"));
         todoItemTopContent.appendChild(editButtonContainer);
         todoItemTopContent.appendChild(deleteButtonContainer);
         TodoItemBottomContent.appendChild(elementCreator.getElement("h4", todoItem.title, "todo-item-title"));
@@ -231,7 +231,6 @@ function changeSelectedPriority(prioritySelect, selectedPriority) {
 }
 
 function getSelectedPriority(prioritySelect) {
-    console.log(prioritySelect.querySelector(`[data-selected="true"]`).className);
     return prioritySelect.querySelector(`[data-selected="true"]`).className;
 }
 

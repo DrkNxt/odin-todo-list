@@ -154,16 +154,38 @@ function showTodoItemForm(mode, element) {
     const menu = elementCreator.getElement("menu", "");
     
     const priorityInput = elementCreator.getPrioritySelect("todo-item-priority", "todo-item-priority");
+    const dueDateContainer = elementCreator.getElement("div", "", "todo-item-date-container");
+    const dueDateOption = elementCreator.getInput("checkbox", "todo-item-date-option", "todo-item-date-option", "");
     const dueDateInput = elementCreator.getInput("date", "todo-item-date", "todo-item-date", "");
     let titleInput;
     let notesInput;
     let confirmButton;
     let cancelButton;
+
+    // Due date checkbox functionality
+    dueDateOption.addEventListener("click", () => {
+        if (dueDateOption.checked) {
+            dueDateInput.disabled = false;
+        }else {
+            dueDateInput.disabled = true;
+        }
+    });
+    dueDateOption.checked = true;
+    dueDateInput.disabled = false;
     
     // Edit element mode
     if (mode === "edit") {
+        // Check dueDateOption if date is valid
+        if (element.dueDate instanceof Date && !isNaN(element.dueDate)) {
+            dueDateOption.checked = true;
+            dueDateInput.disabled = false;
+            dueDateInput.valueAsDate = element.dueDate === null ? new Date() : element.dueDate;
+        }else {
+            dueDateOption.checked = false;
+            dueDateInput.disabled = true;
+        }
+
         titleInput = elementCreator.getInput("text", "todo-item-title", "todo-item-title", "New Todo", "off", element.title);
-        dueDateInput.valueAsDate = element.dueDate;
         notesInput = elementCreator.getTextArea("todo-item-notes", "todo-item-notes", 3, "", element.notes);
         confirmButton = elementCreator.getButton("confirm-edit-btn", "Confirm", "submit");
         cancelButton = elementCreator.getButton("cancel-edit-btn", "Cancel")
@@ -175,7 +197,11 @@ function showTodoItemForm(mode, element) {
             e.preventDefault();
             element.title = titleInput.value;
             element.priority = getSelectedPriority(priorityInput);
-            element.dueDate = new Date(dueDateInput.valueAsNumber);
+            let dueDate = new Date(dueDateInput.valueAsNumber);
+            if (!(dueDate instanceof Date && !isNaN(dueDate)) || !dueDateOption.checked) {
+                dueDate = null;
+            }
+            element.dueDate = dueDate;
             element.notes = notesInput.value;
             dialog.close();
             updateProject(globals.getActiveProject());
@@ -198,6 +224,9 @@ function showTodoItemForm(mode, element) {
             let title = titleInput.value == "" ? "New Todo" : titleInput.value;
             let priority = getSelectedPriority(priorityInput);
             let dueDate = new Date(dueDateInput.valueAsNumber);
+            if (!(dueDate instanceof Date && !isNaN(dueDate)) || !dueDateOption.checked) {
+                dueDate = null;
+            }
             let notes = notesInput.value;
             dataManager.createTodoItem(element, title, priority, dueDate, notes);
             dialog.close();
@@ -217,7 +246,9 @@ function showTodoItemForm(mode, element) {
     form.appendChild(elementCreator.getLabel("todo-item-priority", "Priority"));
     form.appendChild(priorityInput);
     form.appendChild(elementCreator.getLabel("todo-item-date", "Due Date"));
-    form.appendChild(dueDateInput);
+    dueDateContainer.appendChild(dueDateOption);
+    dueDateContainer.appendChild(dueDateInput);
+    form.appendChild(dueDateContainer);
     form.appendChild(elementCreator.getLabel("todo-item-notes", "Notes"));
     form.appendChild(notesInput);
     menu.appendChild(confirmButton);
