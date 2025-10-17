@@ -4,7 +4,9 @@ import { TodoList } from "./classes/todo-list.js";
 import { TodoItem } from "./classes/todo-item.js";
 
 function createProject(title, description) {
-    globals.projectList.addProject(new Project(title, description));
+    let project = new Project(title, description);
+    globals.projectList.addProject(project);
+    globals.setActiveProject(project);
 }
 
 function createTodoList(project, title, description) {

@@ -21,8 +21,6 @@ domManager.updateProject(globals.projectList.projects[0]);
 
 // TODO: change element creation to use dialog (?)
 
-// TODO: change create, edit and delete forms to have border below heading and no border above buttons
-
 // TODO: option to only display todos of specific priority
 
 // TODO: make due date optional

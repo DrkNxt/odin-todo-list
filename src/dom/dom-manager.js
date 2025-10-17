@@ -1,9 +1,7 @@
 import * as globals from "../globals.js";
 import * as elementCreator from "./element-creator.js";
-import * as newForm from "./new-element-forms.js";
+import * as elementForms from "./element-forms.js";
 import * as dataManager from "../data-manager.js";
-import * as deleteForm from "./delete-element-forms.js";
-import * as editForm from "./edit-element-forms.js";
 
 const projectListContainer = document.querySelector("#project-list");
 const currentProjectContainer = document.querySelector("#current-project");
@@ -11,7 +9,7 @@ const todoListsContainer = document.querySelector("#todo-lists");
 const addProjectButton = document.querySelector("#add-project-btn");
 
 addProjectButton.addEventListener("click", () => {
-    newForm.projectForm();
+    elementForms.showAddProjectForm();
 })
 
 function updateAll() {
@@ -53,7 +51,7 @@ function updateProject(project) {
     deleteButtonContainer.appendChild(deleteTodoItem);
         
     deleteButtonContainer.addEventListener("click", (e) => {
-        deleteForm.showDeleteForm("Are you sure you want to delete this Project?<br> This can not be reverted and all Todo Lists and Todos in this Project will be deleted as well.", () => {
+        elementForms.showDeleteForm("Are you sure you want to delete this Project?<br> This can not be reverted and all Todo Lists and Todos in this Project will be deleted as well.", () => {
             dataManager.deleteProject(project);
             globals.setActiveProject(globals.projectList.projects[0]);
             updateAll();
@@ -66,7 +64,7 @@ function updateProject(project) {
     editButtonContainer.appendChild(editProject);
         
     editButtonContainer.addEventListener("click", (e) => {
-        editForm.showProjectEditForm(project);
+        elementForms.showEditProjectForm(project);
     })
 
     const projectTopContent = elementCreator.getElement("div", "", "project-top-content");
@@ -90,7 +88,7 @@ function createAddTodoListButton() {
     const addTodoListButton = elementCreator.getButton(null, "", "button", "add-todo-list-btn");
     addTodoListButton.appendChild(elementCreator.getIcon("new", "todo-list-plus-icon"))
     addTodoListButton.addEventListener("click", () => {
-        newForm.todoListForm();
+        elementForms.showAddTodoListForm();
     });
     return addTodoListButton;
 }
@@ -112,7 +110,7 @@ function createTodoListElement(todoList, todoLists) {
     deleteButtonContainer.appendChild(deleteTodoItem);
         
     deleteButtonContainer.addEventListener("click", (e) => {
-        deleteForm.showDeleteForm("Are you sure you want to delete this Todo List?<br> This can not be reverted and all Todos in this List will be deleted as well.", () => {
+        elementForms.showDeleteForm("Are you sure you want to delete this Todo List?<br> This can not be reverted and all Todos in this List will be deleted as well.", () => {
             dataManager.deleteTodoList(todoList, globals.getActiveProject());
             updateProject(globals.getActiveProject());
         });
@@ -124,7 +122,7 @@ function createTodoListElement(todoList, todoLists) {
     editButtonContainer.appendChild(editTodoList);
         
     editButtonContainer.addEventListener("click", (e) => {
-        editForm.showTodoListEditForm(todoList);
+        elementForms.showEditTodoListForm(todoList);
     })
 
     const todoListContainer = elementCreator.getElement("div", "", "todo-list");
@@ -152,7 +150,7 @@ function createAddTodoItemButton(todoList) {
     const addTodoItemButton = elementCreator.getButton(null, "", "button", "add-todo-item-btn");
     addTodoItemButton.appendChild(elementCreator.getIcon("new", "todo-item-plus-icon"))
     addTodoItemButton.addEventListener("click", () => {
-        newForm.todoItemForm(todoList);
+        elementForms.showAddTodoItemForm(todoList);
     });
 
     return addTodoItemButton;
@@ -171,7 +169,7 @@ function displayTodoItems(todoList, todoItemsContainer) {
                 dataManager.deleteTodoItem(todoItem, todoList);
                 updateProject(globals.getActiveProject());
             }else {
-                deleteForm.showDeleteForm("Are you sure you want to delete this uncompleted Todo?<br> This can not be reverted.", () => {
+                elementForms.showDeleteForm("Are you sure you want to delete this uncompleted Todo?<br> This can not be reverted.", () => {
                 dataManager.deleteTodoItem(todoItem, todoList);
                 updateProject(globals.getActiveProject());
             });
@@ -184,7 +182,7 @@ function displayTodoItems(todoList, todoItemsContainer) {
         editButtonContainer.appendChild(editTodoItem);
         
         editButtonContainer.addEventListener("click", (e) => {
-            editForm.showTodoItemEditForm(todoItem);
+            elementForms.showEditTodoItemForm(todoItem);
         })
 
         // Create mark completed button
