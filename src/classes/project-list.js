@@ -2,16 +2,13 @@ class ProjectList {
     constructor() {
         this.projects = []
     }
-    get(project) {
-        return this.projects.findIndex((proj) => proj === project);
+
+    static addProject(projectList, project) {
+        projectList.projects.push(project);
     }
 
-    addProject(project) {
-        this.projects.push(project);
-    }
-
-    removeProject(project) {
-        this.projects.splice(this.projects.findIndex((proj) => proj === project), 1);
+    static removeProject(projectList, project) {
+        projectList.projects.splice(projectList.projects.findIndex((proj) => proj === project), 1);
     }
 }
 

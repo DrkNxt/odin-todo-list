@@ -1,6 +1,13 @@
 import { ProjectList } from "./classes/project-list";
+import * as localStorageManager from "./local-storage-manager.js";
 
-const projectList = new ProjectList();
+let projectList;
+if (localStorageManager.isProjectListStored()) {
+    projectList = localStorageManager.getProjectList();
+}
+projectList = new ProjectList();
+
+
 let activeProject = projectList.projects[0];
 
 function getActiveProject() {

@@ -3,12 +3,14 @@ import * as globals from "./globals.js";
 import { loadDefaultProject } from "./default-project.js";
 import * as domManager from "./dom/dom-manager.js";
 import "./data-manager.js";
+import * as localStorageManager from "./local-storage-manager.js";
 
 loadDefaultProject(globals.projectList);
 
 domManager.updateProjectList();
 domManager.updateProject(globals.projectList.projects[0]);
 
+localStorageManager.getProjectList();
 
 // TODO: add "Upcoming" section that displays tasks in order of closest due date
 // TODO: add "Today" and "This Week" section that displays tasks due today / this week

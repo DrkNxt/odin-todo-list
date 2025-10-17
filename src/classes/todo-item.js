@@ -8,8 +8,8 @@ class TodoItem {
         this.id = crypto.randomUUID();
     }
 
-    toggleCompleted() {
-        this.isCompleted = !this.isCompleted;
+    static toggleCompleted(todoItem) {
+        todoItem.isCompleted = !todoItem.isCompleted;
     }
 }
 

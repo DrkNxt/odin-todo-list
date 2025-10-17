@@ -5,16 +5,16 @@ class TodoList {
         this.todoItems = []
         this.id = crypto.randomUUID();
     }
-    get(todoItem) {
-        return this.todoItems.findIndex((todo) => todo === todoItem);
+    static get(todoList, todoItem) {
+        return todoList.todoItems.findIndex((todo) => todo === todoItem);
     }
 
-    addTodoItem(todoItem) {
-        this.todoItems.push(todoItem);
+    static addTodoItem(todoList, todoItem) {
+        todoList.todoItems.push(todoItem);
     }
 
-    removeTodoItem(todoItem) {
-        this.todoItems.splice(this.todoItems.findIndex((todo) => todo === todoItem), 1);
+    static removeTodoItem(todoList, todoItem) {
+        todoList.todoItems.splice(todoList.todoItems.findIndex((todo) => todo === todoItem), 1);
     }
 }
 
