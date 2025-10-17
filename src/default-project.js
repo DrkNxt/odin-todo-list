@@ -3,13 +3,16 @@ import { Project } from "./classes/project.js";
 import { TodoList } from "./classes/todo-list.js";
 import { TodoItem } from "./classes/todo-item.js";
 import { ProjectList } from "./classes/project-list.js";
+import { updateAll } from "./dom/dom-manager.js";
+import { saveChanges } from "./data-manager.js";
 
-function loadDefaultProject(projectList) {
-    addDefaultProjectWork(projectList);
-    addDefaultProjectUni(projectList);
-    addDefaultProjectMisc(projectList);
+function loadDefaultProject() {
+    addDefaultProjectWork(globals.projectList);
+    addDefaultProjectUni(globals.projectList);
+    addDefaultProjectMisc(globals.projectList);
+    updateAll();
+    saveChanges();
 }
-
 
 function addDefaultProjectWork(projectList) {
     ProjectList.addProject(globals.projectList, new Project("Work", `This is where I put all my work related tasks`));

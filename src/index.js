@@ -1,6 +1,5 @@
 import "./styles.css";
 import * as globals from "./globals.js";
-import { loadDefaultProject } from "./default-project.js";
 import * as domManager from "./dom/dom-manager.js";
 import "./data-manager.js";
 
@@ -12,5 +11,3 @@ domManager.updateProject(globals.projectList.projects[0]);
 // TODO: add "Completed" section that displays all completed tasks
 // TODO: only display uncompleted tasks in every section (except "Completed" and Projects)
 // TODO: option to only display todos of specific priority
-
-// TODO: implement local storage

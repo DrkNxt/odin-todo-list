@@ -2,14 +2,20 @@ import * as globals from "../globals.js";
 import * as elementCreator from "./element-creator.js";
 import * as elementForms from "./element-forms.js";
 import * as dataManager from "../data-manager.js";
+import { loadDefaultProject } from "../default-project.js";
 
 const projectListContainer = document.querySelector("#project-list");
 const currentProjectContainer = document.querySelector("#current-project");
 const todoListsContainer = document.querySelector("#todo-lists");
 const addProjectButton = document.querySelector("#add-project-btn");
+const addTemplateProjectsButton = document.querySelector("#add-template-projects-btn");
 
 addProjectButton.addEventListener("click", () => {
     elementForms.showAddProjectForm();
+})
+
+addTemplateProjectsButton.addEventListener("click", () => {
+    loadDefaultProject();
 })
 
 function updateAll() {

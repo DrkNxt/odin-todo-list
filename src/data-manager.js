@@ -53,4 +53,4 @@ function saveChanges() {
     localStorageManager.storeProjectList(globals.projectList);
 }
 
-export { createProject, createTodoList, createTodoItem, deleteProject, deleteTodoList, deleteTodoItem, toggleCompleted };
+export { createProject, createTodoList, createTodoItem, deleteProject, deleteTodoList, deleteTodoItem, toggleCompleted, saveChanges };
