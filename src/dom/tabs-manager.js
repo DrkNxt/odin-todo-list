@@ -1,16 +1,29 @@
+import * as globals from "../globals.js";
+import * as filterTodoItems from "../filter-todo-items.js";
 import * as elementCreator from "./element-creator.js";
 import * as todoItemCreator from "./todo-item-creator.js";
 
 const mainContainer = document.querySelector("#main");
 
-function displayTodoItemsBy(todoList, title) {
+function displayUpcomingTodoItems() {
     mainContainer.innerHTML = "";
+
+    const todoLists = filterTodoItems.getUpcoming();
+    for (let todoList of todoLists) {
+        displayTodoItemsBy(todoList, false);
+    }
+}
+
+function displayTodoItemsBy(todoList, emptyContainer=true) {
+    if (emptyContainer) {
+        mainContainer.innerHTML = "";
+    }
 
     const todoListContainer = elementCreator.getElement("div", "", "filter-todo-list");
     const todoItemsContainer = elementCreator.getElement("div", "", "filter-todo-items");
     const todoListTopContent = elementCreator.getElement("div", "", "filter-todo-list-top-content")
 
-    todoListTopContent.appendChild(elementCreator.getElement("h3", title, "filter-todo-list-title"));
+    todoListTopContent.appendChild(elementCreator.getElement("h3", todoList.title, "filter-todo-list-title"));
     todoListContainer.appendChild(todoListTopContent);
     todoListContainer.appendChild(todoItemsContainer);
 
@@ -20,4 +33,4 @@ function displayTodoItemsBy(todoList, title) {
     mainContainer.appendChild(todoListContainer);
 }
 
-export { displayTodoItemsBy };
+export { displayUpcomingTodoItems, displayTodoItemsBy };

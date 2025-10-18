@@ -70,7 +70,6 @@ function updateSelectedTab(selectedTab) {
     displayCompletedButton.classList.remove("active-tab");
     projectList.removeAttribute("class");
 
-    console.log(selectedTab == globals.tabs.TODAY);
     switch(selectedTab) {
         case globals.tabs.UPCOMING: displayUpcomingButton.classList.add("active-tab"); break;
         case globals.tabs.TODAY: displayTodayButton.classList.add("active-tab"); break;
@@ -84,32 +83,32 @@ function updateSelectedTab(selectedTab) {
 
 // Tab display functions
 function displayUpcoming() {
-
+    tabsManager.displayUpcomingTodoItems();
     updateSelectedTab(globals.tabs.UPCOMING);
 }
 
 function displayDueToday() {
-    tabsManager.displayTodoItemsBy(filterTodoItems.getDueInXDays(1, "Today"), "Todays Todos");
+    tabsManager.displayTodoItemsBy(filterTodoItems.getDueInXDays(1, "Today"));
     updateSelectedTab(globals.tabs.TODAY);
 }
 
 function displayDueThisWeek() {
-    tabsManager.displayTodoItemsBy(filterTodoItems.getDueInXDays(7, "This week"), "This weeks Todos");
+    tabsManager.displayTodoItemsBy(filterTodoItems.getDueInXDays(7, "This week"));
     updateSelectedTab(globals.tabs.THIS_WEEK);
 }
 
 function displayOverdue() {
-    tabsManager.displayTodoItemsBy(filterTodoItems.getOverdue(), "Overdue Todos");
+    tabsManager.displayTodoItemsBy(filterTodoItems.getOverdue());
     updateSelectedTab(globals.tabs.OVERDUE);
 }
 
 function displayByPriority(priority) {
-    tabsManager.displayTodoItemsBy(filterTodoItems.getByPriority(priority), "Todos by Priority");
+    tabsManager.displayTodoItemsBy(filterTodoItems.getByPriority(priority));
     updateSelectedTab(globals.tabs.PRIORITY);
 }
 
 function displayByCompleted() {
-    tabsManager.displayTodoItemsBy(filterTodoItems.getCompleted(), "Completed Todos");
+    tabsManager.displayTodoItemsBy(filterTodoItems.getCompleted());
     updateSelectedTab(globals.tabs.COMPLETED);
 }
 
