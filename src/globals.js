@@ -1,6 +1,17 @@
 import { ProjectList } from "./classes/project-list";
 import * as localStorageManager from "./local-storage-manager.js";
 
+const tabs = Object.freeze({
+    UPCOMING:   "upcoming",
+    TODAY:  "today",
+    THIS_WEEK: "thisWeek",
+    OVERDUE:  "overdue",
+    PRIORITY:  "priority",
+    COMPLETED:  "completed",
+    PROJECT:  "project",
+});
+
+let selectedTab = tabs.THIS_WEEK;
 let projectList;
 if (localStorageManager.isProjectListStored()) {
     projectList = localStorageManager.getProjectList();
@@ -26,4 +37,4 @@ function setActiveProject(project) {
     
 }
 
-export { projectList, getActiveProject, setActiveProject };
+export { tabs, selectedTab, projectList, getActiveProject, setActiveProject };

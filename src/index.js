@@ -6,6 +6,3 @@ import { getUpcoming, getDueInXDays, getOverdue, getCompleted, getByPriority } f
 
 domManager.updateProjectList();
 domManager.displayProject(globals.projectList.projects[0]);
-
-
-// TODO: make project header editable directly (?)

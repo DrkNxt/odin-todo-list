@@ -154,7 +154,11 @@ div.sidebar {
     background-color: color-mix(in srgb, var(--button-color) 60%, white);
 }
 
-#active-project-btn {
+button.active-tab {
+    border-left: 6px solid color-mix(in srgb, var(--button-color) 60%, white);
+}
+
+.active-tab > button#active-project {
     border-left: 6px solid color-mix(in srgb, var(--button-color) 60%, white);
 }
 

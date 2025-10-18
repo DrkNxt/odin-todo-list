@@ -1,23 +1,12 @@
 import * as globals from "../globals.js";
 import * as elementCreator from "./element-creator.js";
-import * as elementForms from "./forms-manager.js";
 import * as dataManager from "../data-manager.js";
-import * as projectManager from "./dom-project-manager.js";
-import * as filterManager from "./dom-filter-manager.js";
+import * as projectsTabManager from "./projects-tab-manager.js";
+import * as tabsManager from "./tabs-manager.js";
 import * as filterTodoItems from "../filter-todo-items.js";
-import { loadDefaultProject } from "../default-project.js";
+import "./sidebar-button-manager.js";
 
 const projectListContainer = document.querySelector("#project-list");
-const addProjectButton = document.querySelector("#add-project-btn");
-const addTemplateProjectsButton = document.querySelector("#add-template-projects-btn");
-
-addProjectButton.addEventListener("click", () => {
-    elementForms.showAddProjectForm();
-})
-
-addTemplateProjectsButton.addEventListener("click", () => {
-    loadDefaultProject();
-})
 
 function updateAll() {
     updateProjectList();
@@ -37,7 +26,7 @@ function updateProjectList() {
         const projectElement = elementCreator.getElement("button", project.title, "project-btn");
         projectListContainer.appendChild(projectElement);
         if (project === globals.getActiveProject()) {
-            projectElement.id = "active-project-btn";
+            projectElement.id = "active-project";
         }
 
         projectElement.addEventListener("click", () => {
@@ -63,30 +52,70 @@ function getSelectedPriority(prioritySelect) {
     return prioritySelect.querySelector(`[data-selected="true"]`).className;
 }
 
+// Bei project ein active machen und nur wenn active ist der button markiert
+function updateSelectedTab(selectedTab) {
+    const displayUpcomingButton = document.querySelector("#display-upcoming-btn");
+    const displayTodayButton = document.querySelector("#display-today-btn");
+    const displayThisWeekButton = document.querySelector("#display-this-week-btn");
+    const displayOverdueButton = document.querySelector("#display-overdue-btn");
+    const displayPriorityButton = document.querySelector("#display-priority-btn");
+    const displayCompletedButton = document.querySelector("#display-completed-btn");
+    const projectList = document.querySelector("#project-list");
+
+    displayUpcomingButton.classList.remove("active-tab");
+    displayTodayButton.classList.remove("active-tab");
+    displayThisWeekButton.classList.remove("active-tab");
+    displayOverdueButton.classList.remove("active-tab");
+    displayPriorityButton.classList.remove("active-tab");
+    displayCompletedButton.classList.remove("active-tab");
+    projectList.removeAttribute("class");
+
+    console.log(selectedTab == globals.tabs.TODAY);
+    switch(selectedTab) {
+        case globals.tabs.UPCOMING: displayUpcomingButton.classList.add("active-tab"); break;
+        case globals.tabs.TODAY: displayTodayButton.classList.add("active-tab"); break;
+        case globals.tabs.THIS_WEEK: displayThisWeekButton.classList.add ("active-tab"); break;
+        case globals.tabs.OVERDUE: displayOverdueButton.classList.add("active-tab"); break;
+        case globals.tabs.PRIORITY: displayPriorityButton.classList.add("active-tab"); break;
+        case globals.tabs.COMPLETED: displayCompletedButton.classList.add("active-tab"); break;
+        case globals.tabs.PROJECT: projectList.classList.add("active-tab"); break;
+    }
+}
+
+// Tab display functions
+function displayUpcoming() {
+
+    updateSelectedTab(globals.tabs.UPCOMING);
+}
+
 function displayDueToday() {
-    filterManager.displayTodoItemsBy(filterTodoItems.getDueInXDays(1, "Today"), "Todays Todos");
+    tabsManager.displayTodoItemsBy(filterTodoItems.getDueInXDays(1, "Today"), "Todays Todos");
+    updateSelectedTab(globals.tabs.TODAY);
 }
 
 function displayDueThisWeek() {
-    filterManager.displayTodoItemsBy(filterTodoItems.getDueInXDays(7, "This week"), "This weeks Todos");
+    tabsManager.displayTodoItemsBy(filterTodoItems.getDueInXDays(7, "This week"), "This weeks Todos");
+    updateSelectedTab(globals.tabs.THIS_WEEK);
 }
 
 function displayOverdue() {
-    filterManager.displayTodoItemsBy(filterTodoItems.getOverdue(), "Overdue Todos");
+    tabsManager.displayTodoItemsBy(filterTodoItems.getOverdue(), "Overdue Todos");
+    updateSelectedTab(globals.tabs.OVERDUE);
 }
 
 function displayByPriority(priority) {
-    filterManager.displayTodoItemsBy(filterTodoItems.getByPriority(priority), "Todos by Priority");
+    tabsManager.displayTodoItemsBy(filterTodoItems.getByPriority(priority), "Todos by Priority");
+    updateSelectedTab(globals.tabs.PRIORITY);
 }
 
 function displayByCompleted() {
-    filterManager.displayTodoItemsBy(filterTodoItems.getCompleted(), "Completed Todos");
+    tabsManager.displayTodoItemsBy(filterTodoItems.getCompleted(), "Completed Todos");
+    updateSelectedTab(globals.tabs.COMPLETED);
 }
 
 function displayProject(project) {
-    projectManager.displayProject(project);
+    projectsTabManager.displayProject(project);
+    updateSelectedTab(globals.tabs.PROJECT);
 }
 
-
-
-export { updateAll, updateProjectList, displayProject, changeSelectedPriority, getSelectedPriority, displayDueToday, displayDueThisWeek, displayOverdue, displayByPriority, displayByCompleted };
+export { updateAll, updateProjectList, displayProject, changeSelectedPriority, getSelectedPriority, displayUpcoming, displayDueToday, displayDueThisWeek, displayOverdue, displayByPriority, displayByCompleted };
