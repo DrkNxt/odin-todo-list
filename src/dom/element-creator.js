@@ -1,4 +1,4 @@
-import { changeSelectedPriority } from "./dom-project-manager";
+import { changeSelectedPriority } from "./dom-manager";
 
 function getLabel(htmlFor, textContent) {
     const label = document.createElement("label");

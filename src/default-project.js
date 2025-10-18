@@ -3,7 +3,7 @@ import { Project } from "./classes/project.js";
 import { TodoList } from "./classes/todo-list.js";
 import { TodoItem } from "./classes/todo-item.js";
 import { ProjectList } from "./classes/project-list.js";
-import { updateAll } from "./dom/dom-project-manager.js";
+import { updateAll } from "./dom/dom-manager.js";
 import { saveChanges } from "./data-manager.js";
 
 function loadDefaultProject() {

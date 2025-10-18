@@ -1,5 +1,5 @@
-import * as globals from "../globals.js";
-import { TodoList } from "../classes/todo-list.js";
+import * as globals from "./globals.js";
+import { TodoList } from "./classes/todo-list.js";
 import { formatDistance, subDays } from 'date-fns'
 
 function getAll() {
@@ -40,9 +40,9 @@ function getUpcoming() {
     const todoLists = [];
     for (let dateKey in groupedByDate) {
         const date = new Date(dateKey);
-        date.setUTCHours(0,0,0,0);
+        date.setHours(0,0,0,0);
         let startToday = new Date();
-        startToday.setUTCHours(0,0,0,0);
+        startToday.setHours(0,0,0,0);
         const formattedDate = formatDistance(date, startToday);
         const todoList = new TodoList(`Due in ${formattedDate}`, "");
         if (date < startToday) {
@@ -67,7 +67,7 @@ function getDueInXDays(days) {
     overdueTodoItems.todoItems = allTodoItems.todoItems
         .filter((todoItem) => { 
             let startToday = new Date();
-            startToday.setUTCHours(0,0,0,0);
+            startToday.setHours(0,0,0,0);
             let endToday = addDays(startToday, days);
             // Convert todoItem.dueDate to a valid date (if it isn't already)
             if (todoItem.dueDate === null) {
@@ -92,7 +92,7 @@ function getOverdue() {
     overdueTodoItems.todoItems = allTodoItems.todoItems
     .filter((todoItem) => { 
         let today = new Date();
-        today.setUTCHours(0,0,0,0);
+        today.setHours(0,0,0,0);
         // Convert todoItem.dueDate to a valid date (if it isn't already)
         if (todoItem.dueDate === null) {
             return false;

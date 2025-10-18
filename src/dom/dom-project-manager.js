@@ -2,49 +2,10 @@ import * as globals from "../globals.js";
 import * as elementCreator from "./element-creator.js";
 import * as elementForms from "./forms-manager.js";
 import * as dataManager from "../data-manager.js";
-import { loadDefaultProject } from "../default-project.js";
+import { updateAll, changeSelectedPriority, getSelectedPriority } from "./dom-manager.js";
 
-const projectListContainer = document.querySelector("#project-list");
 const currentProjectContainer = document.querySelector("#current-project");
 const todoListsContainer = document.querySelector("#todo-lists");
-const addProjectButton = document.querySelector("#add-project-btn");
-const addTemplateProjectsButton = document.querySelector("#add-template-projects-btn");
-
-addProjectButton.addEventListener("click", () => {
-    elementForms.showAddProjectForm();
-})
-
-addTemplateProjectsButton.addEventListener("click", () => {
-    loadDefaultProject();
-})
-
-function updateAll() {
-    updateProjectList();
-    updateProject(globals.getActiveProject());
-}
-
-// Update project list elements
-function updateProjectList() {
-
-    if (globals.projectList.projects.length < 1) {
-            dataManager.createProject("New Project", "Description");
-    }
-
-    projectListContainer.innerHTML = "";
-
-    for (let project of globals.projectList.projects) {
-        const projectElement = elementCreator.getElement("button", project.title, "project-btn");
-        projectListContainer.appendChild(projectElement);
-        if (project === globals.getActiveProject()) {
-            projectElement.id = "active-project-btn";
-        }
-
-        projectElement.addEventListener("click", () => {
-            updateProject(project);
-            updateProjectList();
-        });
-    }
-}
 
 // Update project elements
 function updateProject(project) {
@@ -233,20 +194,4 @@ function displayTodoItems(todoList, todoItemsContainer) {
     }
 }
 
-function changeSelectedPriority(prioritySelect, selectedPriority) {
-    for (let priority of prioritySelect.children) {
-        priority.dataset.selected = "false";
-        priority.innerHTML = "";
-        priority.appendChild(elementCreator.getIcon("circle"));
-    }
-    const priority = prioritySelect.querySelector(`.${selectedPriority}`);
-    priority.dataset.selected = "true";
-    priority.innerHTML = "";
-    priority.appendChild(elementCreator.getIcon("circle-outline"));
-}
-
-function getSelectedPriority(prioritySelect) {
-    return prioritySelect.querySelector(`[data-selected="true"]`).className;
-}
-
-export { updateAll, updateProjectList, updateProject, createAddTodoItemButton, createAddTodoListButton, changeSelectedPriority, getSelectedPriority };
+export { updateProject, createAddTodoItemButton, createAddTodoListButton };

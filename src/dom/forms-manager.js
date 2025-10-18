@@ -1,7 +1,7 @@
 import * as globals from "../globals.js";
 import * as elementCreator from "./element-creator.js";
 import * as dataManager from "../data-manager.js";
-import { updateProjectList, updateAll, updateProject, changeSelectedPriority, getSelectedPriority } from "./dom-project-manager.js";
+import { updateAll, displayProject, changeSelectedPriority, getSelectedPriority } from "./dom-manager.js";
 import * as localStorageManager from "../local-storage-manager.js";
 
 const dialog = document.querySelector("#dialog");
@@ -101,7 +101,7 @@ function showTodoListForm(mode, element) {
             element.title = titleInput.value;
             element.description = descriptionInput.value;
             dialog.close();
-            updateProject(globals.getActiveProject());
+            displayProject(globals.getActiveProject());
             localStorageManager.storeProjectList();
         })
     } 
@@ -120,7 +120,7 @@ function showTodoListForm(mode, element) {
             let description = descriptionInput.value;
             dataManager.createTodoList(globals.getActiveProject(), title, description);
             dialog.close();
-            updateProject(globals.getActiveProject());
+            displayProject(globals.getActiveProject());
         })
     }
 
@@ -205,7 +205,7 @@ function showTodoItemForm(mode, element) {
             element.dueDate = dueDate;
             element.notes = notesInput.value;
             dialog.close();
-            updateProject(globals.getActiveProject());
+            displayProject(globals.getActiveProject());
             localStorageManager.storeProjectList();
         })
     } 
@@ -231,7 +231,7 @@ function showTodoItemForm(mode, element) {
             let notes = notesInput.value;
             dataManager.createTodoItem(element, title, priority, dueDate, notes);
             dialog.close();
-            updateProject(globals.getActiveProject());
+            displayProject(globals.getActiveProject());
         })
     }
 

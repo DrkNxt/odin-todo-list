@@ -1,11 +1,11 @@
 import "./styles.css";
 import * as globals from "./globals.js";
-import * as domManager from "./dom/dom-project-manager.js";
+import * as domManager from "./dom/dom-manager.js";
 import "./data-manager.js";
-import { getUpcoming, getDueInXDays, getOverdue, getCompleted, getByPriority } from "./dom/filter-todo-items.js";
+import { getUpcoming, getDueInXDays, getOverdue, getCompleted, getByPriority } from "./filter-todo-items.js";
 
 domManager.updateProjectList();
-domManager.updateProject(globals.projectList.projects[0]);
+domManager.displayProject(globals.projectList.projects[0]);
 
 console.log(getDueInXDays(1));
 console.log(getDueInXDays(7));
