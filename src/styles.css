@@ -245,7 +245,7 @@ div#main {
     page-break-inside: avoid;
 }
 
-.todo-list, .add-todo-list-form-active {
+.project-todo-list, .add-todo-list-form-active, .filter-todo-list {
     background-color: color-mix(in srgb, var(--primary-color) 70%, white);
     padding: 1rem;
     margin-bottom: 1rem;
@@ -263,13 +263,23 @@ div#main {
     gap: 0;
 }
 
-.todo-list-top-content, .project-top-content {
+.filter-todo-list {
+    max-width: 800px;
+    margin: 0 auto 1rem auto;
+}
+
+.project-todo-list-top-content, .project-top-content, .filter-todo-list-top-content {
     display: grid;
     grid-template-columns: 1fr auto auto;
     gap: 0.5rem;
     align-items: center;
     border-bottom: 1px solid black;
     padding-bottom: 0.5rem;
+}
+
+.filter-todo-list-title {
+    font-size: 2rem;
+    text-align: center;
 }
 
 .add-todo-item-btn {
@@ -288,7 +298,7 @@ div#main {
 }
 
 
-.todo-items {
+.project-todo-items, .filter-todo-items {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;

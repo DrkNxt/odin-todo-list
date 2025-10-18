@@ -3,6 +3,8 @@ import * as elementCreator from "./element-creator.js";
 import * as elementForms from "./forms-manager.js";
 import * as dataManager from "../data-manager.js";
 import * as projectManager from "./dom-project-manager.js";
+import * as filterManager from "./dom-filter-manager.js";
+import * as filterTodoItems from "../filter-todo-items.js";
 import { loadDefaultProject } from "../default-project.js";
 
 const projectListContainer = document.querySelector("#project-list");
@@ -45,10 +47,6 @@ function updateProjectList() {
     }
 }
 
-function displayProject(project) {
-    projectManager.updateProject(project);
-}
-
 function changeSelectedPriority(prioritySelect, selectedPriority) {
     for (let priority of prioritySelect.children) {
         priority.dataset.selected = "false";
@@ -65,4 +63,30 @@ function getSelectedPriority(prioritySelect) {
     return prioritySelect.querySelector(`[data-selected="true"]`).className;
 }
 
-export { updateAll, updateProjectList, displayProject, changeSelectedPriority, getSelectedPriority };
+function displayDueToday() {
+    filterManager.displayTodoItemsBy(filterTodoItems.getDueInXDays(1, "Today"), "Todays Todos");
+}
+
+function displayDueThisWeek() {
+    filterManager.displayTodoItemsBy(filterTodoItems.getDueInXDays(7, "This week"), "This weeks Todos");
+}
+
+function displayOverdue() {
+    filterManager.displayTodoItemsBy(filterTodoItems.getOverdue(), "Overdue Todos");
+}
+
+function displayByPriority(priority) {
+    filterManager.displayTodoItemsBy(filterTodoItems.getByPriority(priority), "Todos by Priority");
+}
+
+function displayByCompleted() {
+    filterManager.displayTodoItemsBy(filterTodoItems.getCompleted(), "Completed Todos");
+}
+
+function displayProject(project) {
+    projectManager.displayProject(project);
+}
+
+
+
+export { updateAll, updateProjectList, displayProject, changeSelectedPriority, getSelectedPriority, displayDueToday, displayDueThisWeek, displayOverdue, displayByPriority, displayByCompleted };
