@@ -15,8 +15,15 @@ function getAll() {
     return allTodoItems;
 }
 
+function getAllUncompleted() {
+    const allTodoItems = getAll()
+    const allUncompletedTodoItems = new TodoList("All uncompleted Todos", "");
+    allUncompletedTodoItems.todoItems = allTodoItems.todoItems.filter(todoItem => !todoItem.isCompleted);
+    return allUncompletedTodoItems;
+}
+
 function getUpcoming() {
-    const allTodoItems = getAll();
+    const allTodoItems = getAllUncompleted();
 
     // Sort TodoItems by dueDate
     const sortedTodoItems = allTodoItems.todoItems
@@ -61,9 +68,9 @@ function getUpcoming() {
     return todoLists;
 }
 
-function getDueInXDays(days) {
-    const allTodoItems = getAll();
-    const overdueTodoItems = new TodoList("Today", "");
+function getDueInXDays(days, title) {
+    const allTodoItems = getAllUncompleted();
+    const overdueTodoItems = new TodoList(title, "");
     overdueTodoItems.todoItems = allTodoItems.todoItems
         .filter((todoItem) => { 
             let startToday = new Date();
@@ -87,7 +94,7 @@ function addDays(date, days) {
 }
 
 function getOverdue() {
-    const allTodoItems = getAll();
+    const allTodoItems = getAllUncompleted();
     const overdueTodoItems = new TodoList("Overdue", "");
     overdueTodoItems.todoItems = allTodoItems.todoItems
     .filter((todoItem) => { 
@@ -113,7 +120,7 @@ function getCompleted() {
 }
 
 function getByPriority(priority) {
-    const allTodoItems = getAll();
+    const allTodoItems = getAllUncompleted();
     const priorityTodoItems = new TodoList("Priority", "");
     priorityTodoItems.todoItems = allTodoItems.todoItems
         .filter((todoItem) => todoItem.priority === priority);

@@ -2,15 +2,20 @@ import * as globals from "../globals.js";
 import * as elementCreator from "./element-creator.js";
 import * as elementForms from "./forms-manager.js";
 import * as dataManager from "../data-manager.js";
-import { updateAll, changeSelectedPriority, getSelectedPriority } from "./dom-manager.js";
+import { updateAll } from "./dom-manager.js";
 
-const currentProjectContainer = document.querySelector("#current-project");
-const todoListsContainer = document.querySelector("#todo-lists");
+const mainContainer = document.querySelector("#main");
 
 // Update project elements
 function updateProject(project) {
     globals.setActiveProject(project);
-    currentProjectContainer.innerHTML = "";
+    mainContainer.innerHTML = "";
+
+    // Create project container
+    const currentProjectContainer = elementCreator.getElement("div", "", null, "current-project");
+    const todoListsContainer = elementCreator.getElement("div", "", null, "todo-lists");
+    mainContainer.appendChild(currentProjectContainer);
+    mainContainer.appendChild(todoListsContainer);
 
     // Create delete button
     const deleteButtonContainer = elementCreator.getElement("div", "");
@@ -62,6 +67,7 @@ function createAddTodoListButton() {
 
 // Update todo list elements
 function updateTodoLists(todoLists) {
+    const todoListsContainer = document.querySelector("#todo-lists");
     todoListsContainer.innerHTML = "";
 
     for (let todoList of todoLists) {
@@ -71,6 +77,8 @@ function updateTodoLists(todoLists) {
 
 // Create single todo list
 function createTodoListElement(todoList, todoLists) {
+    const todoListsContainer = document.querySelector("#todo-lists");
+
     // Create delete button
     const deleteButtonContainer = elementCreator.getElement("div", "");
     const deleteTodoItem = elementCreator.getIcon("delete", "clickable-icon");
@@ -175,15 +183,24 @@ function displayTodoItems(todoList, todoItemsContainer) {
         todoItemContainer.dataset.isCompleted = todoItem.isCompleted;
         todoItemTopContent.appendChild(markCompletedButtonContainer);
         let dueDate;
+        let isOverdue = false;
+        let startToday = new Date();
+        startToday.setHours(0,0,0,0);
         if (todoItem.dueDate instanceof Date && !isNaN(todoItem.dueDate)) {
             dueDate = todoItem.dueDate.toLocaleDateString();
+            isOverdue = todoItem.dueDate < startToday;
         }else if (todoItem.dueDate == null) {
             dueDate = "";
         }else {
             todoItem.dueDate = (new Date(Date.parse(todoItem.dueDate)));
             dueDate = todoItem.dueDate.toLocaleDateString();
+            isOverdue = todoItem.dueDate < startToday;
         }
-        todoItemTopContent.appendChild(elementCreator.getElement("span", dueDate, "todo-item-due-date"));
+        const todoItemDueDate = elementCreator.getElement("span", dueDate, "todo-item-due-date");
+        if (isOverdue && !todoItem.isCompleted) {
+            todoItemDueDate.classList.add("overdue");
+        }
+        todoItemTopContent.appendChild(todoItemDueDate);
         todoItemTopContent.appendChild(editButtonContainer);
         todoItemTopContent.appendChild(deleteButtonContainer);
         TodoItemBottomContent.appendChild(elementCreator.getElement("h4", todoItem.title, "todo-item-title"));

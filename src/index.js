@@ -7,8 +7,8 @@ import { getUpcoming, getDueInXDays, getOverdue, getCompleted, getByPriority } f
 domManager.updateProjectList();
 domManager.displayProject(globals.projectList.projects[0]);
 
-console.log(getDueInXDays(1));
-console.log(getDueInXDays(7));
+console.log(getDueInXDays(1, "Today"));
+console.log(getDueInXDays(7, "This week"));
 console.log(getOverdue());
 console.log(getCompleted());
 console.log(getByPriority("priority-1"));
