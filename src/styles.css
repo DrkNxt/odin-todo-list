@@ -7,90 +7,97 @@ Make grid auto-fit content:
 */
 
 @font-face {
-    font-family: 'Roboto';
-    src: url('./fonts/Roboto-Bold.woff2') format('woff2'),
-        url('./fonts/Roboto-Bold.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Roboto";
+  src:
+    url("./fonts/Roboto-Bold.woff2") format("woff2"),
+    url("./fonts/Roboto-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Roboto';
-    src: url('./fonts/Roboto-Regular.woff2') format('woff2'),
-        url('./fonts/Roboto-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Roboto";
+  src:
+    url("./fonts/Roboto-Regular.woff2") format("woff2"),
+    url("./fonts/Roboto-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 :root {
-    line-height: 1.6;
-    font-family: "Roboto", Arial, sans-serif;
-    box-sizing: border-box;
-    --primary-color: rgb(229, 229, 229);
-    --secondary-color: rgb(45, 49, 66);
-    --background-color: rgb(217, 226, 241);
-    --button-color: rgb(66, 77, 100);
-    --todo-item-color: rgb(255, 255, 255);
-    --text-color: rgb(0, 0, 0);
-    --priority-1-color: rgb(44, 142, 44);
-    --priority-2-color: rgb(34, 158, 225);
-    --priority-3-color: rgb(255, 255, 0);
-    --priority-4-color: rgb(255, 0, 93);
-    --priority-5-color: rgb(153, 0, 255);
+  line-height: 1.6;
+  font-family: "Roboto", Arial, sans-serif;
+  box-sizing: border-box;
+  --primary-color: rgb(229, 229, 229);
+  --secondary-color: rgb(45, 49, 66);
+  --background-color: rgb(217, 226, 241);
+  --button-color: rgb(66, 77, 100);
+  --todo-item-color: rgb(255, 255, 255);
+  --text-color: rgb(0, 0, 0);
+  --priority-1-color: rgb(44, 142, 44);
+  --priority-2-color: rgb(34, 158, 225);
+  --priority-3-color: rgb(255, 255, 0);
+  --priority-4-color: rgb(255, 0, 93);
+  --priority-5-color: rgb(153, 0, 255);
 }
 
 .iconify {
-    width: 1em;
-    height: 1em;
-    font-size: 1.2rem;
-    vertical-align: -0.125em; 
-    transform: rotate(360deg);
+  width: 1em;
+  height: 1em;
+  font-size: 1.2rem;
+  vertical-align: -0.125em;
+  transform: rotate(360deg);
 }
 
-h1, h2, h3, h4, p, body {
-    margin: 0;
-    padding: 0;
+h1,
+h2,
+h3,
+h4,
+p,
+body {
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
-    font-size: 2rem;
-    align-self: center;
-    margin-bottom: 1rem;
+  font-size: 2rem;
+  align-self: center;
+  margin-bottom: 1rem;
 }
 
 h1 > .iconify {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 div.github {
-    margin-top: 1rem;
-    text-align: center;
-    font-size: 0.9rem;
-    color: color-mix(in srgb, var(--background-color) 20%, transparent);
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: color-mix(in srgb, var(--background-color) 20%, transparent);
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 a:hover {
-    color: color-mix(in srgb, var(--background-color) 70%, transparent);
+  color: color-mix(in srgb, var(--background-color) 70%, transparent);
 }
 
 body {
-    background-color: color-mix(in srgb, var(--background-color) 75%, black);
-    color: var(--text-color);
-    display: grid;
-    grid-template-columns: 300px auto;
-    min-height: 100vh;
+  background-color: color-mix(in srgb, var(--background-color) 75%, black);
+  color: var(--text-color);
+  display: grid;
+  grid-template-columns: 300px auto;
+  min-height: 100vh;
 }
 
 #dialog-form {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 textarea {
@@ -98,399 +105,425 @@ textarea {
 }
 
 div.sidebar {
-    box-sizing: border-box;
-    background-color: var(--secondary-color);
-    color: white;
-    padding: 1rem;;
-    box-shadow: 4px 0px 5px rgba(0,0,0,0.2);
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    height: 100vh;
-    width: 300px;
-    overflow-y: scroll;
+  box-sizing: border-box;
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 1rem;
+  box-shadow: 4px 0px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  width: 300px;
+  overflow-y: scroll;
 }
 
 .projects-container {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0 0.5rem;
 }
 
 #project-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
 }
 
-.project-btn, .display-filter-btn {
-    text-align: left;
-    padding: 0.7rem 1rem;
+.project-btn,
+.display-filter-btn {
+  text-align: left;
+  padding: 0.7rem 1rem;
 }
 
-#add-project-btn, #add-template-projects-btn {
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: color-mix(in srgb, var(--button-color) 70%, white);
-    margin-bottom: 0.1rem;
+#add-project-btn,
+#add-template-projects-btn {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: color-mix(in srgb, var(--button-color) 70%, white);
+  margin-bottom: 0.1rem;
 }
 
 #add-template-projects-btn {
-    font-size: 1rem;
-    gap: 0.5rem;
+  font-size: 1rem;
+  gap: 0.5rem;
 }
 
 .display-filter-btn {
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.1rem;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.1rem;
 }
 
-#add-project-btn > .iconify, #add-template-projects-btn > .iconify {
-    font-size: 1.5rem;
+#add-project-btn > .iconify,
+#add-template-projects-btn > .iconify {
+  font-size: 1.5rem;
 }
 
-#add-project-btn:hover, #add-template-projects-btn:hover {
-    background-color: color-mix(in srgb, var(--button-color) 60%, white);
+#add-project-btn:hover,
+#add-template-projects-btn:hover {
+  background-color: color-mix(in srgb, var(--button-color) 60%, white);
 }
 
 button.active-tab {
-    border-left: 6px solid color-mix(in srgb, var(--button-color) 60%, white);
+  border-left: 6px solid color-mix(in srgb, var(--button-color) 60%, white);
 }
 
 .active-tab > button#active-project {
-    border-left: 6px solid color-mix(in srgb, var(--button-color) 60%, white);
+  border-left: 6px solid color-mix(in srgb, var(--button-color) 60%, white);
 }
 
 #add-project-form {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
-input, textarea, button {
-    background-color: var(--todo-item-color);
-    margin-bottom: 0.5rem;
-    padding: 0.5rem;
-    border: none;
-    border-radius: 5px;
-    font-family: "Roboto", Arial, sans-serif;
-    font-size: 1rem;
-    box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+input,
+textarea,
+button {
+  background-color: var(--todo-item-color);
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 1rem;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-input:focus, textarea:focus {
-    outline: none;
+input:focus,
+textarea:focus {
+  outline: none;
 }
 
-input:disabled, textarea:disabled {
-    background-color: color-mix(in srgb, var(--todo-item-color) 80%, black);
-    cursor: not-allowed;
+input:disabled,
+textarea:disabled {
+  background-color: color-mix(in srgb, var(--todo-item-color) 80%, black);
+  cursor: not-allowed;
 }
 
-.todo-item-date-container{
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 1rem;
+.todo-item-date-container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
 }
 
-button, .project {
-    cursor: pointer;
-    background-color: var(--button-color);
-    font-weight: bold;
-    color: white;
-    transition: background-color 0.3s ease;
+button,
+.project {
+  cursor: pointer;
+  background-color: var(--button-color);
+  font-weight: bold;
+  color: white;
+  transition: background-color 0.3s ease;
 }
 
-button:hover, .project:hover {
-    background-color: color-mix(in srgb, var(--button-color) 85%, white);
+button:hover,
+.project:hover {
+  background-color: color-mix(in srgb, var(--button-color) 85%, white);
 }
 
-.form-buttons-project, .form-buttons-todo-list, .form-buttons-todo-item {
-    margin-top: 0.5rem;
-    display: flex;
-    gap: 0.5rem;
+.form-buttons-project,
+.form-buttons-todo-list,
+.form-buttons-todo-item {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
 }
 
-.form-buttons-project > button, .form-buttons-todo-list > button, .form-buttons-todo-item > button {
-    width: 200px;
+.form-buttons-project > button,
+.form-buttons-todo-list > button,
+.form-buttons-todo-item > button {
+  width: 200px;
 }
 
 div#main {
-    padding: 1rem;
-    grid-area: 1 / 2 / 2 / 3;
+  padding: 1rem;
+  grid-area: 1 / 2 / 2 / 3;
 }
 
 #current-project {
-    background-color: color-mix(in srgb, var(--primary-color) 70%, white);
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 5px;
-    box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+  background-color: color-mix(in srgb, var(--primary-color) 70%, white);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 #todo-lists {
-    column-count: auto;
-    column-width: clamp(100px, 22rem, 450px);
+  column-count: auto;
+  column-width: clamp(100px, 22rem, 450px);
 }
 
-.add-todo-list-btn {   
-    width: 100%;
-    font-size: 4rem;
-    box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
-    -webkit-column-break-inside: avoid;
-    break-inside: avoid;
+.add-todo-list-btn {
+  width: 100%;
+  font-size: 4rem;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  -webkit-column-break-inside: avoid;
+  break-inside: avoid;
 }
 
-#add-todo-list-div, .add-todo-item-div {
-    display: flex;
-    flex-direction: column;
-    -webkit-column-break-inside: avoid;
-    break-inside: avoid;
+#add-todo-list-div,
+.add-todo-item-div {
+  display: flex;
+  flex-direction: column;
+  -webkit-column-break-inside: avoid;
+  break-inside: avoid;
 }
 
-.project-todo-list, .add-todo-list-form-active, .filter-todo-list {
-    background-color: color-mix(in srgb, var(--primary-color) 70%, white);
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 5px;
-    box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
-    -webkit-column-break-inside: avoid;
-    break-inside: avoid;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+.project-todo-list,
+.add-todo-list-form-active,
+.filter-todo-list {
+  background-color: color-mix(in srgb, var(--primary-color) 70%, white);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  -webkit-column-break-inside: avoid;
+  break-inside: avoid;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .add-todo-list-form-active {
-    gap: 0;
+  gap: 0;
 }
 
 .filter-todo-list {
-    margin: 0 auto 1rem auto;
+  margin: 0 auto 1rem auto;
 }
 
-.project-todo-list-top-content, .project-top-content, .filter-todo-list-top-content {
-    display: grid;
-    grid-template-columns: 1fr auto auto;
-    gap: 0.5rem;
-    align-items: center;
-    border-bottom: 1px solid black;
-    padding-bottom: 0.5rem;
+.project-todo-list-top-content,
+.project-top-content,
+.filter-todo-list-top-content {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 0.5rem;
+  align-items: center;
+  border-bottom: 1px solid black;
+  padding-bottom: 0.5rem;
 }
 
 .filter-todo-list-title {
-    font-size: 2rem;
-    text-align: center;
+  font-size: 2rem;
+  text-align: center;
 }
 
 .add-todo-item-btn {
-    font-size: 1.5rem;
-    box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+  font-size: 1.5rem;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .priority-due-date-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
 }
 
 .project-top-content {
-    margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
-
 .project-todo-items {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .filter-todo-items {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
 }
 
 .filter-todo-items > .todo-item {
-    margin: 0;
+  margin: 0;
 }
 
 .empty-todo-items-container {
-    grid-column: 1 / -1;
-    text-align: center;
-    font-size: 1.2rem;
-    color: gray;
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 1.2rem;
+  color: gray;
 }
 
 .todo-item {
-    background-color: var(--todo-item-color);
-    padding: 0.5rem;
-    border-radius: 5px;
-    box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
-    margin-bottom: 0.5rem;
-    transition: transform 0.3s ease;
+  background-color: var(--todo-item-color);
+  padding: 0.5rem;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 0.5rem;
+  transition: transform 0.3s ease;
 }
 
 .todo-item:hover {
-    transform: translateY(-0.2rem);
+  transform: translateY(-0.2rem);
 }
 
 .todo-item-notes {
-    font-size: 0.9rem;
+  font-size: 0.9rem;
 }
 
 .todo-item-top-content {
-    display: grid;
-    grid-template-columns: auto 1fr auto auto;
-    gap: 0.5rem;
-    align-items: center;
-    border-bottom: 1px solid lightgray;
-    margin-bottom: 0.5rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  gap: 0.5rem;
+  align-items: center;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 0.5rem;
 }
 
 .todo-item-due-date {
-    font-size: 0.8rem;
-    color: gray;
+  font-size: 0.8rem;
+  color: gray;
 }
 
 .todo-item-due-date.overdue {
-    color: red;
+  color: red;
 }
 
 [data-is-completed="true"] {
-    background-color: color-mix(in srgb, var(--todo-item-color) 95%, black);
-    color: color-mix(in srgb, var(--text-color) 50%, white);
-    text-decoration: line-through;
-    opacity: 0.7;
+  background-color: color-mix(in srgb, var(--todo-item-color) 95%, black);
+  color: color-mix(in srgb, var(--text-color) 50%, white);
+  text-decoration: line-through;
+  opacity: 0.7;
 }
 
 div.priority-1 {
-    border-left: 6px solid var(--priority-1-color);
+  border-left: 6px solid var(--priority-1-color);
 }
 
 div.priority-2 {
-    border-left: 6px solid var(--priority-2-color);
+  border-left: 6px solid var(--priority-2-color);
 }
 
 div.priority-3 {
-    border-left: 6px solid var(--priority-3-color);
+  border-left: 6px solid var(--priority-3-color);
 }
 
 div.priority-4 {
-    border-left: 6px solid var(--priority-4-color);
+  border-left: 6px solid var(--priority-4-color);
 }
 
 div.priority-5 {
-    border-left: 6px solid var(--priority-5-color);
+  border-left: 6px solid var(--priority-5-color);
 }
 
 .icon-error {
-    color: red;
-    background-color: color-mix(in srgb, red 20%, white);
+  color: red;
+  background-color: color-mix(in srgb, red 20%, white);
 }
 
 .todo-item-plus-icon {
-    font-size: 1.8rem;
+  font-size: 1.8rem;
 }
 
 .todo-list-plus-icon {
-    font-size: 4rem;
+  font-size: 4rem;
 }
 
-.clickable-icon, input[type="checkbox"], .todo-item-bottom-content {
-    cursor: pointer;
+.clickable-icon,
+input[type="checkbox"],
+.todo-item-bottom-content {
+  cursor: pointer;
 }
 
 .clickable-icon:hover {
-    color: color-mix(in srgb, var(--button-color) 70%, blue);
+  color: color-mix(in srgb, var(--button-color) 70%, blue);
 }
 
 dialog {
-    background-color: var(--primary-color);
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0px 4px 8px rgba(0,0,0,0.4);
-    padding: 1rem 1rem 0.5rem 1rem;
-    width: 500px;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+  padding: 1rem 1rem 0.5rem 1rem;
+  width: 500px;
 }
 
 dialog::backdrop {
-    background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 #dialog-form > h2 {
-    border-bottom: 1px solid black;
-    padding-bottom: 0.5rem;
-    margin-bottom: 0.5rem;
+  border-bottom: 1px solid black;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 menu {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.5rem;
-    margin: 0;
-    margin-top: 0.5rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin: 0;
+  margin-top: 0.5rem;
 }
 
 menu > button {
-    width: 100px;
+  width: 100px;
 }
 
 #confirm-delete-btn {
-    background-color: red;
+  background-color: red;
 }
 
 #confirm-delete-btn:hover {
-    background-color: color-mix(in srgb, red 65%, white);
+  background-color: color-mix(in srgb, red 65%, white);
 }
 
-#confirm-edit-btn, #add-new-todo-item-btn, #add-new-todo-list-btn, #add-new-project-btn {
-    background-color: green;
+#confirm-edit-btn,
+#add-new-todo-item-btn,
+#add-new-todo-list-btn,
+#add-new-project-btn {
+  background-color: green;
 }
 
-#confirm-edit-btn:hover, #add-new-todo-item-btn:hover, #add-new-todo-list-btn:hover, #add-new-project-btn:hover {
-    background-color: color-mix(in srgb, green 65%, white);
+#confirm-edit-btn:hover,
+#add-new-todo-item-btn:hover,
+#add-new-todo-list-btn:hover,
+#add-new-project-btn:hover {
+  background-color: color-mix(in srgb, green 65%, white);
 }
 
 .priority-select {
-    display: flex;
-    gap: 1rem;
+  display: flex;
+  gap: 1rem;
 }
 
 .priority-select > span > .iconify {
-    font-size: 1.5rem;
-    background-color: white;
-    border-radius: 50%;
-    border: 2px solid var(--button-color);
-    transition: background-color 0.3s ease;
+  font-size: 1.5rem;
+  background-color: white;
+  border-radius: 50%;
+  border: 2px solid var(--button-color);
+  transition: background-color 0.3s ease;
 }
 
 .priority-select > span:hover > .iconify {
-    background-color: color-mix(in srgb, var(--button-color) 30%, white);
-    cursor: pointer;
+  background-color: color-mix(in srgb, var(--button-color) 30%, white);
+  cursor: pointer;
 }
 
 span.priority-1 {
-    color: var(--priority-1-color);
+  color: var(--priority-1-color);
 }
 
 span.priority-2 {
-    color: var(--priority-2-color);
+  color: var(--priority-2-color);
 }
 
 span.priority-3 {
-    color: var(--priority-3-color);
+  color: var(--priority-3-color);
 }
 
 span.priority-4 {
-    color: var(--priority-4-color);
+  color: var(--priority-4-color);
 }
 
 span.priority-5 {
-    color: var(--priority-5-color);
+  color: var(--priority-5-color);
 }

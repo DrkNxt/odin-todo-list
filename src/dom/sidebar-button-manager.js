@@ -11,36 +11,38 @@ const displayPriorityButton = document.querySelector("#display-priority-btn");
 const displayCompletedButton = document.querySelector("#display-completed-btn");
 
 const addProjectButton = document.querySelector("#add-project-btn");
-const addTemplateProjectsButton = document.querySelector("#add-template-projects-btn");
+const addTemplateProjectsButton = document.querySelector(
+  "#add-template-projects-btn"
+);
 
 displayUpcomingButton.addEventListener("click", () => {
-    domManager.displaySelectedTab(globals.tabs.UPCOMING);
-})
+  domManager.displaySelectedTab(globals.tabs.UPCOMING);
+});
 
 displayTodayButton.addEventListener("click", () => {
-    domManager.displaySelectedTab(globals.tabs.TODAY);
-})
+  domManager.displaySelectedTab(globals.tabs.TODAY);
+});
 
 displayThisWeekButton.addEventListener("click", () => {
-    domManager.displaySelectedTab(globals.tabs.THIS_WEEK);
-})
+  domManager.displaySelectedTab(globals.tabs.THIS_WEEK);
+});
 
 displayOverdueButton.addEventListener("click", () => {
-    domManager.displaySelectedTab(globals.tabs.OVERDUE);
-})
+  domManager.displaySelectedTab(globals.tabs.OVERDUE);
+});
 
 displayPriorityButton.addEventListener("click", () => {
-    domManager.displaySelectedTab(globals.tabs.PRIORITY);
-})
+  domManager.displaySelectedTab(globals.tabs.PRIORITY);
+});
 
 displayCompletedButton.addEventListener("click", () => {
-    domManager.displaySelectedTab(globals.tabs.COMPLETED);
-})
+  domManager.displaySelectedTab(globals.tabs.COMPLETED);
+});
 
 addProjectButton.addEventListener("click", () => {
-    elementForms.showAddProjectForm();
-})
+  elementForms.showAddProjectForm();
+});
 
 addTemplateProjectsButton.addEventListener("click", () => {
-    loadDefaultProject();
-})
+  loadDefaultProject();
+});
