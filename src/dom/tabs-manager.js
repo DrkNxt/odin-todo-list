@@ -1,4 +1,3 @@
-import * as globals from "../globals.js";
 import * as filterTodoItems from "../filter-todo-items.js";
 import * as elementCreator from "./element-creator.js";
 import * as todoItemCreator from "./todo-item-creator.js";
@@ -9,6 +8,21 @@ function displayUpcomingTodoItems() {
     mainContainer.innerHTML = "";
 
     const todoLists = filterTodoItems.getUpcoming();
+    for (let todoList of todoLists) {
+        displayTodoItemsBy(todoList, false);
+    }
+}
+
+function displayTodoItemsByPriority() {
+    mainContainer.innerHTML = "";
+
+    const todoLists = [ 
+        filterTodoItems.getByPriority("priority-1", "Green"), 
+        filterTodoItems.getByPriority("priority-2", "Blue"), 
+        filterTodoItems.getByPriority("priority-3", "Yellow"), 
+        filterTodoItems.getByPriority("priority-4", "Red"), 
+        filterTodoItems.getByPriority("priority-5", "Purple")
+    ]
     for (let todoList of todoLists) {
         displayTodoItemsBy(todoList, false);
     }
@@ -33,4 +47,4 @@ function displayTodoItemsBy(todoList, emptyContainer=true) {
     mainContainer.appendChild(todoListContainer);
 }
 
-export { displayUpcomingTodoItems, displayTodoItemsBy };
+export { displayUpcomingTodoItems, displayTodoItemsByPriority, displayTodoItemsBy };

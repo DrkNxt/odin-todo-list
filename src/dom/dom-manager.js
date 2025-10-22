@@ -103,7 +103,7 @@ function displayOverdue() {
 }
 
 function displayByPriority(priority) {
-    tabsManager.displayTodoItemsBy(filterTodoItems.getByPriority(priority));
+    tabsManager.displayTodoItemsByPriority();
     updateSelectedTab(globals.tabs.PRIORITY);
 }
 

@@ -152,9 +152,9 @@ function getCompleted() {
     return completedTodoItems;
 }
 
-function getByPriority(priority) {
+function getByPriority(priority, name) {
     const allTodoItems = getAllUncompleted();
-    const priorityTodoItems = new TodoList("Priority", "");
+    const priorityTodoItems = new TodoList(name, "");
     priorityTodoItems.todoItems = allTodoItems.todoItems
         .filter((todoItem) => todoItem.priority === priority);
     return sortByDueDate(priorityTodoItems);
