@@ -3,6 +3,7 @@ import * as elementCreator from "./element-creator.js";
 import * as elementForms from "./forms-manager.js";
 import * as dataManager from "../data-manager.js";
 import * as projectsTabManager from "./projects-tab-manager.js";
+import { sortByUncompleted } from "../filter-todo-items.js";
 
 // Update todo item elements
 function displayTodoItems(todoList, todoItemsContainer) {
@@ -10,6 +11,7 @@ function displayTodoItems(todoList, todoItemsContainer) {
         todoItemsContainer.appendChild(elementCreator.getElement("div", "Seems like there is nothing to display here yet", "empty-todo-items-container"));
         return;
     }
+    todoList = sortByUncompleted(todoList);
     for (let todoItem of todoList.todoItems) {
         // Create delete button
         const deleteButtonContainer = elementCreator.getElement("div", "");

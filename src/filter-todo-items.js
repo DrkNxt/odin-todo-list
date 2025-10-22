@@ -36,6 +36,16 @@ function sortByDueDate(todoList) {
     return todoList;
 }
 
+function sortByUncompleted(todoList) {
+    const uncompletedTodoItems = todoList.todoItems
+        .filter(todoItem => !todoItem.isCompleted);
+    const completedTodoItems = todoList.todoItems
+        .filter(todoItem => todoItem.isCompleted)
+    todoList.todoItems = uncompletedTodoItems;
+    TodoList.addTodoItems(todoList, completedTodoItems);
+    return todoList;
+}
+
 function getDueDateless(todoList) {
     todoList.todoItems = todoList.todoItems
         .filter(todoItem => todoItem.dueDate === null || !(todoItem.dueDate instanceof Date) || isNaN(todoItem.dueDate));
@@ -150,4 +160,4 @@ function getByPriority(priority) {
     return sortByDueDate(priorityTodoItems);
 }
 
-export { getUpcoming, getDueInXDays, getOverdue, getCompleted, getByPriority };
+export { getUpcoming, getDueInXDays, getOverdue, getCompleted, getByPriority, sortByUncompleted };
