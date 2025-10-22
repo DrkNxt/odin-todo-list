@@ -1,4 +1,5 @@
 import * as localStorageManager from "./local-storage-manager.js";
+import { TodoList } from "./classes/todo-list.js";
 
 const tabs = Object.freeze({
     UPCOMING:   "upcoming",
@@ -47,4 +48,15 @@ function setSelectedTab(tab) {
     localStorageManager.storeSelectedTab();
 }
 
-export { tabs, projectList, getSelectedProject, getSelectedProjectIndex, setSelectedProject, getSelectedTab, setSelectedTab };
+function getTodoListOf(todoItem) {
+    for (let project of projectList.projects) {
+        for (let todoList of project.todoLists) {
+            if (TodoList.get(todoList, todoItem) > -1) {
+                return todoList;
+            }
+        }
+    }
+    
+}
+
+export { tabs, projectList, getSelectedProject, getSelectedProjectIndex, setSelectedProject, getSelectedTab, setSelectedTab, getTodoListOf };

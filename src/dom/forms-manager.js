@@ -101,7 +101,7 @@ function showTodoListForm(mode, element) {
             element.title = titleInput.value;
             element.description = descriptionInput.value;
             dialog.close();
-            domManager.displaySelectedTab(globals.tabs.PROJECT, globals.getSelectedProject());
+            domManager.displaySelectedTab(globals.getSelectedTab());
             localStorageManager.storeProjectList();
         })
     } 
@@ -120,7 +120,7 @@ function showTodoListForm(mode, element) {
             let description = descriptionInput.value;
             dataManager.createTodoList(globals.getSelectedProject(), title, description);
             dialog.close();
-            domManager.displaySelectedTab(globals.tabs.PROJECT, globals.getSelectedProject());
+            domManager.displaySelectedTab(globals.getSelectedTab());
         })
     }
 
@@ -205,7 +205,7 @@ function showTodoItemForm(mode, element) {
             element.dueDate = dueDate;
             element.notes = notesInput.value;
             dialog.close();
-            domManager.displaySelectedTab(globals.tabs.PROJECT, globals.getSelectedProject());
+            domManager.displaySelectedTab(globals.getSelectedTab());
             localStorageManager.storeProjectList();
         })
     } 
@@ -231,7 +231,7 @@ function showTodoItemForm(mode, element) {
             let notes = notesInput.value;
             dataManager.createTodoItem(element, title, priority, dueDate, notes);
             dialog.close();
-            domManager.displaySelectedTab(globals.tabs.PROJECT, globals.getSelectedProject());
+            domManager.displaySelectedTab(globals.getSelectedTab());
         })
     }
 

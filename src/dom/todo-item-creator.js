@@ -19,14 +19,15 @@ function displayTodoItems(todoList, todoItemsContainer) {
         deleteButtonContainer.appendChild(deleteTodoItem);
         
         deleteButtonContainer.addEventListener("click", (e) => {
+            let projectTodoList = globals.getTodoListOf(todoItem);
             if (todoItem.isCompleted) {
-                dataManager.deleteTodoItem(todoItem, todoList);
-                domManager.displaySelectedTab(globals.tabs.PROJECT, globals.getSelectedProject());
+                dataManager.deleteTodoItem(todoItem, projectTodoList);
+                domManager.displaySelectedTab(globals.getSelectedTab());
             }else {
                 elementForms.showDeleteForm("Are you sure you want to delete this uncompleted Todo?<br> This can not be reverted.", () => {
-                dataManager.deleteTodoItem(todoItem, todoList);
-                domManager.displaySelectedTab(globals.tabs.PROJECT, globals.getSelectedProject());
-            });
+                    dataManager.deleteTodoItem(todoItem, projectTodoList);
+                    domManager.displaySelectedTab(globals.getSelectedTab());
+                });
             }
         })
 
@@ -46,7 +47,7 @@ function displayTodoItems(todoList, todoItemsContainer) {
         markCompletedButtonContainer.appendChild(markCompletedCheckbox);
         markCompletedCheckbox.addEventListener("click", (e) => {
             dataManager.toggleCompleted(todoItem);
-            domManager.displaySelectedTab(globals.tabs.PROJECT, globals.getSelectedProject());
+            domManager.displaySelectedTab(globals.getSelectedTab());
         })
 
         const todoItemContainer = elementCreator.getElement("div", "", "todo-item");
@@ -55,7 +56,7 @@ function displayTodoItems(todoList, todoItemsContainer) {
 
         TodoItemBottomContent.addEventListener("click", (e) => {
             dataManager.toggleCompleted(todoItem);
-            domManager.displaySelectedTab(globals.tabs.PROJECT, globals.getSelectedProject());
+            domManager.displaySelectedTab(globals.getSelectedTab());
         })
 
         todoItemContainer.classList.add(todoItem.priority);
