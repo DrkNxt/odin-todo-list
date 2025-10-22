@@ -113,7 +113,7 @@ function createTodoListElement(todoList, todoLists) {
     todoListContainer.appendChild(todoItemsContainer);
 
     // Display all todo items of this list
-    todoItemCreator.displayTodoItems(todoList, todoItemsContainer);
+    todoItemCreator.displayTodoItems(todoList, todoItemsContainer, false);
 
     const addTodoItemDiv = elementCreator.getElement("div", "", "add-todo-item-div", todoList.id);
 

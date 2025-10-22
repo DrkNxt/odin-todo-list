@@ -235,7 +235,7 @@ div#main {
 
 #todo-lists {
     column-count: auto;
-    column-width: clamp(100px, 20rem, 450px);
+    column-width: clamp(100px, 22rem, 450px);
 }
 
 .add-todo-list-btn {   
@@ -325,7 +325,6 @@ div#main {
     text-align: center;
     font-size: 1.2rem;
     color: gray;
-    margin-top: 1rem;
 }
 
 .todo-item {
@@ -334,6 +333,11 @@ div#main {
     border-radius: 5px;
     box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
     margin-bottom: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.todo-item:hover {
+    transform: translateY(-0.2rem);
 }
 
 .todo-item-notes {

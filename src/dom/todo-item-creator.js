@@ -6,8 +6,8 @@ import * as domManager from "./dom-manager.js";
 import { sortByUncompleted } from "../filter-todo-items.js";
 
 // Update todo item elements
-function displayTodoItems(todoList, todoItemsContainer) {
-    if (todoList.todoItems.length <= 0) {
+function displayTodoItems(todoList, todoItemsContainer, enableEmptyMessage=true) {
+    if (todoList.todoItems.length <= 0 && enableEmptyMessage) {
         todoItemsContainer.appendChild(elementCreator.getElement("div", "Seems like there is nothing to display here yet", "empty-todo-items-container"));
         return;
     }
