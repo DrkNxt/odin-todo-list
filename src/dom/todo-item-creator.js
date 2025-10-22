@@ -6,6 +6,10 @@ import * as projectsTabManager from "./projects-tab-manager.js";
 
 // Update todo item elements
 function displayTodoItems(todoList, todoItemsContainer) {
+    if (todoList.todoItems.length <= 0) {
+        todoItemsContainer.appendChild(elementCreator.getElement("div", "Seems like there is nothing to display here yet", "empty-todo-items-container"));
+        return;
+    }
     for (let todoItem of todoList.todoItems) {
         // Create delete button
         const deleteButtonContainer = elementCreator.getElement("div", "");

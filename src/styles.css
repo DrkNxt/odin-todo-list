@@ -280,6 +280,13 @@ div#main {
     padding-bottom: 0.5rem;
 }
 
+.empty-todo-items-container {
+    text-align: center;
+    font-size: 1.2rem;
+    color: gray;
+    margin-top: 1rem;
+}
+
 .filter-todo-list-title {
     font-size: 2rem;
     text-align: center;
