@@ -8,7 +8,7 @@ import * as localStorageManager from "./local-storage-manager.js";
 function createProject(title, description) {
     let project = new Project(title, description);
     ProjectList.addProject(globals.projectList, project);
-    globals.setActiveProject(project);
+    globals.setSelectedProject(project);
     saveChanges();
 }
 

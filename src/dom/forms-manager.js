@@ -1,7 +1,7 @@
 import * as globals from "../globals.js";
 import * as elementCreator from "./element-creator.js";
 import * as dataManager from "../data-manager.js";
-import { updateAll, displayProject, changeSelectedPriority, getSelectedPriority } from "./dom-manager.js";
+import * as domManager from "./dom-manager.js";
 import * as localStorageManager from "../local-storage-manager.js";
 
 const dialog = document.querySelector("#dialog");
@@ -30,7 +30,7 @@ function showProjectForm(mode, element) {
             element.title = titleInput.value;
             element.description = descriptionInput.value;
             dialog.close();
-            updateAll();
+            domManager.updateAll();
             localStorageManager.storeProjectList();
         })
     }
@@ -49,7 +49,7 @@ function showProjectForm(mode, element) {
             let description = descriptionInput.value;
             dataManager.createProject(title, description);
             dialog.close();
-            updateAll();
+            domManager.updateAll();
         })
     }
 
@@ -101,7 +101,7 @@ function showTodoListForm(mode, element) {
             element.title = titleInput.value;
             element.description = descriptionInput.value;
             dialog.close();
-            displayProject(globals.getActiveProject());
+            domManager.displaySelectedTab(globals.tabs.PROJECT, globals.getSelectedProject());
             localStorageManager.storeProjectList();
         })
     } 
@@ -118,9 +118,9 @@ function showTodoListForm(mode, element) {
             e.preventDefault();
             let title = titleInput.value == "" ? "New Todo List" : titleInput.value;
             let description = descriptionInput.value;
-            dataManager.createTodoList(globals.getActiveProject(), title, description);
+            dataManager.createTodoList(globals.getSelectedProject(), title, description);
             dialog.close();
-            displayProject(globals.getActiveProject());
+            domManager.displaySelectedTab(globals.tabs.PROJECT, globals.getSelectedProject());
         })
     }
 
@@ -142,7 +142,7 @@ function showTodoListForm(mode, element) {
 }
 
 function showAddTodoListForm() {
-    showTodoListForm("add", globals.getActiveProject());
+    showTodoListForm("add", globals.getSelectedProject());
 }
 
 function showEditTodoListForm(todoList) {
@@ -191,13 +191,13 @@ function showTodoItemForm(mode, element) {
         confirmButton = elementCreator.getButton("confirm-edit-btn", "Confirm", "submit");
         cancelButton = elementCreator.getButton("cancel-edit-btn", "Cancel")
         form.appendChild(elementCreator.getElement("h2", "Edit Todo"));
-        changeSelectedPriority(priorityInput, element.priority);
+        domManager.changeSelectedPriority(priorityInput, element.priority);
 
         // Edit todo item when "Confirm" button is clicked
         confirmButton.addEventListener("click", (e) => {
             e.preventDefault();
             element.title = titleInput.value;
-            element.priority = getSelectedPriority(priorityInput);
+            element.priority = domManager.getSelectedPriority(priorityInput);
             let dueDate = new Date(dueDateInput.valueAsNumber);
             if (!(dueDate instanceof Date && !isNaN(dueDate)) || !dueDateOption.checked) {
                 dueDate = null;
@@ -205,7 +205,7 @@ function showTodoItemForm(mode, element) {
             element.dueDate = dueDate;
             element.notes = notesInput.value;
             dialog.close();
-            displayProject(globals.getActiveProject());
+            domManager.displaySelectedTab(globals.tabs.PROJECT, globals.getSelectedProject());
             localStorageManager.storeProjectList();
         })
     } 
@@ -216,14 +216,14 @@ function showTodoItemForm(mode, element) {
         notesInput = elementCreator.getTextArea("todo-item-notes", "todo-item-notes", 3, "");
         confirmButton = elementCreator.getButton("add-new-todo-item-btn", "Confirm", "submit");
         cancelButton = elementCreator.getButton("cancel-new-todo-item-btn", "Cancel")
-        changeSelectedPriority(priorityInput, "priority-1");
+        domManager.changeSelectedPriority(priorityInput, "priority-1");
         form.appendChild(elementCreator.getElement("h2", "New Todo"));
 
         // Add todo item when "Confirm" button is clicked
         confirmButton.addEventListener("click", (e) => {
             e.preventDefault();
             let title = titleInput.value == "" ? "New Todo" : titleInput.value;
-            let priority = getSelectedPriority(priorityInput);
+            let priority = domManager.getSelectedPriority(priorityInput);
             let dueDate = new Date(dueDateInput.valueAsNumber);
             if (!(dueDate instanceof Date && !isNaN(dueDate)) || !dueDateOption.checked) {
                 dueDate = null;
@@ -231,7 +231,7 @@ function showTodoItemForm(mode, element) {
             let notes = notesInput.value;
             dataManager.createTodoItem(element, title, priority, dueDate, notes);
             dialog.close();
-            displayProject(globals.getActiveProject());
+            domManager.displaySelectedTab(globals.tabs.PROJECT, globals.getSelectedProject());
         })
     }
 

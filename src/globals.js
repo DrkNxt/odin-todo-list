@@ -1,4 +1,3 @@
-import { ProjectList } from "./classes/project-list";
 import * as localStorageManager from "./local-storage-manager.js";
 
 const tabs = Object.freeze({
@@ -11,30 +10,41 @@ const tabs = Object.freeze({
     PROJECT:  "project",
 });
 
-let selectedTab = tabs.THIS_WEEK;
-let projectList;
-if (localStorageManager.isProjectListStored()) {
-    projectList = localStorageManager.getProjectList();
-}else {
-    projectList = new ProjectList();
-}
+let projectList = localStorageManager.getProjectList();
+let selectedTab; 
+let selectedProject = projectList.projects[localStorageManager.getSelectedProject()];
+setSelectedTab(localStorageManager.getSelectedTab());
 
-let activeProject = projectList.projects[0];
-
-function getActiveProject() {
-    if (!projectList.projects.includes(activeProject)){
-        activeProject = projectList.projects[0];
+function getSelectedProject() {
+    if (!projectList.projects.includes(selectedProject)){
+        selectedProject = projectList.projects[0];
     }
-    return activeProject;
+    return selectedProject;
 }
 
-function setActiveProject(project) {
+function getSelectedProjectIndex() {
+    return projectList.projects.findIndex((proj) => proj === selectedProject);
+}
+
+function setSelectedProject(project) {
     if (!projectList.projects.includes(project)){
-        activeProject = projectList.projects[0];
+        selectedProject = projectList.projects[0];
     }else {
-        activeProject = project;
+        selectedProject = project;
     }
-    
 }
 
-export { tabs, selectedTab, projectList, getActiveProject, setActiveProject };
+function getSelectedTab() {
+    return selectedTab;
+}
+
+function setSelectedTab(tab) {
+    if (Object.values(tabs).includes(tab)) {
+        selectedTab = tab;
+    }else {
+        selectedTab = tabs.UPCOMING
+    }
+    localStorageManager.storeSelectedTab();
+}
+
+export { tabs, projectList, getSelectedProject, getSelectedProjectIndex, setSelectedProject, getSelectedTab, setSelectedTab };

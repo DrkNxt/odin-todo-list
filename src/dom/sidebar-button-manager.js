@@ -1,3 +1,4 @@
+import * as globals from "../globals.js";
 import * as domManager from "./dom-manager.js";
 import * as elementForms from "./forms-manager.js";
 import { loadDefaultProject } from "../default-project.js";
@@ -13,27 +14,27 @@ const addProjectButton = document.querySelector("#add-project-btn");
 const addTemplateProjectsButton = document.querySelector("#add-template-projects-btn");
 
 displayUpcomingButton.addEventListener("click", () => {
-    domManager.displayUpcoming();
+    domManager.displaySelectedTab(globals.tabs.UPCOMING);
 })
 
 displayTodayButton.addEventListener("click", () => {
-    domManager.displayDueToday();
+    domManager.displaySelectedTab(globals.tabs.TODAY);
 })
 
 displayThisWeekButton.addEventListener("click", () => {
-    domManager.displayDueThisWeek();
+    domManager.displaySelectedTab(globals.tabs.THIS_WEEK);
 })
 
 displayOverdueButton.addEventListener("click", () => {
-    domManager.displayOverdue();
+    domManager.displaySelectedTab(globals.tabs.OVERDUE);
 })
 
 displayPriorityButton.addEventListener("click", () => {
-    domManager.displayByPriority("priority-1");
+    domManager.displaySelectedTab(globals.tabs.PRIORITY);
 })
 
 displayCompletedButton.addEventListener("click", () => {
-    domManager.displayByCompleted();
+    domManager.displaySelectedTab(globals.tabs.COMPLETED);
 })
 
 addProjectButton.addEventListener("click", () => {

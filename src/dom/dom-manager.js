@@ -10,7 +10,7 @@ const projectListContainer = document.querySelector("#project-list");
 
 function updateAll() {
     updateProjectList();
-    displayProject(globals.getActiveProject());
+    displaySelectedTab(globals.tabs.PROJECT, globals.getSelectedProject());
 }
 
 // Update project list elements
@@ -25,12 +25,12 @@ function updateProjectList() {
     for (let project of globals.projectList.projects) {
         const projectElement = elementCreator.getElement("button", project.title, "project-btn");
         projectListContainer.appendChild(projectElement);
-        if (project === globals.getActiveProject()) {
+        if (project === globals.getSelectedProject()) {
             projectElement.id = "active-project";
         }
 
         projectElement.addEventListener("click", () => {
-            displayProject(project);
+            displaySelectedTab(globals.tabs.PROJECT, project);
             updateProjectList();
         });
     }
@@ -52,8 +52,8 @@ function getSelectedPriority(prioritySelect) {
     return prioritySelect.querySelector(`[data-selected="true"]`).className;
 }
 
-// Bei project ein active machen und nur wenn active ist der button markiert
-function updateSelectedTab(selectedTab) {
+// Display selected tab
+function displaySelectedTab(selectedTab, project=globals.getSelectedProject()) {
     const displayUpcomingButton = document.querySelector("#display-upcoming-btn");
     const displayTodayButton = document.querySelector("#display-today-btn");
     const displayThisWeekButton = document.querySelector("#display-this-week-btn");
@@ -71,50 +71,36 @@ function updateSelectedTab(selectedTab) {
     projectList.removeAttribute("class");
 
     switch(selectedTab) {
-        case globals.tabs.UPCOMING: displayUpcomingButton.classList.add("active-tab"); break;
-        case globals.tabs.TODAY: displayTodayButton.classList.add("active-tab"); break;
-        case globals.tabs.THIS_WEEK: displayThisWeekButton.classList.add ("active-tab"); break;
-        case globals.tabs.OVERDUE: displayOverdueButton.classList.add("active-tab"); break;
-        case globals.tabs.PRIORITY: displayPriorityButton.classList.add("active-tab"); break;
-        case globals.tabs.COMPLETED: displayCompletedButton.classList.add("active-tab"); break;
-        case globals.tabs.PROJECT: projectList.classList.add("active-tab"); break;
+        case globals.tabs.UPCOMING: 
+            tabsManager.displayUpcomingTodoItems();
+            displayUpcomingButton.classList.add("active-tab");
+            break;
+        case globals.tabs.TODAY: 
+            tabsManager.displayTodoItemsBy(filterTodoItems.getDueInXDays(1, "Today"));
+            displayTodayButton.classList.add("active-tab");
+            break;
+        case globals.tabs.THIS_WEEK: 
+            tabsManager.displayTodoItemsBy(filterTodoItems.getDueInXDays(7, "This week"));
+            displayThisWeekButton.classList.add ("active-tab");
+            break;
+        case globals.tabs.OVERDUE: 
+            tabsManager.displayTodoItemsBy(filterTodoItems.getOverdue());
+            displayOverdueButton.classList.add("active-tab");
+            break;
+        case globals.tabs.PRIORITY: 
+            tabsManager.displayTodoItemsByPriority();
+            displayPriorityButton.classList.add("active-tab");
+            break;
+        case globals.tabs.COMPLETED: 
+            tabsManager.displayTodoItemsBy(filterTodoItems.getCompleted());
+            displayCompletedButton.classList.add("active-tab");
+            break;
+        case globals.tabs.PROJECT: 
+            projectsTabManager.displayProject(project);
+            projectList.classList.add("active-tab");
+            break;
     }
+    globals.setSelectedTab(selectedTab);
 }
 
-// Tab display functions
-function displayUpcoming() {
-    tabsManager.displayUpcomingTodoItems();
-    updateSelectedTab(globals.tabs.UPCOMING);
-}
-
-function displayDueToday() {
-    tabsManager.displayTodoItemsBy(filterTodoItems.getDueInXDays(1, "Today"));
-    updateSelectedTab(globals.tabs.TODAY);
-}
-
-function displayDueThisWeek() {
-    tabsManager.displayTodoItemsBy(filterTodoItems.getDueInXDays(7, "This week"));
-    updateSelectedTab(globals.tabs.THIS_WEEK);
-}
-
-function displayOverdue() {
-    tabsManager.displayTodoItemsBy(filterTodoItems.getOverdue());
-    updateSelectedTab(globals.tabs.OVERDUE);
-}
-
-function displayByPriority(priority) {
-    tabsManager.displayTodoItemsByPriority();
-    updateSelectedTab(globals.tabs.PRIORITY);
-}
-
-function displayByCompleted() {
-    tabsManager.displayTodoItemsBy(filterTodoItems.getCompleted());
-    updateSelectedTab(globals.tabs.COMPLETED);
-}
-
-function displayProject(project) {
-    projectsTabManager.displayProject(project);
-    updateSelectedTab(globals.tabs.PROJECT);
-}
-
-export { updateAll, updateProjectList, displayProject, changeSelectedPriority, getSelectedPriority, displayUpcoming, displayDueToday, displayDueThisWeek, displayOverdue, displayByPriority, displayByCompleted };
+export { updateAll, updateProjectList, changeSelectedPriority, getSelectedPriority, displaySelectedTab };

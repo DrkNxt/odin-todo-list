@@ -2,7 +2,7 @@ import * as globals from "../globals.js";
 import * as elementCreator from "./element-creator.js";
 import * as elementForms from "./forms-manager.js";
 import * as dataManager from "../data-manager.js";
-import * as projectsTabManager from "./projects-tab-manager.js";
+import * as domManager from "./dom-manager.js";
 import { sortByUncompleted } from "../filter-todo-items.js";
 
 // Update todo item elements
@@ -21,11 +21,11 @@ function displayTodoItems(todoList, todoItemsContainer) {
         deleteButtonContainer.addEventListener("click", (e) => {
             if (todoItem.isCompleted) {
                 dataManager.deleteTodoItem(todoItem, todoList);
-                projectsTabManager.displayProject(globals.getActiveProject());
+                domManager.displaySelectedTab(globals.tabs.PROJECT, globals.getSelectedProject());
             }else {
                 elementForms.showDeleteForm("Are you sure you want to delete this uncompleted Todo?<br> This can not be reverted.", () => {
                 dataManager.deleteTodoItem(todoItem, todoList);
-                projectsTabManager.displayProject(globals.getActiveProject());
+                domManager.displaySelectedTab(globals.tabs.PROJECT, globals.getSelectedProject());
             });
             }
         })
@@ -46,7 +46,7 @@ function displayTodoItems(todoList, todoItemsContainer) {
         markCompletedButtonContainer.appendChild(markCompletedCheckbox);
         markCompletedCheckbox.addEventListener("click", (e) => {
             dataManager.toggleCompleted(todoItem);
-            projectsTabManager.displayProject(globals.getActiveProject());
+            domManager.displaySelectedTab(globals.tabs.PROJECT, globals.getSelectedProject());
         })
 
         const todoItemContainer = elementCreator.getElement("div", "", "todo-item");
@@ -55,7 +55,7 @@ function displayTodoItems(todoList, todoItemsContainer) {
 
         TodoItemBottomContent.addEventListener("click", (e) => {
             dataManager.toggleCompleted(todoItem);
-            projectsTabManager.displayProject(globals.getActiveProject());
+            domManager.displaySelectedTab(globals.tabs.PROJECT, globals.getSelectedProject());
         })
 
         todoItemContainer.classList.add(todoItem.priority);

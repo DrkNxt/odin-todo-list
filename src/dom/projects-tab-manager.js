@@ -9,7 +9,7 @@ const mainContainer = document.querySelector("#main");
 
 // Update project elements
 function displayProject(project) {
-    globals.setActiveProject(project);
+    globals.setSelectedProject(project);
     mainContainer.innerHTML = "";
 
     // Create project container
@@ -26,7 +26,7 @@ function displayProject(project) {
     deleteButtonContainer.addEventListener("click", (e) => {
         elementForms.showDeleteForm("Are you sure you want to delete this Project?<br> This can not be reverted and all Todo Lists and Todos in this Project will be deleted as well.", () => {
             dataManager.deleteProject(project);
-            globals.setActiveProject(globals.projectList.projects[0]);
+            globals.setSelectedProject(globals.projectList.projects[0]);
             updateAll();
         });
     })
@@ -87,8 +87,8 @@ function createTodoListElement(todoList, todoLists) {
         
     deleteButtonContainer.addEventListener("click", (e) => {
         elementForms.showDeleteForm("Are you sure you want to delete this Todo List?<br> This can not be reverted and all Todos in this List will be deleted as well.", () => {
-            dataManager.deleteTodoList(todoList, globals.getActiveProject());
-            displayProject(globals.getActiveProject());
+            dataManager.deleteTodoList(todoList, globals.getSelectedProject());
+            displayProject(globals.getSelectedProject());
         });
     })
 
