@@ -1,6 +1,7 @@
 import * as filterTodoItems from "../filter-todo-items.js";
 import * as elementCreator from "./element-creator.js";
 import * as todoItemCreator from "./todo-item-creator.js";
+import { TodoList } from "../classes/todo-list.js";
 
 const mainContainer = document.querySelector("#main");
 
@@ -8,8 +9,12 @@ function displayUpcomingTodoItems() {
     mainContainer.innerHTML = "";
 
     const todoLists = filterTodoItems.getUpcoming();
-    for (let todoList of todoLists) {
-        displayTodoItemsBy(todoList, false);
+    if (todoLists.length < 1) {
+        displayTodoItemsBy(new TodoList("Upcoming tasks", ""), false);
+    }else {
+        for (let todoList of todoLists) {
+            displayTodoItemsBy(todoList, false);
+        }
     }
 }
 
