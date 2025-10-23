@@ -4,6 +4,7 @@ class TodoList {
     this.description = description;
     this.todoItems = [];
     this.id = crypto.randomUUID();
+    this.isFolded = false;
   }
   static get(todoList, todoItem) {
     return todoList.todoItems.findIndex((todo) => todo === todoItem);
@@ -24,6 +25,10 @@ class TodoList {
       todoList.todoItems.findIndex((todo) => todo === todoItem),
       1
     );
+  }
+
+  static toggleFolded(todoList) {
+    todoList.isFolded = !todoList.isFolded;
   }
 }
 

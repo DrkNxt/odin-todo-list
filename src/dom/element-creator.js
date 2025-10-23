@@ -133,6 +133,12 @@ function getIcon(iconName, classes = null) {
     case "circle":
       d = "M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2";
       break;
+    case "folded":
+      d = "M8.59 16.58L13.17 12L8.59 7.41L10 6l6 6l-6 6z";
+      break;
+    case "unfolded":
+      d = "M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6l-6-6z";
+      break;
     default:
       d =
         "M11 15h2v2h-2zm0-8h2v6h-2zm1-5C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2m0 18a8 8 0 0 1-8-8a8 8 0 0 1 8-8a8 8 0 0 1 8 8a8 8 0 0 1-8 8";

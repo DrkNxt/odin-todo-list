@@ -49,6 +49,12 @@ function toggleCompleted(todoItem) {
   return todoItem.isCompleted;
 }
 
+function toggleFolded(todoItem) {
+  TodoList.toggleFolded(todoItem);
+  saveChanges();
+  return todoItem.isFolded;
+}
+
 function saveChanges() {
   localStorageManager.storeProjectList(globals.projectList);
 }
@@ -62,4 +68,5 @@ export {
   deleteTodoItem,
   toggleCompleted,
   saveChanges,
+  toggleFolded,
 };

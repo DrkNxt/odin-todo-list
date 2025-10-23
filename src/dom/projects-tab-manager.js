@@ -90,6 +90,28 @@ function updateTodoLists(todoLists) {
 // Create single todo list
 function createTodoListElement(todoList) {
   const todoListsContainer = document.querySelector("#todo-lists");
+  const todoListContainer = elementCreator.getElement("div", "", "project-todo-list");
+  const todoItemsContainer = elementCreator.getElement("div", "", "project-todo-items");
+  const todoListTopContent = elementCreator.getElement("div", "", "project-todo-list-top-content");
+
+  // Create fold button
+  const foldButtonContainer = elementCreator.getElement("div", "");
+
+  if (todoList.isFolded) {
+    todoListContainer.classList.add("folded");
+  }
+  let foldTodoItem;
+  if (todoListContainer.classList.contains("folded")) {
+    foldTodoItem = elementCreator.getIcon("folded", "clickable-icon");
+  } else {
+    foldTodoItem = elementCreator.getIcon("unfolded", "clickable-icon");
+  }
+  foldButtonContainer.appendChild(foldTodoItem);
+  foldButtonContainer.addEventListener("click", () => {
+    todoListContainer.classList.toggle("folded");
+    dataManager.toggleFolded(todoList);
+    displayProject(globals.getSelectedProject());
+  });
 
   // Create delete button
   const deleteButtonContainer = elementCreator.getElement("div", "");
@@ -115,13 +137,10 @@ function createTodoListElement(todoList) {
     elementForms.showEditTodoListForm(todoList);
   });
 
-  const todoListContainer = elementCreator.getElement("div", "", "project-todo-list");
-  const todoItemsContainer = elementCreator.getElement("div", "", "project-todo-items");
-  const todoListTopContent = elementCreator.getElement("div", "", "project-todo-list-top-content");
-
   todoListTopContent.appendChild(
     elementCreator.getElement("h3", todoList.title, "project-todo-list-title")
   );
+  todoListTopContent.appendChild(foldButtonContainer);
   todoListTopContent.appendChild(editButtonContainer);
   todoListTopContent.appendChild(deleteButtonContainer);
   todoListContainer.appendChild(todoListTopContent);
@@ -135,7 +154,9 @@ function createTodoListElement(todoList) {
 
   const addTodoItemDiv = elementCreator.getElement("div", "", "add-todo-item-div", todoList.id);
 
-  addTodoItemDiv.appendChild(createAddTodoItemButton(todoList));
+  if (!todoList.isFolded) {
+    addTodoItemDiv.appendChild(createAddTodoItemButton(todoList));
+  }
   todoItemsContainer.appendChild(addTodoItemDiv);
   todoListsContainer.appendChild(todoListContainer);
 }

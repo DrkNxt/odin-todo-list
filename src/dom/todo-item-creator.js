@@ -7,6 +7,9 @@ import { sortByUncompleted } from "../filter-todo-items.js";
 
 // Update todo item elements
 function displayTodoItems(todoList, todoItemsContainer, enableEmptyMessage = true) {
+  if (todoList.isFolded) {
+    return;
+  }
   if (todoList.todoItems.length <= 0 && enableEmptyMessage) {
     todoItemsContainer.appendChild(
       elementCreator.getElement(
