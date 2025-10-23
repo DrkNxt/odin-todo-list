@@ -38,21 +38,9 @@ function displayTodoItemsBy(todoList, emptyContainer = true) {
     mainContainer.innerHTML = "";
   }
 
-  const todoListContainer = elementCreator.getElement(
-    "div",
-    "",
-    "filter-todo-list"
-  );
-  const todoItemsContainer = elementCreator.getElement(
-    "div",
-    "",
-    "filter-todo-items"
-  );
-  const todoListTopContent = elementCreator.getElement(
-    "div",
-    "",
-    "filter-todo-list-top-content"
-  );
+  const todoListContainer = elementCreator.getElement("div", "", "filter-todo-list");
+  const todoItemsContainer = elementCreator.getElement("div", "", "filter-todo-items");
+  const todoListTopContent = elementCreator.getElement("div", "", "filter-todo-list-top-content");
 
   todoListTopContent.appendChild(
     elementCreator.getElement("h3", todoList.title, "filter-todo-list-title")
@@ -66,8 +54,4 @@ function displayTodoItemsBy(todoList, emptyContainer = true) {
   mainContainer.appendChild(todoListContainer);
 }
 
-export {
-  displayUpcomingTodoItems,
-  displayTodoItemsByPriority,
-  displayTodoItemsBy,
-};
+export { displayUpcomingTodoItems, displayTodoItemsByPriority, displayTodoItemsBy };

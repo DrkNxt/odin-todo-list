@@ -3,6 +3,7 @@ import * as elementCreator from "./element-creator.js";
 import * as elementForms from "./forms-manager.js";
 import * as dataManager from "../data-manager.js";
 import * as todoItemCreator from "./todo-item-creator.js";
+import * as localStorageManager from "../local-storage-manager.js";
 import { updateAll } from "./dom-manager.js";
 
 const mainContainer = document.querySelector("#main");
@@ -13,18 +14,8 @@ function displayProject(project) {
   mainContainer.innerHTML = "";
 
   // Create project container
-  const currentProjectContainer = elementCreator.getElement(
-    "div",
-    "",
-    null,
-    "current-project"
-  );
-  const todoListsContainer = elementCreator.getElement(
-    "div",
-    "",
-    null,
-    "todo-lists"
-  );
+  const currentProjectContainer = elementCreator.getElement("div", "", null, "current-project");
+  const todoListsContainer = elementCreator.getElement("div", "", null, "todo-lists");
   mainContainer.appendChild(currentProjectContainer);
   mainContainer.appendChild(todoListsContainer);
 
@@ -38,7 +29,10 @@ function displayProject(project) {
       "Are you sure you want to delete this Project?<br> This can not be reverted and all Todo Lists and Todos in this Project will be deleted as well.",
       () => {
         dataManager.deleteProject(project);
-        globals.setSelectedProject(globals.projectList.projects[0]);
+        // Set new selected project to correct index
+        globals.setSelectedProject(
+          globals.projectList.projects[localStorageManager.getSelectedProject() - 1]
+        );
         updateAll();
       }
     );
@@ -53,11 +47,7 @@ function displayProject(project) {
     elementForms.showEditProjectForm(project);
   });
 
-  const projectTopContent = elementCreator.getElement(
-    "div",
-    "",
-    "project-top-content"
-  );
+  const projectTopContent = elementCreator.getElement("div", "", "project-top-content");
 
   projectTopContent.appendChild(
     elementCreator.getElement("h2", project.title, "current-project-name")
@@ -66,37 +56,21 @@ function displayProject(project) {
   projectTopContent.appendChild(deleteButtonContainer);
   currentProjectContainer.appendChild(projectTopContent);
   currentProjectContainer.appendChild(
-    elementCreator.getElement(
-      "p",
-      project.description,
-      "current-project-description"
-    )
+    elementCreator.getElement("p", project.description, "current-project-description")
   );
 
   // Display all todo lists of this project
   updateTodoLists(project.todoLists);
 
   // Display addTodoListButton
-  const addTodoListDiv = elementCreator.getElement(
-    "div",
-    "",
-    null,
-    "add-todo-list-div"
-  );
+  const addTodoListDiv = elementCreator.getElement("div", "", null, "add-todo-list-div");
   addTodoListDiv.appendChild(createAddTodoListButton());
   todoListsContainer.appendChild(addTodoListDiv);
 }
 
 function createAddTodoListButton() {
-  const addTodoListButton = elementCreator.getButton(
-    null,
-    "",
-    "button",
-    "add-todo-list-btn"
-  );
-  addTodoListButton.appendChild(
-    elementCreator.getIcon("new", "todo-list-plus-icon")
-  );
+  const addTodoListButton = elementCreator.getButton(null, "", "button", "add-todo-list-btn");
+  addTodoListButton.appendChild(elementCreator.getIcon("new", "todo-list-plus-icon"));
   addTodoListButton.addEventListener("click", () => {
     elementForms.showAddTodoListForm();
   });
@@ -141,21 +115,9 @@ function createTodoListElement(todoList) {
     elementForms.showEditTodoListForm(todoList);
   });
 
-  const todoListContainer = elementCreator.getElement(
-    "div",
-    "",
-    "project-todo-list"
-  );
-  const todoItemsContainer = elementCreator.getElement(
-    "div",
-    "",
-    "project-todo-items"
-  );
-  const todoListTopContent = elementCreator.getElement(
-    "div",
-    "",
-    "project-todo-list-top-content"
-  );
+  const todoListContainer = elementCreator.getElement("div", "", "project-todo-list");
+  const todoItemsContainer = elementCreator.getElement("div", "", "project-todo-items");
+  const todoListTopContent = elementCreator.getElement("div", "", "project-todo-list-top-content");
 
   todoListTopContent.appendChild(
     elementCreator.getElement("h3", todoList.title, "project-todo-list-title")
@@ -164,23 +126,14 @@ function createTodoListElement(todoList) {
   todoListTopContent.appendChild(deleteButtonContainer);
   todoListContainer.appendChild(todoListTopContent);
   todoListContainer.appendChild(
-    elementCreator.getElement(
-      "p",
-      todoList.description,
-      "todo-list-description"
-    )
+    elementCreator.getElement("p", todoList.description, "todo-list-description")
   );
   todoListContainer.appendChild(todoItemsContainer);
 
   // Display all todo items of this list
   todoItemCreator.displayTodoItems(todoList, todoItemsContainer, false);
 
-  const addTodoItemDiv = elementCreator.getElement(
-    "div",
-    "",
-    "add-todo-item-div",
-    todoList.id
-  );
+  const addTodoItemDiv = elementCreator.getElement("div", "", "add-todo-item-div", todoList.id);
 
   addTodoItemDiv.appendChild(createAddTodoItemButton(todoList));
   todoItemsContainer.appendChild(addTodoItemDiv);
@@ -188,15 +141,8 @@ function createTodoListElement(todoList) {
 }
 
 function createAddTodoItemButton(todoList) {
-  const addTodoItemButton = elementCreator.getButton(
-    null,
-    "",
-    "button",
-    "add-todo-item-btn"
-  );
-  addTodoItemButton.appendChild(
-    elementCreator.getIcon("new", "todo-item-plus-icon")
-  );
+  const addTodoItemButton = elementCreator.getButton(null, "", "button", "add-todo-item-btn");
+  addTodoItemButton.appendChild(elementCreator.getIcon("new", "todo-item-plus-icon"));
   addTodoItemButton.addEventListener("click", () => {
     elementForms.showAddTodoItemForm(todoList);
   });

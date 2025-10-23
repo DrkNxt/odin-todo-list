@@ -10,7 +10,7 @@ const projectListContainer = document.querySelector("#project-list");
 
 function updateAll() {
   updateProjectList();
-  displaySelectedTab(globals.tabs.PROJECT, globals.getSelectedProject());
+  displaySelectedTab(globals.getSelectedTab());
 }
 
 // Update project list elements
@@ -22,11 +22,7 @@ function updateProjectList() {
   projectListContainer.innerHTML = "";
 
   for (let project of globals.projectList.projects) {
-    const projectElement = elementCreator.getElement(
-      "button",
-      project.title,
-      "project-btn"
-    );
+    const projectElement = elementCreator.getElement("button", project.title, "project-btn");
     projectListContainer.appendChild(projectElement);
     if (project === globals.getSelectedProject()) {
       projectElement.id = "active-project";
@@ -56,20 +52,13 @@ function getSelectedPriority(prioritySelect) {
 }
 
 // Display selected tab
-function displaySelectedTab(
-  selectedTab,
-  project = globals.getSelectedProject()
-) {
+function displaySelectedTab(selectedTab, project = globals.getSelectedProject()) {
   const displayUpcomingButton = document.querySelector("#display-upcoming-btn");
   const displayTodayButton = document.querySelector("#display-today-btn");
-  const displayThisWeekButton = document.querySelector(
-    "#display-this-week-btn"
-  );
+  const displayThisWeekButton = document.querySelector("#display-this-week-btn");
   const displayOverdueButton = document.querySelector("#display-overdue-btn");
   const displayPriorityButton = document.querySelector("#display-priority-btn");
-  const displayCompletedButton = document.querySelector(
-    "#display-completed-btn"
-  );
+  const displayCompletedButton = document.querySelector("#display-completed-btn");
   const projectList = document.querySelector("#project-list");
 
   displayUpcomingButton.classList.remove("active-tab");
@@ -90,9 +79,7 @@ function displaySelectedTab(
       displayTodayButton.classList.add("active-tab");
       break;
     case globals.tabs.THIS_WEEK:
-      tabsManager.displayTodoItemsBy(
-        filterTodoItems.getDueInXDays(7, "This week")
-      );
+      tabsManager.displayTodoItemsBy(filterTodoItems.getDueInXDays(7, "This week"));
       displayThisWeekButton.classList.add("active-tab");
       break;
     case globals.tabs.OVERDUE:

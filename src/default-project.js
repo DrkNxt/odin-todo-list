@@ -8,291 +8,278 @@ import { saveChanges } from "./data-manager.js";
 
 function loadDefaultProject() {
   addDefaultProjectWork(globals.projectList);
-  addDefaultProjectUni(globals.projectList);
-  addDefaultProjectMisc(globals.projectList);
+  globals.setSelectedProject(globals.projectList.projects[globals.projectList.projects.length - 1]);
   updateAll();
   saveChanges();
+}
+
+function getDate(days) {
+  let date = new Date();
+  date.setDate(date.getDate() + days);
+  return date;
 }
 
 function addDefaultProjectWork(projectList) {
   ProjectList.addProject(
     globals.projectList,
-    new Project("Work", `This is where I put all my work related tasks`)
+    new Project("Todo List Website", `Things I want to add to this website`)
   );
   const project = projectList.projects[projectList.projects.length - 1];
 
   Project.addTodoList(
     project,
-    new TodoList(
-      "Presentation",
-      "Donec suscipit semper iaculis. Morbi sit amet nunc accumsan, molestie dolor vel, tempus ipsum."
-    )
-  );
-  TodoList.addTodoItem(
-    project.todoLists[0],
-    new TodoItem("Prepare introduction", "priority-4", null, null)
+    new TodoList("Tabs", "Add some new tabs for different display options")
   );
   TodoList.addTodoItem(
     project.todoLists[0],
     new TodoItem(
-      "Simplify slide layouts",
+      "Make todos editable/deletable in all tabs",
+      "priority-4",
+      null,
+      "Change (a lot of) stuff, so buttons do the correct thing (almost works already somehow?)",
+      true
+    )
+  );
+  TodoList.addTodoItem(
+    project.todoLists[0],
+    new TodoItem(
+      `"Upcoming" section`,
       "priority-2",
-      new Date(),
-      "These are optional notes",
+      getDate(-2),
+      `add "Upcoming" section that displays tasks in order of closest due date`,
+      true
+    )
+  );
+  TodoList.addTodoItem(
+    project.todoLists[0],
+    new TodoItem(
+      `"Today", "This Week" section`,
+      "priority-2",
+      getDate(-7),
+      `add "Today" and "This Week" section that displays tasks due today / this week`,
+      true
+    )
+  );
+  TodoList.addTodoItem(
+    project.todoLists[0],
+    new TodoItem(
+      `"Overdue" section`,
+      "priority-1",
+      getDate(-7),
+      `add "Overdue" section that displays tasks that have a due date in the past`,
+      true
+    )
+  );
+  TodoList.addTodoItem(
+    project.todoLists[0],
+    new TodoItem(
+      `"Completed" section`,
+      "priority-1",
+      getDate(-2),
+      `add "Completed" section that displays all completed tasks`,
+      true
+    )
+  );
+  TodoList.addTodoItem(
+    project.todoLists[0],
+    new TodoItem(
+      `"Priority" section`,
+      "priority-5",
+      getDate(0),
+      `add "Priority" section that only displays task of the selected priority`,
+      true
+    )
+  );
+  TodoList.addTodoItem(
+    project.todoLists[0],
+    new TodoItem(
+      `Add buttonManager`,
+      "priority-2",
+      getDate(1),
+      `Do all the button eventListener assignments in one js file`,
       true
     )
   );
 
-  Project.addTodoList(
-    project,
-    new TodoList("Onboarding", "Sed molestie metus ut leo porta maximus.")
-  );
-  TodoList.addTodoItem(
-    project.todoLists[1],
-    new TodoItem("Nullam et semper mi.", "priority-1", new Date(), null, true)
-  );
+  Project.addTodoList(project, new TodoList("Small changes", ""));
   TodoList.addTodoItem(
     project.todoLists[1],
     new TodoItem(
-      "Vestibulum a iaculis nunc.",
+      `Add message to "Upcoming" tab`,
       "priority-3",
-      null,
-      "These are optional notes"
+      getDate(1),
+      `Add message to "Upcoming" tab when there is nothing else to display (no uncompleted TodoItems)`,
+      true
     )
   );
   TodoList.addTodoItem(
     project.todoLists[1],
     new TodoItem(
-      "Aliquam mattis nulla tempus diam.",
+      "Remember last selected tab",
+      "priority-3",
+      null,
+      "Remember the last selected tab and reopen that tab when reloading the website"
+    )
+  );
+  TodoList.addTodoItem(
+    project.todoLists[1],
+    new TodoItem(
+      "Priority tab",
       "priority-5",
-      new Date(),
-      "These are optional notes",
+      getDate(-4),
+      "Make filter priority selectable in priority tab (Maybe just show them all at once)",
+      true
+    )
+  );
+  TodoList.addTodoItem(
+    project.todoLists[1],
+    new TodoItem(
+      "Remove/move completed TodoItems (in Projects)",
+      "priority-2",
+      getDate(0),
+      "Either remove completed TodoItems, or move them to the bottom of the TodoList",
+      true
+    )
+  );
+  TodoList.addTodoItem(
+    project.todoLists[1],
+    new TodoItem(
+      "Tweaks to todo creation",
+      "priority-5",
+      getDate(-4),
+      "dueDate and priority selection in same row",
+      true
+    )
+  );
+  TodoList.addTodoItem(
+    project.todoLists[1],
+    new TodoItem(
+      "GitHub link",
+      "priority-1",
+      getDate(0),
+      "add GitHub link at bottom of page (maybe sidebar)",
+      true
+    )
+  );
+  TodoList.addTodoItem(
+    project.todoLists[1],
+    new TodoItem(
+      "Make filters ignore already completed tasks",
+      "priority-1",
+      getDate(0),
+      null,
+      true
+    )
+  );
+  TodoList.addTodoItem(
+    project.todoLists[1],
+    new TodoItem("Highlight uncompleted overdue Todo Items", "priority-4", getDate(0), "", true)
+  );
+  TodoList.addTodoItem(
+    project.todoLists[1],
+    new TodoItem(
+      "No todos message",
+      "priority-3",
+      getDate(0),
+      "Small message when no there are no todos in this tab",
       true
     )
   );
 
-  Project.addTodoList(
-    project,
-    new TodoList(
-      "Conference",
-      "Ut non ante sagittis augue mollis condimentum nec ut lacus. Nam eleifend, nunc commodo viverra faucibus, dolor justo sodales nisl, vel imperdiet neque erat in libero."
+  Project.addTodoList(project, new TodoList("Possible Features", ""));
+  TodoList.addTodoItem(
+    project.todoLists[2],
+    new TodoItem(
+      "Draggable objects",
+      "priority-1",
+      getDate(5),
+      "TodoItems, TodoLists and Projects can be dragged and dropped to change their display order"
     )
   );
   TodoList.addTodoItem(
     project.todoLists[2],
-    new TodoItem("In hendrerit sed nulla eget.", "priority-1", new Date(), null)
-  );
-  TodoList.addTodoItem(
-    project.todoLists[2],
     new TodoItem(
-      "Maecenas porta consequat est sit.",
-      "priority-5",
+      "Foldable TodoLists",
+      "priority-4",
       null,
-      "These are optional notes"
+      "Add ability to fold TodoLists so their TodoItems are hidden"
     )
   );
   TodoList.addTodoItem(
     project.todoLists[2],
-    new TodoItem("Maecenas a enim quis est.", "priority-3", null, null, true)
+    new TodoItem("Better Masonry layout", "priority-1", null, null)
   );
   TodoList.addTodoItem(
     project.todoLists[2],
     new TodoItem(
-      "Suspendisse non interdum sapien.",
-      "priority-3",
-      new Date(),
-      "These are optional notes"
+      "Directly editable elements",
+      "priority-4",
+      getDate(30),
+      "Make elements like the project header editable directly"
+    )
+  );
+  TodoList.addTodoItem(
+    project.todoLists[2],
+    new TodoItem(`Add "In Progress" tag`, "priority-4", getDate(0), null)
+  );
+  TodoList.addTodoItem(
+    project.todoLists[2],
+    new TodoItem(
+      "Foldable TodoItems (?)",
+      "priority-2",
+      getDate(0),
+      "Add ability to fold TodoItems so their description is hidden"
     )
   );
 
-  Project.addTodoList(
-    project,
-    new TodoList(
-      "Meeting",
-      "Donec placerat urna vel arcu condimentum, ut tristique ex semper."
+  Project.addTodoList(project, new TodoList("UI Update", ""));
+  TodoList.addTodoItem(
+    project.todoLists[3],
+    new TodoItem(
+      "UI Update #3",
+      "priority-3",
+      null,
+      `"Upcoming", "This week", "Overdue" and "Priority" tab with (better) masonry?`
     )
   );
   TodoList.addTodoItem(
     project.todoLists[3],
     new TodoItem(
-      "Phasellus posuere tincidunt dui, at.",
-      "priority-3",
-      null,
-      null
-    )
-  );
-  TodoList.addTodoItem(
-    project.todoLists[3],
-    new TodoItem(
-      "Duis sit amet mollis diam.",
+      "UI Update #1",
       "priority-1",
-      new Date(),
-      "These are optional notes",
+      getDate(1),
+      `"Today" and "Completed" tabs with normal grid layout?`,
       true
     )
   );
   TodoList.addTodoItem(
     project.todoLists[3],
     new TodoItem(
-      "Phasellus eleifend quam lectus, eget.",
+      "UI Update #2",
       "priority-2",
-      new Date(),
-      "These are optional notes"
+      getDate(0),
+      `Display all priorities in "Priority" tab at the same time, in different TodoLists`,
+      true
     )
   );
 
-  Project.addTodoList(
-    project,
-    new TodoList(
-      "Project",
-      "Aenean rhoncus auctor velit, sed porttitor tellus convallis ut."
-    )
-  );
+  Project.addTodoList(project, new TodoList("Sidebar Update", ""));
   TodoList.addTodoItem(
     project.todoLists[4],
-    new TodoItem("Donec lacinia quam nibh, id.", "priority-4", new Date(), null)
+    new TodoItem(
+      "Hidable sidebar",
+      "priority-4",
+      getDate(-2),
+      "Add a button to hide/show the sidebar body grid-template-columns: 0px auto hide sidebar"
+    )
   );
   TodoList.addTodoItem(
     project.todoLists[4],
     new TodoItem(
-      "Mauris et vulputate leo. Vestibulum.",
+      "Separate scrolling",
       "priority-5",
-      new Date(),
-      "These are optional notes"
-    )
-  );
-  TodoList.addTodoItem(
-    project.todoLists[4],
-    new TodoItem(
-      "Nullam ut elit id urna.",
-      "priority-2",
-      null,
-      "These are optional notes"
-    )
-  );
-}
-
-function addDefaultProjectUni(projectList) {
-  ProjectList.addProject(
-    globals.projectList,
-    new Project(
-      "University",
-      `This is where I put all my university related tasks`
-    )
-  );
-  const project = projectList.projects[projectList.projects.length - 1];
-
-  Project.addTodoList(
-    project,
-    new TodoList(
-      "Class",
-      "Fusce consequat, tortor eu mollis hendrerit, purus est placerat odio, eu vulputate ante justo nec orci."
-    )
-  );
-  TodoList.addTodoItem(
-    project.todoLists[0],
-    new TodoItem("Etiam vel dignissim urna.", "priority-5", new Date(), null)
-  );
-  TodoList.addTodoItem(
-    project.todoLists[0],
-    new TodoItem(
-      "Vestibulum varius neque sed augue.",
-      "priority-4",
-      new Date(),
-      "These are optional notes"
-    )
-  );
-  TodoList.addTodoItem(
-    project.todoLists[0],
-    new TodoItem(
-      "Phasellus posuere tincidunt dui, at.",
-      "priority-3",
-      new Date(),
-      null
-    )
-  );
-  TodoList.addTodoItem(
-    project.todoLists[0],
-    new TodoItem(
-      "Duis sit amet mollis diam.",
-      "priority-2",
-      new Date(),
-      "These are optional notes"
-    )
-  );
-  TodoList.addTodoItem(
-    project.todoLists[0],
-    new TodoItem(
-      "Phasellus eleifend quam lectus, eget.",
-      "priority-1",
-      new Date(),
-      "These are optional notes"
-    )
-  );
-}
-
-function addDefaultProjectMisc(projectList) {
-  ProjectList.addProject(
-    globals.projectList,
-    new Project("Misc", `This is where I put all my misc tasks`)
-  );
-  const project = projectList.projects[projectList.projects.length - 1];
-
-  Project.addTodoList(
-    project,
-    new TodoList(
-      "Clean",
-      "Sed nec nunc enim. Praesent finibus leo orci, et volutpat erat condimentum eu."
-    )
-  );
-  TodoList.addTodoItem(
-    project.todoLists[0],
-    new TodoItem(
-      "Integer nec mi eu quam. Integer nec mi eu quam. Integer nec mi eu quam. Integer nec mi eu quam.",
-      "priority-4",
-      new Date(),
-      "These are optional notes These are optional notesThese are optional notes These are optional notes These are optional notes These are optional notes Integer nec mi eu quam. Integer nec mi eu quam.",
-      true
-    )
-  );
-  TodoList.addTodoItem(
-    project.todoLists[0],
-    new TodoItem(
-      "Ut pellentesque magna tortor, sit.",
-      "priority-2",
-      null,
-      "These are optional notes"
-    )
-  );
-
-  Project.addTodoList(
-    project,
-    new TodoList(
-      "Shopping",
-      "Quisque id nulla sit amet neque rutrum ultricies nec ac ligula. Vestibulum lobortis faucibus blandit. Vestibulum tristique consectetur metus."
-    )
-  );
-  TodoList.addTodoItem(
-    project.todoLists[1],
-    new TodoItem("Praesent vitae orci nec tortor.", "priority-5", null, null)
-  );
-  TodoList.addTodoItem(
-    project.todoLists[1],
-    new TodoItem(
-      "Pellentesque at felis venenatis, scelerisque.",
-      "priority-1",
-      new Date(),
-      "These are optional notes"
-    )
-  );
-  TodoList.addTodoItem(
-    project.todoLists[1],
-    new TodoItem(
-      "Etiam sed risus nec ex.",
-      "priority-4",
-      new Date(),
-      "These are optional notes",
-      true
+      getDate(-3),
+      "Make sidebar scoll seperately from rest of website"
     )
   );
 }

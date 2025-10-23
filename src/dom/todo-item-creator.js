@@ -6,11 +6,7 @@ import * as domManager from "./dom-manager.js";
 import { sortByUncompleted } from "../filter-todo-items.js";
 
 // Update todo item elements
-function displayTodoItems(
-  todoList,
-  todoItemsContainer,
-  enableEmptyMessage = true
-) {
+function displayTodoItems(todoList, todoItemsContainer, enableEmptyMessage = true) {
   if (todoList.todoItems.length <= 0 && enableEmptyMessage) {
     todoItemsContainer.appendChild(
       elementCreator.getElement(
@@ -55,12 +51,7 @@ function displayTodoItems(
 
     // Create mark completed button
     const markCompletedButtonContainer = elementCreator.getElement("div", "");
-    const markCompletedCheckbox = elementCreator.getInput(
-      "checkbox",
-      null,
-      "markChecked",
-      ""
-    );
+    const markCompletedCheckbox = elementCreator.getInput("checkbox", null, "markChecked", "");
     markCompletedCheckbox.checked = todoItem.isCompleted;
     markCompletedButtonContainer.appendChild(markCompletedCheckbox);
     markCompletedCheckbox.addEventListener("click", () => {
@@ -69,16 +60,8 @@ function displayTodoItems(
     });
 
     const todoItemContainer = elementCreator.getElement("div", "", "todo-item");
-    const todoItemTopContent = elementCreator.getElement(
-      "div",
-      "",
-      "todo-item-top-content"
-    );
-    const TodoItemBottomContent = elementCreator.getElement(
-      "div",
-      "",
-      "todo-item-bottom-content"
-    );
+    const todoItemTopContent = elementCreator.getElement("div", "", "todo-item-top-content");
+    const TodoItemBottomContent = elementCreator.getElement("div", "", "todo-item-bottom-content");
 
     TodoItemBottomContent.addEventListener("click", () => {
       dataManager.toggleCompleted(todoItem);
@@ -102,11 +85,7 @@ function displayTodoItems(
       dueDate = todoItem.dueDate.toLocaleDateString();
       isOverdue = todoItem.dueDate < startToday;
     }
-    const todoItemDueDate = elementCreator.getElement(
-      "span",
-      dueDate,
-      "todo-item-due-date"
-    );
+    const todoItemDueDate = elementCreator.getElement("span", dueDate, "todo-item-due-date");
     if (isOverdue && !todoItem.isCompleted) {
       todoItemDueDate.classList.add("overdue");
     }

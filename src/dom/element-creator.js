@@ -7,14 +7,7 @@ function getLabel(htmlFor, textContent) {
   return label;
 }
 
-function getInput(
-  type,
-  id,
-  name,
-  placeholder,
-  autocomplete = "off",
-  value = null
-) {
+function getInput(type, id, name, placeholder, autocomplete = "off", value = null) {
   const input = document.createElement("input");
   input.type = type;
   if (id !== null) {
@@ -107,10 +100,7 @@ function getElement(elementName, textContent, classes = null, id = null) {
 
 function getIcon(iconName, classes = null) {
   const iconSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  const iconPath = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "path"
-  );
+  const iconPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
   iconSvg.classList.add("iconify");
   if (classes !== null) {
     iconSvg.classList.add(classes);
@@ -141,8 +131,7 @@ function getIcon(iconName, classes = null) {
       break;
     }
     case "circle":
-      d =
-        "M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2";
+      d = "M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2";
       break;
     default:
       d =

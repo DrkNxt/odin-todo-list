@@ -33,11 +33,7 @@ function showProjectForm(mode, element) {
       "",
       element.description
     );
-    confirmButton = elementCreator.getButton(
-      "confirm-edit-btn",
-      "Confirm",
-      "submit"
-    );
+    confirmButton = elementCreator.getButton("confirm-edit-btn", "Confirm", "submit");
     cancelButton = elementCreator.getButton("cancel-edit-btn", "Cancel");
     form.appendChild(elementCreator.getElement("h2", "Edit Project"));
 
@@ -53,23 +49,14 @@ function showProjectForm(mode, element) {
   }
   // Add new element mode
   else {
-    titleInput = elementCreator.getInput(
-      "text",
-      "project-title",
-      "project-title",
-      "New Project"
-    );
+    titleInput = elementCreator.getInput("text", "project-title", "project-title", "New Project");
     descriptionInput = elementCreator.getTextArea(
       "project-description",
       "project-description",
       5,
       ""
     );
-    confirmButton = elementCreator.getButton(
-      "add-new-project-btn",
-      "Confirm",
-      "submit"
-    );
+    confirmButton = elementCreator.getButton("add-new-project-btn", "Confirm", "submit");
     cancelButton = elementCreator.getButton("cancel-new-project-btn", "Cancel");
     form.appendChild(elementCreator.getElement("h2", "New Project"));
 
@@ -92,9 +79,7 @@ function showProjectForm(mode, element) {
   // Append all elements required for the todo list form
   form.appendChild(elementCreator.getLabel("project-title", "Title"));
   form.appendChild(titleInput);
-  form.appendChild(
-    elementCreator.getLabel("project-description", "Description")
-  );
+  form.appendChild(elementCreator.getLabel("project-description", "Description"));
   form.appendChild(descriptionInput);
   menu.appendChild(confirmButton);
   menu.appendChild(cancelButton);
@@ -137,11 +122,7 @@ function showTodoListForm(mode, element) {
       "",
       element.description
     );
-    confirmButton = elementCreator.getButton(
-      "confirm-edit-btn",
-      "Confirm",
-      "submit"
-    );
+    confirmButton = elementCreator.getButton("confirm-edit-btn", "Confirm", "submit");
     cancelButton = elementCreator.getButton("cancel-edit-btn", "Cancel");
     form.appendChild(elementCreator.getElement("h2", "Edit Todo List"));
 
@@ -169,15 +150,8 @@ function showTodoListForm(mode, element) {
       5,
       ""
     );
-    confirmButton = elementCreator.getButton(
-      "add-new-todo-list-btn",
-      "Confirm",
-      "submit"
-    );
-    cancelButton = elementCreator.getButton(
-      "cancel-new-todo-list-btn",
-      "Cancel"
-    );
+    confirmButton = elementCreator.getButton("add-new-todo-list-btn", "Confirm", "submit");
+    cancelButton = elementCreator.getButton("cancel-new-todo-list-btn", "Cancel");
     form.appendChild(elementCreator.getElement("h2", "New Todo List"));
 
     // Add todo list when "Confirm" button is clicked
@@ -185,11 +159,7 @@ function showTodoListForm(mode, element) {
       e.preventDefault();
       let title = titleInput.value == "" ? "New Todo List" : titleInput.value;
       let description = descriptionInput.value;
-      dataManager.createTodoList(
-        globals.getSelectedProject(),
-        title,
-        description
-      );
+      dataManager.createTodoList(globals.getSelectedProject(), title, description);
       dialog.close();
       domManager.displaySelectedTab(globals.getSelectedTab());
     });
@@ -201,13 +171,9 @@ function showTodoListForm(mode, element) {
   });
 
   // Append all elements required for the todo list form
-  form.appendChild(
-    elementCreator.getLabel("todo-list-title", "Todo List Title")
-  );
+  form.appendChild(elementCreator.getLabel("todo-list-title", "Todo List Title"));
   form.appendChild(titleInput);
-  form.appendChild(
-    elementCreator.getLabel("todo-list-description", "Description")
-  );
+  form.appendChild(elementCreator.getLabel("todo-list-description", "Description"));
   form.appendChild(descriptionInput);
   menu.appendChild(confirmButton);
   menu.appendChild(cancelButton);
@@ -237,23 +203,14 @@ function showTodoItemForm(mode, element) {
     "todo-item-priority",
     "todo-item-priority"
   );
-  const dueDateContainer = elementCreator.getElement(
-    "div",
-    "",
-    "todo-item-date-container"
-  );
+  const dueDateContainer = elementCreator.getElement("div", "", "todo-item-date-container");
   const dueDateOption = elementCreator.getInput(
     "checkbox",
     "todo-item-date-option",
     "todo-item-date-option",
     ""
   );
-  const dueDateInput = elementCreator.getInput(
-    "date",
-    "todo-item-date",
-    "todo-item-date",
-    ""
-  );
+  const dueDateInput = elementCreator.getInput("date", "todo-item-date", "todo-item-date", "");
   let titleInput;
   let notesInput;
   let confirmButton;
@@ -276,8 +233,7 @@ function showTodoItemForm(mode, element) {
     if (element.dueDate instanceof Date && !isNaN(element.dueDate)) {
       dueDateOption.checked = true;
       dueDateInput.disabled = false;
-      dueDateInput.valueAsDate =
-        element.dueDate === null ? new Date() : element.dueDate;
+      dueDateInput.valueAsDate = element.dueDate === null ? new Date() : element.dueDate;
     } else {
       dueDateOption.checked = false;
       dueDateInput.disabled = true;
@@ -298,11 +254,7 @@ function showTodoItemForm(mode, element) {
       "",
       element.notes
     );
-    confirmButton = elementCreator.getButton(
-      "confirm-edit-btn",
-      "Confirm",
-      "submit"
-    );
+    confirmButton = elementCreator.getButton("confirm-edit-btn", "Confirm", "submit");
     cancelButton = elementCreator.getButton("cancel-edit-btn", "Cancel");
     form.appendChild(elementCreator.getElement("h2", "Edit Todo"));
     domManager.changeSelectedPriority(priorityInput, element.priority);
@@ -313,10 +265,7 @@ function showTodoItemForm(mode, element) {
       element.title = titleInput.value;
       element.priority = domManager.getSelectedPriority(priorityInput);
       let dueDate = new Date(dueDateInput.valueAsNumber);
-      if (
-        !(dueDate instanceof Date && !isNaN(dueDate)) ||
-        !dueDateOption.checked
-      ) {
+      if (!(dueDate instanceof Date && !isNaN(dueDate)) || !dueDateOption.checked) {
         dueDate = null;
       }
       element.dueDate = dueDate;
@@ -328,28 +277,11 @@ function showTodoItemForm(mode, element) {
   }
   // Add new element mode
   else {
-    titleInput = elementCreator.getInput(
-      "text",
-      "todo-item-title",
-      "todo-item-title",
-      "New Todo"
-    );
+    titleInput = elementCreator.getInput("text", "todo-item-title", "todo-item-title", "New Todo");
     dueDateInput.valueAsNumber = new Date();
-    notesInput = elementCreator.getTextArea(
-      "todo-item-notes",
-      "todo-item-notes",
-      3,
-      ""
-    );
-    confirmButton = elementCreator.getButton(
-      "add-new-todo-item-btn",
-      "Confirm",
-      "submit"
-    );
-    cancelButton = elementCreator.getButton(
-      "cancel-new-todo-item-btn",
-      "Cancel"
-    );
+    notesInput = elementCreator.getTextArea("todo-item-notes", "todo-item-notes", 3, "");
+    confirmButton = elementCreator.getButton("add-new-todo-item-btn", "Confirm", "submit");
+    cancelButton = elementCreator.getButton("cancel-new-todo-item-btn", "Cancel");
     domManager.changeSelectedPriority(priorityInput, "priority-1");
     form.appendChild(elementCreator.getElement("h2", "New Todo"));
 
@@ -359,10 +291,7 @@ function showTodoItemForm(mode, element) {
       let title = titleInput.value == "" ? "New Todo" : titleInput.value;
       let priority = domManager.getSelectedPriority(priorityInput);
       let dueDate = new Date(dueDateInput.valueAsNumber);
-      if (
-        !(dueDate instanceof Date && !isNaN(dueDate)) ||
-        !dueDateOption.checked
-      ) {
+      if (!(dueDate instanceof Date && !isNaN(dueDate)) || !dueDateOption.checked) {
         dueDate = null;
       }
       let notes = notesInput.value;
@@ -382,12 +311,8 @@ function showTodoItemForm(mode, element) {
   form.appendChild(titleInput);
   dueDateContainer.appendChild(dueDateOption);
   dueDateContainer.appendChild(dueDateInput);
-  priorityDueDateContainer.appendChild(
-    elementCreator.getLabel("todo-item-priority", "Priority")
-  );
-  priorityDueDateContainer.appendChild(
-    elementCreator.getLabel("todo-item-date", "Due Date")
-  );
+  priorityDueDateContainer.appendChild(elementCreator.getLabel("todo-item-priority", "Priority"));
+  priorityDueDateContainer.appendChild(elementCreator.getLabel("todo-item-date", "Due Date"));
   priorityDueDateContainer.appendChild(priorityInput);
   priorityDueDateContainer.appendChild(dueDateContainer);
   form.appendChild(priorityDueDateContainer);
@@ -416,11 +341,7 @@ function showDeleteForm(text, action) {
   form.appendChild(elementCreator.getElement("h2", "Confirm deletion"));
   form.appendChild(elementCreator.getElement("p", text));
   const menu = elementCreator.getElement("menu", "");
-  const confirmButton = elementCreator.getButton(
-    "confirm-delete-btn",
-    "Delete",
-    "submit"
-  );
+  const confirmButton = elementCreator.getButton("confirm-delete-btn", "Delete", "submit");
   const cancelButton = elementCreator.getButton("cancel-delete-btn", "Cancel");
   menu.appendChild(confirmButton);
   menu.appendChild(cancelButton);

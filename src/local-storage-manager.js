@@ -63,10 +63,4 @@ function getSelectedProject() {
   return getObject("selectedProject", () => globals.projectList.projects[0]);
 }
 
-export {
-  storeProjectList,
-  getProjectList,
-  storeSelectedTab,
-  getSelectedTab,
-  getSelectedProject,
-};
+export { storeProjectList, getProjectList, storeSelectedTab, getSelectedTab, getSelectedProject };

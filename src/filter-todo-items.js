@@ -29,9 +29,7 @@ function sortByDueDate(todoList) {
     .filter((todoItem) => {
       if (todoItem.dueDate === null) {
         return false;
-      } else if (
-        !(todoItem.dueDate instanceof Date && !isNaN(todoItem.dueDate))
-      ) {
+      } else if (!(todoItem.dueDate instanceof Date && !isNaN(todoItem.dueDate))) {
         todoItem.dueDate = new Date(Date.parse(todoItem.dueDate));
       }
       return todoItem.dueDate instanceof Date && !isNaN(todoItem.dueDate);
@@ -41,12 +39,8 @@ function sortByDueDate(todoList) {
 }
 
 function sortByUncompleted(todoList) {
-  const uncompletedTodoItems = todoList.todoItems.filter(
-    (todoItem) => !todoItem.isCompleted
-  );
-  const completedTodoItems = todoList.todoItems.filter(
-    (todoItem) => todoItem.isCompleted
-  );
+  const uncompletedTodoItems = todoList.todoItems.filter((todoItem) => !todoItem.isCompleted);
+  const completedTodoItems = todoList.todoItems.filter((todoItem) => todoItem.isCompleted);
   todoList.todoItems = uncompletedTodoItems;
   TodoList.addTodoItems(todoList, completedTodoItems);
   return todoList;
@@ -55,9 +49,7 @@ function sortByUncompleted(todoList) {
 function getDueDateless(todoList) {
   todoList.todoItems = todoList.todoItems.filter(
     (todoItem) =>
-      todoItem.dueDate === null ||
-      !(todoItem.dueDate instanceof Date) ||
-      isNaN(todoItem.dueDate)
+      todoItem.dueDate === null || !(todoItem.dueDate instanceof Date) || isNaN(todoItem.dueDate)
   );
   return todoList;
 }
@@ -121,9 +113,7 @@ function getDueInXDays(days, title) {
     // Convert todoItem.dueDate to a valid date (if it isn't already)
     if (todoItem.dueDate === null) {
       return false;
-    } else if (
-      !(todoItem.dueDate instanceof Date && !isNaN(todoItem.dueDate))
-    ) {
+    } else if (!(todoItem.dueDate instanceof Date && !isNaN(todoItem.dueDate))) {
       todoItem.dueDate = new Date(Date.parse(todoItem.dueDate));
     }
     return todoItem.dueDate > startToday && todoItem.dueDate < endToday;
@@ -146,9 +136,7 @@ function getOverdue() {
     // Convert todoItem.dueDate to a valid date (if it isn't already)
     if (todoItem.dueDate === null) {
       return false;
-    } else if (
-      !(todoItem.dueDate instanceof Date && !isNaN(todoItem.dueDate))
-    ) {
+    } else if (!(todoItem.dueDate instanceof Date && !isNaN(todoItem.dueDate))) {
       todoItem.dueDate = new Date(Date.parse(todoItem.dueDate));
     }
     return todoItem.dueDate < today;
@@ -159,9 +147,7 @@ function getOverdue() {
 function getCompleted() {
   const allTodoItems = getSortedTodoItems();
   const completedTodoItems = new TodoList("Completed", "");
-  completedTodoItems.todoItems = allTodoItems.todoItems.filter(
-    (todoItem) => todoItem.isCompleted
-  );
+  completedTodoItems.todoItems = allTodoItems.todoItems.filter((todoItem) => todoItem.isCompleted);
   return completedTodoItems;
 }
 
@@ -174,11 +160,4 @@ function getByPriority(priority, name) {
   return sortByDueDate(priorityTodoItems);
 }
 
-export {
-  getUpcoming,
-  getDueInXDays,
-  getOverdue,
-  getCompleted,
-  getByPriority,
-  sortByUncompleted,
-};
+export { getUpcoming, getDueInXDays, getOverdue, getCompleted, getByPriority, sortByUncompleted };

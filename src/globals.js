@@ -13,8 +13,7 @@ const tabs = Object.freeze({
 
 let projectList = localStorageManager.getProjectList();
 let selectedTab;
-let selectedProject =
-  projectList.projects[localStorageManager.getSelectedProject()];
+let selectedProject = projectList.projects[localStorageManager.getSelectedProject()];
 setSelectedTab(localStorageManager.getSelectedTab());
 
 function getSelectedProject() {

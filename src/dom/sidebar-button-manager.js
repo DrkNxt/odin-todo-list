@@ -11,9 +11,7 @@ const displayPriorityButton = document.querySelector("#display-priority-btn");
 const displayCompletedButton = document.querySelector("#display-completed-btn");
 
 const addProjectButton = document.querySelector("#add-project-btn");
-const addTemplateProjectsButton = document.querySelector(
-  "#add-template-projects-btn"
-);
+const addTemplateProjectsButton = document.querySelector("#add-template-projects-btn");
 
 displayUpcomingButton.addEventListener("click", () => {
   domManager.displaySelectedTab(globals.tabs.UPCOMING);
