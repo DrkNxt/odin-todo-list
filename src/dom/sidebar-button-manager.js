@@ -1,7 +1,7 @@
 import * as globals from "../globals.js";
 import * as domManager from "./dom-manager.js";
 import * as elementForms from "./forms-manager.js";
-import { loadDefaultProject } from "../default-project.js";
+import { loadDefaultProject } from "../template-project.js";
 
 const displayUpcomingButton = document.querySelector("#display-upcoming-btn");
 const displayTodayButton = document.querySelector("#display-today-btn");
