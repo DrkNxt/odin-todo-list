@@ -6,10 +6,15 @@ class TodoItem {
     this.dueDate = dueDate;
     this.notes = notes;
     this.id = crypto.randomUUID();
+    this.isFolded = false;
   }
 
   static toggleCompleted(todoItem) {
     todoItem.isCompleted = !todoItem.isCompleted;
+  }
+
+  static toggleFolded(todoItem) {
+    todoItem.isFolded = !todoItem.isFolded;
   }
 }
 

@@ -371,7 +371,7 @@ div#main {
 
 .todo-item-top-content {
   display: grid;
-  grid-template-columns: auto 1fr auto auto;
+  grid-template-columns: auto 1fr auto auto auto;
   gap: 0.5rem;
   align-items: center;
   border-bottom: 1px solid lightgray;

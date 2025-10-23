@@ -97,11 +97,8 @@ function createTodoListElement(todoList) {
   // Create fold button
   const foldButtonContainer = elementCreator.getElement("div", "");
 
-  if (todoList.isFolded) {
-    todoListContainer.classList.add("folded");
-  }
   let foldTodoItem;
-  if (todoListContainer.classList.contains("folded")) {
+  if (todoList.isFolded) {
     foldTodoItem = elementCreator.getIcon("folded", "clickable-icon");
   } else {
     foldTodoItem = elementCreator.getIcon("unfolded", "clickable-icon");
@@ -109,7 +106,7 @@ function createTodoListElement(todoList) {
   foldButtonContainer.appendChild(foldTodoItem);
   foldButtonContainer.addEventListener("click", () => {
     todoListContainer.classList.toggle("folded");
-    dataManager.toggleFolded(todoList);
+    dataManager.toggleTodoListFolded(todoList);
     displayProject(globals.getSelectedProject());
   });
 

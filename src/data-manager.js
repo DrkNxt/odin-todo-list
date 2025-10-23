@@ -49,8 +49,14 @@ function toggleCompleted(todoItem) {
   return todoItem.isCompleted;
 }
 
-function toggleFolded(todoItem) {
-  TodoList.toggleFolded(todoItem);
+function toggleTodoListFolded(todoList) {
+  TodoList.toggleFolded(todoList);
+  saveChanges();
+  return todoList.isFolded;
+}
+
+function toggleTodoItemFolded(todoItem) {
+  TodoItem.toggleFolded(todoItem);
   saveChanges();
   return todoItem.isFolded;
 }
@@ -68,5 +74,6 @@ export {
   deleteTodoItem,
   toggleCompleted,
   saveChanges,
-  toggleFolded,
+  toggleTodoListFolded,
+  toggleTodoItemFolded,
 };

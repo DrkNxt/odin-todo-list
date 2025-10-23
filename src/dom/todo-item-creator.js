@@ -22,6 +22,26 @@ function displayTodoItems(todoList, todoItemsContainer, enableEmptyMessage = tru
   }
   todoList = sortByUncompleted(todoList);
   for (let todoItem of todoList.todoItems) {
+    const todoItemContainer = elementCreator.getElement("div", "", "todo-item");
+    const todoItemTopContent = elementCreator.getElement("div", "", "todo-item-top-content");
+    const TodoItemBottomContent = elementCreator.getElement("div", "", "todo-item-bottom-content");
+
+    // Create fold button
+    const foldButtonContainer = elementCreator.getElement("div", "");
+
+    let foldTodoItem;
+    if (todoItem.isFolded) {
+      foldTodoItem = elementCreator.getIcon("folded", "clickable-icon");
+    } else {
+      foldTodoItem = elementCreator.getIcon("unfolded", "clickable-icon");
+    }
+    foldButtonContainer.appendChild(foldTodoItem);
+    foldButtonContainer.addEventListener("click", () => {
+      todoItemContainer.classList.toggle("folded");
+      dataManager.toggleTodoItemFolded(todoItem);
+      domManager.displaySelectedTab(globals.getSelectedTab());
+    });
+
     // Create delete button
     const deleteButtonContainer = elementCreator.getElement("div", "");
     const deleteTodoItem = elementCreator.getIcon("delete", "clickable-icon");
@@ -59,15 +79,21 @@ function displayTodoItems(todoList, todoItemsContainer, enableEmptyMessage = tru
     markCompletedButtonContainer.appendChild(markCompletedCheckbox);
     markCompletedCheckbox.addEventListener("click", () => {
       dataManager.toggleCompleted(todoItem);
+      if (todoItem.isCompleted) {
+        todoItem.isFolded = true;
+      } else {
+        todoItem.isFolded = false;
+      }
       domManager.displaySelectedTab(globals.getSelectedTab());
     });
 
-    const todoItemContainer = elementCreator.getElement("div", "", "todo-item");
-    const todoItemTopContent = elementCreator.getElement("div", "", "todo-item-top-content");
-    const TodoItemBottomContent = elementCreator.getElement("div", "", "todo-item-bottom-content");
-
     TodoItemBottomContent.addEventListener("click", () => {
       dataManager.toggleCompleted(todoItem);
+      if (todoItem.isCompleted) {
+        todoItem.isFolded = true;
+      } else {
+        todoItem.isFolded = false;
+      }
       domManager.displaySelectedTab(globals.getSelectedTab());
     });
 
@@ -93,14 +119,20 @@ function displayTodoItems(todoList, todoItemsContainer, enableEmptyMessage = tru
       todoItemDueDate.classList.add("overdue");
     }
     todoItemTopContent.appendChild(todoItemDueDate);
+    todoItemTopContent.appendChild(foldButtonContainer);
     todoItemTopContent.appendChild(editButtonContainer);
     todoItemTopContent.appendChild(deleteButtonContainer);
     TodoItemBottomContent.appendChild(
       elementCreator.getElement("h4", todoItem.title, "todo-item-title")
     );
-    TodoItemBottomContent.appendChild(
-      elementCreator.getElement("p", todoItem.notes, "todo-item-notes")
-    );
+    if (todoItem.isFolded) {
+      TodoItemBottomContent.appendChild(elementCreator.getElement("p", "", "todo-item-notes"));
+    } else {
+      TodoItemBottomContent.appendChild(
+        elementCreator.getElement("p", todoItem.notes, "todo-item-notes")
+      );
+    }
+
     todoItemContainer.appendChild(todoItemTopContent);
     todoItemContainer.appendChild(TodoItemBottomContent);
     todoItemsContainer.appendChild(todoItemContainer);
