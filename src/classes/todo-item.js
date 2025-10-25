@@ -1,12 +1,12 @@
 class TodoItem {
-  constructor(title, priority, dueDate, notes, isCompleted = false) {
+  constructor(title, priority, dueDate, notes, isCompleted = false, isFolded = false) {
     this.title = title;
     this.priority = priority;
     this.isCompleted = isCompleted;
     this.dueDate = dueDate;
     this.notes = notes;
     this.id = crypto.randomUUID();
-    this.isFolded = false;
+    this.isFolded = isFolded;
   }
 
   static toggleCompleted(todoItem) {

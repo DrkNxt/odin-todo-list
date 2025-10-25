@@ -94,6 +94,22 @@ function createTodoListElement(todoList) {
   const todoItemsContainer = elementCreator.getElement("div", "", "project-todo-items");
   const todoListTopContent = elementCreator.getElement("div", "", "project-todo-list-top-content");
 
+  // Create hide button
+  const hideButtonContainer = elementCreator.getElement("div", "");
+
+  let hideTodoItem;
+  if (todoList.isCompletedHidden) {
+    hideTodoItem = elementCreator.getIcon("hidden", "clickable-icon");
+  } else {
+    hideTodoItem = elementCreator.getIcon("shown", "clickable-icon");
+  }
+  hideButtonContainer.appendChild(hideTodoItem);
+  hideButtonContainer.addEventListener("click", () => {
+    todoListContainer.classList.toggle("folded");
+    dataManager.toggleTodoListCompletedHidden(todoList);
+    displayProject(globals.getSelectedProject());
+  });
+
   // Create fold button
   const foldButtonContainer = elementCreator.getElement("div", "");
 
@@ -138,6 +154,7 @@ function createTodoListElement(todoList) {
     elementCreator.getElement("h3", todoList.title, "project-todo-list-title")
   );
   todoListTopContent.appendChild(foldButtonContainer);
+  todoListTopContent.appendChild(hideButtonContainer);
   todoListTopContent.appendChild(editButtonContainer);
   todoListTopContent.appendChild(deleteButtonContainer);
   todoListContainer.appendChild(todoListTopContent);

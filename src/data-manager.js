@@ -61,6 +61,12 @@ function toggleTodoItemFolded(todoItem) {
   return todoItem.isFolded;
 }
 
+function toggleTodoListCompletedHidden(todoList) {
+  TodoList.toggleCompletedHidden(todoList);
+  saveChanges();
+  return todoList.isCompletedHidden;
+}
+
 function saveChanges() {
   localStorageManager.storeProjectList(globals.projectList);
 }
@@ -76,4 +82,5 @@ export {
   saveChanges,
   toggleTodoListFolded,
   toggleTodoItemFolded,
+  toggleTodoListCompletedHidden,
 };

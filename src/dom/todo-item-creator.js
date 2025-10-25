@@ -22,6 +22,9 @@ function displayTodoItems(todoList, todoItemsContainer, enableEmptyMessage = tru
   }
   todoList = sortByUncompleted(todoList);
   for (let todoItem of todoList.todoItems) {
+    if (todoItem.isCompleted && todoList.isCompletedHidden) {
+      continue;
+    }
     const todoItemContainer = elementCreator.getElement("div", "", "todo-item");
     const todoItemTopContent = elementCreator.getElement("div", "", "todo-item-top-content");
     const TodoItemBottomContent = elementCreator.getElement("div", "", "todo-item-bottom-content");

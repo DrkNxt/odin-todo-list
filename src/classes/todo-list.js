@@ -5,6 +5,7 @@ class TodoList {
     this.todoItems = [];
     this.id = crypto.randomUUID();
     this.isFolded = false;
+    this.isCompletedHidden = false;
   }
   static get(todoList, todoItem) {
     return todoList.todoItems.findIndex((todo) => todo === todoItem);
@@ -29,6 +30,10 @@ class TodoList {
 
   static toggleFolded(todoList) {
     todoList.isFolded = !todoList.isFolded;
+  }
+
+  static toggleCompletedHidden(todoList) {
+    todoList.isCompletedHidden = !todoList.isCompletedHidden;
   }
 }
 

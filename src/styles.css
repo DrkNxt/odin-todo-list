@@ -302,7 +302,7 @@ div#main {
 .project-top-content,
 .filter-todo-list-top-content {
   display: grid;
-  grid-template-columns: 1fr auto auto auto;
+  grid-template-columns: 1fr auto auto auto auto;
   gap: 0.5rem;
   align-items: center;
   border-bottom: 1px solid black;

@@ -37,6 +37,7 @@ function addDefaultProjectWork(projectList) {
       "priority-4",
       null,
       "Change (a lot of) stuff, so buttons do the correct thing (almost works already somehow?)",
+      true,
       true
     )
   );
@@ -47,6 +48,7 @@ function addDefaultProjectWork(projectList) {
       "priority-2",
       getDate(-2),
       `add "Upcoming" section that displays tasks in order of closest due date`,
+      true,
       true
     )
   );
@@ -57,6 +59,7 @@ function addDefaultProjectWork(projectList) {
       "priority-2",
       getDate(-7),
       `add "Today" and "This Week" section that displays tasks due today / this week`,
+      true,
       true
     )
   );
@@ -67,6 +70,7 @@ function addDefaultProjectWork(projectList) {
       "priority-1",
       getDate(-7),
       `add "Overdue" section that displays tasks that have a due date in the past`,
+      true,
       true
     )
   );
@@ -77,6 +81,7 @@ function addDefaultProjectWork(projectList) {
       "priority-1",
       getDate(-2),
       `add "Completed" section that displays all completed tasks`,
+      true,
       true
     )
   );
@@ -87,6 +92,7 @@ function addDefaultProjectWork(projectList) {
       "priority-5",
       getDate(0),
       `add "Priority" section that only displays task of the selected priority`,
+      true,
       true
     )
   );
@@ -97,6 +103,7 @@ function addDefaultProjectWork(projectList) {
       "priority-2",
       getDate(1),
       `Do all the button eventListener assignments in one js file`,
+      true,
       true
     )
   );
@@ -109,6 +116,7 @@ function addDefaultProjectWork(projectList) {
       "priority-3",
       getDate(1),
       `Add message to "Upcoming" tab when there is nothing else to display (no uncompleted TodoItems)`,
+      true,
       true
     )
   );
@@ -128,6 +136,7 @@ function addDefaultProjectWork(projectList) {
       "priority-5",
       getDate(-4),
       "Make filter priority selectable in priority tab (Maybe just show them all at once)",
+      true,
       true
     )
   );
@@ -138,6 +147,7 @@ function addDefaultProjectWork(projectList) {
       "priority-2",
       getDate(0),
       "Either remove completed TodoItems, or move them to the bottom of the TodoList",
+      true,
       true
     )
   );
@@ -148,6 +158,7 @@ function addDefaultProjectWork(projectList) {
       "priority-5",
       getDate(-4),
       "dueDate and priority selection in same row",
+      true,
       true
     )
   );
@@ -158,6 +169,7 @@ function addDefaultProjectWork(projectList) {
       "priority-1",
       getDate(0),
       "add GitHub link at bottom of page (maybe sidebar)",
+      true,
       true
     )
   );
@@ -168,12 +180,20 @@ function addDefaultProjectWork(projectList) {
       "priority-1",
       getDate(0),
       null,
+      true,
       true
     )
   );
   TodoList.addTodoItem(
     project.todoLists[1],
-    new TodoItem("Highlight uncompleted overdue Todo Items", "priority-4", getDate(0), "", true)
+    new TodoItem(
+      "Highlight uncompleted overdue Todo Items",
+      "priority-4",
+      getDate(0),
+      "",
+      true,
+      true
+    )
   );
   TodoList.addTodoItem(
     project.todoLists[1],
@@ -182,6 +202,7 @@ function addDefaultProjectWork(projectList) {
       "priority-3",
       getDate(0),
       "Small message when no there are no todos in this tab",
+      true,
       true
     )
   );
@@ -249,6 +270,7 @@ function addDefaultProjectWork(projectList) {
       "priority-1",
       getDate(1),
       `"Today" and "Completed" tabs with normal grid layout?`,
+      true,
       true
     )
   );
@@ -259,6 +281,7 @@ function addDefaultProjectWork(projectList) {
       "priority-2",
       getDate(0),
       `Display all priorities in "Priority" tab at the same time, in different TodoLists`,
+      true,
       true
     )
   );
